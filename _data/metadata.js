@@ -1,6 +1,6 @@
 export default {
 	title: "Oliver Kiran Brown",
-	url: "https://oliverkiranbrown.github.io.com/",
+	url: "https://oliverkiranbrown.github.io/",
 	language: "en",
 	description: "I am writing about my experiences as a naval navel-gazer.",
 	author: {
