@@ -6,6 +6,6 @@ export default {
 	author: {
 		name: "Oliver Kiran Brown",
 		email: "oliverkiranbrown@gmail.com",
-		url: "https://oliverkiranbrown.github.io/About/"
+		url: "https://oliverkiranbrown.github.io/home/"
 	}
 }
