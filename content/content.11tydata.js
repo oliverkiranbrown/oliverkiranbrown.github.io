@@ -1,3 +1,3 @@
 export default {
-	layout: "layouts/about.njk",
+	layout: "layouts/home.njk",
 };

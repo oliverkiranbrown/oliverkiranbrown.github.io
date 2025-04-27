@@ -5,3 +5,4 @@ eleventyNavigation:
 permalink: /contact/
 ---
 # Contact Infomation
+Please contact me via the following links
