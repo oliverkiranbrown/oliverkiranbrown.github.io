@@ -1,4 +1,5 @@
 ---
+layout: layouts/about.njk
 eleventyNavigation:
     key: About
     order: 1

@@ -1,4 +1,5 @@
 ---
+layout: layouts/about.njk
 eleventyNavigation:
     key: Contact
     order: 4
