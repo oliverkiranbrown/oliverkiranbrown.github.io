@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
     key: Music
-    order: 2
+    order: 3
 permalink: /music/
 ---
 # How does this look?
