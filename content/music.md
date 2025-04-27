@@ -2,7 +2,6 @@
 eleventyNavigation:
     key: Music
     order: 3
-permalink: /music/
 ---
-# How does this look?
+# Music
 I love my tunes!
