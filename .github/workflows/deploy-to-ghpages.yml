@@ -42,4 +42,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          clean: true # make sure old files are wiped. 
+          publish_branch: gh-pages
+          clean: true
+          # Fixes for YOUR case:
+          enable_jekyll: false
+          cname: ''  # Not needed for user sites, but prevents weird rewrites
+          force_orphan: true  # clean branch deploy

@@ -6,4 +6,4 @@ eleventyNavigation:
 permalink: /about/
 ---
 # Welcome
-Hey thanks for stopping by!
+Hey thanks for stopping by! Hopefully we can get this navigation bar working soon so we can get to producing content!
