@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Oliver Kiran Brown</title>
 		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
-		<link rel="icon" href="/favicon.png" type="image/x-icon">
+		<link rel="icon" href="/img/favicon.png" type="image/png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		
 		
@@ -70,8 +70,14 @@ html {
 	overflow-y: scroll;
 }
 body {
+	/*
+	Makes the body wide
 	max-width: 40em;
-}
+	*/
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
@@ -187,13 +193,18 @@ code {
 }
 
 /* Header */
-header {
+.top-bar {
+	color: white !important;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: center;
+	font-size: 1.2rem;
+	/*
+	background-color: #4682B4;  
+	*/
 	padding: 1em;
+	width: 100%;
 }
 .home-link {
 	flex-grow: 1;
@@ -293,9 +304,7 @@ header {
 		
 	</head>
 	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
-
-		<header>
+		<header class="top-bar" style="color: white;">
 			<a href="/" class="home-link">Oliver Kiran Brown</a>
 			<nav>
 				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
@@ -307,7 +316,6 @@ header {
 				</ul>
 			</nav>
 		</header>
-
 		<main id="skip">
 			<heading-anchors>
 				
@@ -344,7 +352,7 @@ header {
 			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.0</a></em></p>
 		</footer>
 
-		<!-- This page `/blog/` was built on 2025-04-28T22:35:08.118Z -->
+		<!-- This page `/blog/` was built on 2025-04-29T22:30:24.162Z -->
 		<script type="module" src="/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>

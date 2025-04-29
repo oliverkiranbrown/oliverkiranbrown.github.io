@@ -89,8 +89,8 @@ export default async function(eleventyConfig) {
 		return (new Date()).toISOString();
 	});
 
-	// favicon
-	eleventyConfig.addPassthroughCopy("./public/favicon.png");
+	// the whole image folder
+	eleventyConfig.addPassthroughCopy("./public/img");
 
 
 

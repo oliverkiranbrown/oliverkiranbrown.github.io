@@ -57,8 +57,14 @@ html {
 	overflow-y: scroll;
 }
 body {
+	/*
+	Makes the body wide
 	max-width: 40em;
-}
+	*/
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
@@ -174,13 +180,18 @@ code {
 }
 
 /* Header */
-header {
+.top-bar {
+	color: white !important;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: center;
+	font-size: 1.2rem;
+	/*
+	background-color: #4682B4;  
+	*/
 	padding: 1em;
+	width: 100%;
 }
 .home-link {
 	flex-grow: 1;
