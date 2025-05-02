@@ -5,13 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Oliver Kiran Brown</title>
 		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
-		<link rel="icon" href="/favicon.png" type="image/x-icon">
+		<link rel="icon" href="/img/favicon.png" type="image/png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
-		
-		
-		
-		<style>/* This is an arbitrary CSS string added to the bundle */
-/* Defaults */
+		<style>/* This is an arbitrary CSS string added to the bundle */</style>
+		<style>/* Defaults */
 :root {
 	--font-family: -apple-system, system-ui, sans-serif;
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
@@ -70,8 +67,14 @@ html {
 	overflow-y: scroll;
 }
 body {
+	/*
+	Makes the body wide
 	max-width: 40em;
-}
+	*/
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
@@ -187,13 +190,18 @@ code {
 }
 
 /* Header */
-header {
+.top-bar {
+	color: white !important;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: center;
+	font-size: 1.2rem;
+	/*
+	background-color: #4682B4;  
+	*/
 	padding: 1em;
+	width: 100%;
 }
 .home-link {
 	flex-grow: 1;
@@ -289,31 +297,267 @@ header {
 }
 .post-metadata time {
 	margin-right: 1em;
-}</style>
+}
+
+</style>
 		
+		<style></style>
+		<script type="module">// Thank you to https://github.com/daviddarnes/heading-anchors
+// Thank you to https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+
+let globalInstanceIndex = 0;
+
+class HeadingAnchors extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "heading-anchors", HeadingAnchors);
+		}
+	}
+
+	static attributes = {
+		exclude: "data-ha-exclude",
+		prefix: "prefix",
+		content: "content",
+	}
+
+	static classes = {
+		anchor: "ha",
+		placeholder: "ha-placeholder",
+		srOnly: "ha-visualhide",
+	}
+
+	static defaultSelector = "h2,h3,h4,h5,h6";
+
+	static css = `
+.${HeadingAnchors.classes.srOnly} {
+	clip: rect(0 0 0 0);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+}
+.${HeadingAnchors.classes.anchor} {
+	position: absolute;
+	left: var(--ha_offsetx);
+	top: var(--ha_offsety);
+	text-decoration: none;
+	opacity: 0;
+}
+.${HeadingAnchors.classes.placeholder} {
+	opacity: .3;
+}
+.${HeadingAnchors.classes.anchor}:is(:focus-within, :hover) {
+	opacity: 1;
+}
+.${HeadingAnchors.classes.anchor},
+.${HeadingAnchors.classes.placeholder} {
+	display: inline-block;
+	padding: 0 .25em;
+
+	/* Disable selection of visually hidden label */
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+@supports (anchor-name: none) {
+	.${HeadingAnchors.classes.anchor} {
+		position: absolute;
+		left: anchor(left);
+		top: anchor(top);
+	}
+}`;
+
+	get supports() {
+		return "replaceSync" in CSSStyleSheet.prototype;
+	}
+
+	get supportsAnchorPosition() {
+		return CSS.supports("anchor-name: none");
+	}
+
+	constructor() {
+		super();
+
+		if(!this.supports) {
+			return;
+		}
+
+		let sheet = new CSSStyleSheet();
+		sheet.replaceSync(HeadingAnchors.css);
+		document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+
+		this.headingStyles = {};
+		this.instanceIndex = globalInstanceIndex++;
+	}
+
+	connectedCallback() {
+		if (!this.supports) {
+			return;
+		}
+
+		this.headings.forEach((heading, index) => {
+			if(!heading.hasAttribute(HeadingAnchors.attributes.exclude)) {
+				let anchor = this.getAnchorElement(heading);
+				let placeholder = this.getPlaceholderElement();
+
+				// Prefers anchor position approach for better accessibility
+				// https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+				if(this.supportsAnchorPosition) {
+					let anchorName = `--ha_${this.instanceIndex}_${index}`;
+					placeholder.style.setProperty("anchor-name", anchorName);
+					anchor.style.positionAnchor = anchorName;
+				}
+
+				heading.appendChild(placeholder);
+				heading.after(anchor);
+			}
+		});
+	}
+
+	// Polyfill-only
+	positionAnchorFromPlaceholder(placeholder) {
+		if(!placeholder) {
+			return;
+		}
+
+		let heading = placeholder.closest("h1,h2,h3,h4,h5,h6");
+		if(!heading.nextElementSibling) {
+			return;
+		}
+
+		// TODO next element could be more defensive
+		this.positionAnchor(heading.nextElementSibling);
+	}
+
+	// Polyfill-only
+	positionAnchor(anchor) {
+		if(!anchor || !anchor.previousElementSibling) {
+			return;
+		}
+
+		// TODO previous element could be more defensive
+		let heading = anchor.previousElementSibling;
+		this.setFontProp(heading, anchor);
+
+		if(this.supportsAnchorPosition) {
+			// quit early
+			return;
+		}
+
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			anchor.style.setProperty("--ha_offsetx", `${placeholder.offsetLeft}px`);
+			anchor.style.setProperty("--ha_offsety", `${placeholder.offsetTop}px`);
+		}
+	}
+
+	setFontProp(heading, anchor) {
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			let style = getComputedStyle(placeholder);
+			let props = ["font-weight", "font-size", "line-height", "font-family"];
+			let font = props.map(name => style.getPropertyValue(name));
+			anchor.style.setProperty("font", `${font[0]} ${font[1]}/${font[2]} ${font[3]}`);
+		}
+	}
+
+	getAccessibleTextPrefix() {
+		// Useful for i18n
+		return this.getAttribute(HeadingAnchors.attributes.prefix) || "Jump to section titled";
+	}
+
+	getContent() {
+		if(this.hasAttribute(HeadingAnchors.attributes.content)) {
+			return this.getAttribute(HeadingAnchors.attributes.content);
+		}
+		return "#";
+	}
+
+	// Placeholder nests inside of heading
+	getPlaceholderElement() {
+		let ph = document.createElement("span");
+		ph.setAttribute("aria-hidden", true);
+		ph.classList.add(HeadingAnchors.classes.placeholder);
+		let content = this.getContent();
+		if(content) {
+			ph.textContent = content;
+		}
+
+		ph.addEventListener("mouseover", (e) => {
+			let placeholder = e.target.closest(`.${HeadingAnchors.classes.placeholder}`);
+			if(placeholder) {
+				this.positionAnchorFromPlaceholder(placeholder);
+			}
+		});
+
+		return ph;
+	}
+
+	getAnchorElement(heading) {
+		let anchor = document.createElement("a");
+		anchor.href = `#${heading.id}`;
+		anchor.classList.add(HeadingAnchors.classes.anchor);
+
+		let content = this.getContent();
+		anchor.innerHTML = `<span class="${HeadingAnchors.classes.srOnly}">${this.getAccessibleTextPrefix()}: ${heading.textContent}</span>${content ? `<span aria-hidden="true">${content}</span>` : ""}`;
+
+		anchor.addEventListener("focus", e => {
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			if(anchor) {
+				this.positionAnchor(anchor);
+			}
+		});
+
+		anchor.addEventListener("mouseover", (e) => {
+			// when CSS anchor positioning is supported, this is only used to set the font
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			this.positionAnchor(anchor);
+		});
+
+		return anchor;
+	}
+
+	get headings() {
+		return this.querySelectorAll(this.selector.split(",").map(entry => `${entry.trim()}[id]`));
+	}
+
+	get selector() {
+		return this.getAttribute("selector") || HeadingAnchors.defaultSelector;
+	}
+}
+
+HeadingAnchors.register();
+
+export { HeadingAnchors }
+</script>
 	</head>
 	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
-
-		<header>
+		<header class="top-bar" style="color: white;">
 			<a href="/" class="home-link">Oliver Kiran Brown</a>
 			<nav>
 				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 				<ul class="nav">
 					<li class="nav-item"><a href="/about/" aria-current="page">About</a></li>
-					<li class="nav-item"><a href="/blog/">Blog</a></li>
+					<li class="nav-item"><a href="/">Blog</a></li>
 					<li class="nav-item"><a href="/music/">Music</a></li>
 					<li class="nav-item"><a href="/contact/">Contact</a></li>
 				</ul>
 			</nav>
 		</header>
-
 		<main id="skip">
 			<heading-anchors>
-				
-<h1 id="welcome">Welcome</h1>
-<p>Hey thanks for stopping by! Hopefully we can get this navigation bar working soon so we can get to producing content! Hopefully after unpublishing the site, the GitHub cache will be cleaered of any old jekyll junk.</p>
-
+				<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fabout%2Foli_home_photo.jpg&width=4032&format=avif&via=transform 4032w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fabout%2Foli_home_photo.jpg&width=4032&format=webp&via=transform 4032w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fabout%2Foli_home_photo.jpg&width=4032&format=jpeg&via=transform" alt="Home Profile Photo" width="4032" height="3024"></picture>
+  </div>
+</div>
+<div>
+    <p><b>About Me</b></p>
+    <p>
+      Welcome to my personal blog where I share insights on web development, design, and more. 
+      I'm Oli, a passionate developer with a love for clean code and creative projects.
+    </p>
+  </div>
 			</heading-anchors>
 		</main>
 
@@ -321,7 +565,7 @@ header {
 			<p><em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.0</a></em></p>
 		</footer>
 
-		<!-- This page `/about/` was built on 2025-04-28T22:34:37.857Z -->
-		<script type="module" src="/dist/xbxy_EL6cU.js"></script>
+		<!-- This page `/about/` was built on 2025-05-02T12:32:39.073Z -->
+		<script type="module" src=""></script>
 	</body>
 </html>

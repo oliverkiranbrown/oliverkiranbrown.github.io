@@ -60,7 +60,8 @@ export default async function(eleventyConfig) {
 		// Output formats for each image.
 		formats: ["avif", "webp", "auto"],
 
-		// widths: ["auto"],
+		// output image widths
+		widths: ["auto"],
 
 		failOnError: false,
 		htmlOptions: {
@@ -90,7 +91,7 @@ export default async function(eleventyConfig) {
 	});
 
 	// the whole image folder
-	eleventyConfig.addPassthroughCopy("./public/img");
+	eleventyConfig.addPassthroughCopy("./public");
 
 
 
