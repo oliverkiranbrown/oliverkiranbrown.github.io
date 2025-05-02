@@ -13,7 +13,6 @@ permalink: /about/
 <div>
     <p><b>About Me</b></p>
     <p>
-      Welcome to my personal blog where I share insights on web development, design, and more. 
-      I'm Oli, a passionate developer with a love for clean code and creative projects.
+      Hey! I'm Oli. I've recently joined Lloyds on their Data Science and Analytics Graduate scheme. 
     </p>
   </div>
