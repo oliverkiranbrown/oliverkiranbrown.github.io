@@ -48,6 +48,10 @@
 	},
 	"dependencies": {
 		"@zachleat/heading-anchors": "^1.0.3",
+		"markdown-it": "^14.1.0",
+		"markdown-it-mathjax3": "^4.3.2",
+		"markdown-it-texmath": "^1.0.0",
+		"mathjax": "^3.2.2",
 		"netlify-plugin-cache": "^1.0.3"
 	}
 }

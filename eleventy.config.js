@@ -2,6 +2,8 @@ import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import markdownIt from "markdown-it";
+import markdownItMathjax3 from "markdown-it-mathjax3";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -38,6 +40,20 @@ export default async function(eleventyConfig) {
 		// supported selectors: https://www.npmjs.com/package/posthtml-match-helper
 		bundleHtmlContentFromSelector: "style",
 	});
+
+	// add support for $\text{maths}$
+	const md = markdownIt({
+		html: true,
+		breaks: true,
+		linkify: true
+	}).use(markdownItMathjax3, {
+		tex: {
+			inlineMath: [['$', '$']],
+			displayMath: [['$$', '$$']]
+		}
+	});
+	
+	eleventyConfig.setLibrary("md", md);
 
 	// Bundle <script> content and adds a {% js %} paired shortcode
 	eleventyConfig.addBundle("js", {
