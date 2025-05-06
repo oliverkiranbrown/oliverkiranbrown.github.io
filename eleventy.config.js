@@ -109,7 +109,25 @@ export default async function(eleventyConfig) {
 	// the whole image folder
 	eleventyConfig.addPassthroughCopy("./public");
 
+	// build the list of unique tags in the blog posts
+	eleventyConfig.addCollection("tagList", function(collectionApi) {
+		const tagSet = new Set();
+		collectionApi.getFilteredByGlob("./content/blog/*.md").forEach(item => {
+		  if ("tags" in item.data) {
+			let tags = item.data.tags;
+			if (typeof tags === "string") tags = [tags];
+			tags.forEach(tag => tagSet.add(tag));
+		  }
+		});
+		return [...tagSet].sort();
+	  });
 
+	// create a collection for the blog posts
+	eleventyConfig.addCollection("blog", function(collectionApi) {
+		return collectionApi.getFilteredByGlob("./content/blog/*.md").sort((a, b) => {
+		  return b.date - a.date;
+		});
+	  });
 
 	// Features to make your build faster (when you need them)
 

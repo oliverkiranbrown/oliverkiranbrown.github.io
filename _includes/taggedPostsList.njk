@@ -1,0 +1,44 @@
+<div id="tag-filter-container">
+  {% for tag in collections.tagList | filterTagList %}
+    <label class="tag-checkbox">
+      <input type="checkbox" name="tag" value="{{ tag }}">
+      {{ tag }}
+    </label>
+  {% endfor %}
+</div>
+
+<ol reversed class="postlist" style="--postlist-index: {{ (postslistCounter or collections.blog.length) + 1 }}" id="post-list">
+  {%- for post in collections.blog | reverse %}
+    <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}" data-tags="{{ post.data.tags | join(',') }}">
+      <a href="{{ post.url }}" class="postlist-link">
+        {% if post.data.title %}
+          {{ post.data.title }}
+        {% else %}
+          <code>{{ post.url }}</code>
+        {% endif %}
+      </a>
+      <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">
+        {{ post.date | readableDate("LLLL yyyy") }}
+      </time>
+    </li>
+  {%- endfor %}
+</ol>
+
+<script>
+  const checkboxes = document.querySelectorAll('#tag-filter-container input[type="checkbox"]');
+  const posts = document.querySelectorAll('#post-list .postlist-item');
+
+  function filterPosts() {
+    const selectedTags = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+    posts.forEach(post => {
+      const tags = post.dataset.tags.split(',');
+      const show = selectedTags.length === 0 || tags.some(tag => selectedTags.includes(tag));
+      post.style.display = show ? '' : 'none';
+    });
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', filterPosts));
+</script>

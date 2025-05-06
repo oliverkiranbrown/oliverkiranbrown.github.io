@@ -1,6 +1,7 @@
 ---
 title: This is my fourth post
 description: This is a post on My Blog about touchpoints and circling wagons.
+tags: ['foo']
 date: 2018-09-30
 eleventyNavigation:
     key: forth-post

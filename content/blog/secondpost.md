@@ -1,6 +1,7 @@
 ---
 title: This is my second post with a much longer title.
 description: This is a post on My Blog about leveraging agile frameworks.
+tags: ['foo']
 date: 2018-07-04
 layout: layouts/post.njk
 eleventyNavigation:

@@ -8,11 +8,16 @@ layout: layouts/base.njk
 
 <ul class="post-metadata">
 	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
+</ul>
+
+{%- if tags | filterTagList | length %}
+<ul class="post-tags">
 	{%- for tag in tags | filterTagList %}
-	{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
+		{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+		<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a></li>
 	{%- endfor %}
 </ul>
+{%- endif %}
 
 {{ content | safe }}
 

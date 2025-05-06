@@ -1,6 +1,7 @@
 ---
 title: Maths example
 description: Test of mathjax
+tags: ['maths']
 date: 2025-12-25
 layout: layouts/post.njk
 eleventyNavigation:

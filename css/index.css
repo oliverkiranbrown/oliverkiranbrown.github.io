@@ -289,3 +289,62 @@ code {
 	margin-right: 1em;
 }
 
+.tag-filter-label {
+	font-weight: bold;
+	margin-right: 0.5em;
+  }
+  
+  .tag-filter-dropdown {
+	margin-bottom: 1em;
+	padding: 0.4em;
+	font-size: 1rem;
+  }
+  
+  .postlist-item {
+	margin-bottom: 0.8em;
+  }
+
+  #tag-filter-container {
+	margin-bottom: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+  }
+  
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+  }
+  
+  .tag-checkbox input {
+	margin-right: 0.4em;
+	margin-top: 0.4em;
+  }
+
+  .post-metadata,
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-tags {
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  background: #f0f0f0;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.post-tag:hover {
+  background: #ddd;
+}
+

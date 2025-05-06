@@ -5,6 +5,9 @@ eleventyNavigation:
     order: 3
 permalink: /music/
 ---
+# Music
+
+I've been playing drums in bands for bleedin' ages! 
 | Band                                                                                    | Years Active |
 | :------------------------------------------------------------------------------------- | :-----------: |
 | [Influx of Insanity](https://influxofinsanity.bandcamp.com/album/influx-the-collection) | 2017-2021    |
