@@ -2,6 +2,7 @@
   {% for tag in collections.tagList | filterTagList %}
     <label class="tag-checkbox">
       <input type="checkbox" name="tag" value="{{ tag }}">
+      <span class="custom-checkmark"></span>
       {{ tag }}
     </label>
   {% endfor %}

@@ -444,7 +444,53 @@ code {
 
 .post-tag:hover {
   background: #ddd;
-}</style>
+}
+
+/* custom checkbox */
+/* Hide the native checkbox */
+.tag-checkbox input[type="checkbox"] {
+	display: none;
+  }
+  
+  /* Style the label to align nicely */
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+	cursor: pointer;
+	position: relative;
+  }
+  
+  /* Style the custom checkbox square */
+  .custom-checkmark {
+	width: 1em;
+	height: 1em;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	position: relative;
+	transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* When checked, change the background color */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: #8ba254; /* your custom green */
+	border-color: #8ba254;
+  }
+  
+  /* Optional: add a checkmark icon */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 7px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -496,16 +542,19 @@ code {
   
     <label class="tag-checkbox">
       <input type="checkbox" name="tag" value="bar">
+      <span class="custom-checkmark"></span>
       bar
     </label>
   
     <label class="tag-checkbox">
       <input type="checkbox" name="tag" value="foo">
+      <span class="custom-checkmark"></span>
       foo
     </label>
   
     <label class="tag-checkbox">
       <input type="checkbox" name="tag" value="maths">
+      <span class="custom-checkmark"></span>
       maths
     </label>
   
@@ -575,7 +624,7 @@ code {
 			</p>
 		</footer>
 
-		<!-- This page `/` was built on 2025-05-10T23:08:25.700Z -->
+		<!-- This page `/` was built on 2025-05-10T23:49:06.053Z -->
 		<script type="module" src="/dist/9Or_lbGDQQ.js"></script>
 	</body>
 </html>
