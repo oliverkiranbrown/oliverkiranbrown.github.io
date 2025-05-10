@@ -4,6 +4,14 @@
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
 /* Theme colors */
 :root {
 	--color-gray-20: #e0e0e0;
@@ -57,13 +65,8 @@ html {
 	overflow-y: scroll;
 }
 body {
-	/*
-	Makes the body wide
-	max-width: 40em;
-	*/
-	max-width: 40em;
-	margin: 0 auto;
-	padding: 1em;
+	margin: 0;
+	padding: 0;
 	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -75,6 +78,11 @@ body {
 	position: absolute;
 	white-space: nowrap;
 	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
 }
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
@@ -129,7 +137,9 @@ main :first-child {
 }
 
 header {
+	/*
 	border-bottom: 1px dashed var(--color-gray-20);
+	*/
 }
 
 .links-nextprev {
@@ -141,19 +151,33 @@ header {
 	padding: 1em 0;
 }
 .links-nextprev > * {
-	flex-grow: 1;
+	flex-grow: 0;
 }
 .links-nextprev-next {
 	text-align: right;
 }
 
 table {
-	margin: 1em 0;
-}
-table td,
-table th {
-	padding-right: 1em;
-}
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
 
 pre,
 code {
@@ -185,22 +209,56 @@ code {
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
 	/*
-	background-color: #4682B4;  
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
 	*/
 	padding: 1em;
 	width: 100%;
 }
 .home-link {
-	flex-grow: 1;
-	font-size: 1em; /* 16px /16 */
-	font-weight: 700;
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
 }
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
 
 /* Nav */
 .nav {
@@ -209,6 +267,11 @@ code {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
 }
 .nav-item {
 	display: inline-block;
@@ -220,9 +283,27 @@ code {
 	text-decoration: underline;
 }
 
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
 /* Posts list */
 .postlist {
-	counter-reset: start-from var(--postlist-index);
 	list-style: none;
 	padding: 0;
 	padding-left: 1.5rem;
@@ -231,13 +312,11 @@ code {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
-	counter-increment: start-from -1;
 	margin-bottom: 1em;
-}
+  }
 .postlist-item:before {
 	display: inline-block;
 	pointer-events: none;
-	content: "" counter(start-from, decimal-leading-zero) ". ";
 	line-height: 100%;
 	text-align: right;
 	margin-left: -1.5rem;
@@ -249,6 +328,7 @@ code {
 }
 .postlist-date {
 	word-spacing: -0.5px;
+	margin-left: 1.7rem;
 }
 .postlist-link {
 	font-size: 1.1875em; /* 19px /16 */
@@ -263,7 +343,11 @@ code {
 .postlist-item-active .postlist-link {
 	font-weight: bold;
 }
-
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
 /* Tags */
 .post-tag {
 	display: inline-flex;

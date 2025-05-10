@@ -18,6 +18,14 @@
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
 /* Theme colors */
 :root {
 	--color-gray-20: #e0e0e0;
@@ -71,13 +79,8 @@ html {
 	overflow-y: scroll;
 }
 body {
-	/*
-	Makes the body wide
-	max-width: 40em;
-	*/
-	max-width: 40em;
-	margin: 0 auto;
-	padding: 1em;
+	margin: 0;
+	padding: 0;
 	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -89,6 +92,11 @@ body {
 	position: absolute;
 	white-space: nowrap;
 	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
 }
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
@@ -143,7 +151,9 @@ main :first-child {
 }
 
 header {
+	/*
 	border-bottom: 1px dashed var(--color-gray-20);
+	*/
 }
 
 .links-nextprev {
@@ -155,19 +165,33 @@ header {
 	padding: 1em 0;
 }
 .links-nextprev > * {
-	flex-grow: 1;
+	flex-grow: 0;
 }
 .links-nextprev-next {
 	text-align: right;
 }
 
 table {
-	margin: 1em 0;
-}
-table td,
-table th {
-	padding-right: 1em;
-}
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
 
 pre,
 code {
@@ -199,22 +223,56 @@ code {
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
 	/*
-	background-color: #4682B4;  
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
 	*/
 	padding: 1em;
 	width: 100%;
 }
 .home-link {
-	flex-grow: 1;
-	font-size: 1em; /* 16px /16 */
-	font-weight: 700;
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
 }
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
 
 /* Nav */
 .nav {
@@ -223,6 +281,11 @@ code {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
 }
 .nav-item {
 	display: inline-block;
@@ -234,9 +297,27 @@ code {
 	text-decoration: underline;
 }
 
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
 /* Posts list */
 .postlist {
-	counter-reset: start-from var(--postlist-index);
 	list-style: none;
 	padding: 0;
 	padding-left: 1.5rem;
@@ -245,13 +326,11 @@ code {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
-	counter-increment: start-from -1;
 	margin-bottom: 1em;
-}
+  }
 .postlist-item:before {
 	display: inline-block;
 	pointer-events: none;
-	content: "" counter(start-from, decimal-leading-zero) ". ";
 	line-height: 100%;
 	text-align: right;
 	margin-left: -1.5rem;
@@ -263,6 +342,7 @@ code {
 }
 .postlist-date {
 	word-spacing: -0.5px;
+	margin-left: 1.7rem;
 }
 .postlist-link {
 	font-size: 1.1875em; /* 19px /16 */
@@ -277,7 +357,11 @@ code {
 .postlist-item-active .postlist-link {
 	font-weight: bold;
 }
-
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
 /* Tags */
 .post-tag {
 	display: inline-flex;
@@ -362,81 +446,128 @@ code {
   background: #ddd;
 }</style>
 		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
 		
 		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 	</head>
 	<body>
-		<header class="top-bar" style="color: white;">
+		<header class="top-bar">
 			<a href="/" class="home-link">Oliver Kiran Brown</a>
 			<nav>
-				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 				<ul class="nav">
 					<li class="nav-item"><a href="/about/">About</a></li>
 					<li class="nav-item"><a href="/">Blog</a></li>
 					<li class="nav-item"><a href="/music/" aria-current="page">Music</a></li>
-					<li class="nav-item"><a href="/contact/">Contact</a></li>
 				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 			</nav>
-		</header>
-		<main id="skip">
-			<heading-anchors>
-				
-<h1 id="music">Music</h1>
-<p>I've been playing drums in bands for bleedin' ages!</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Band</th>
-<th style="text-align:center">Years Active</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://influxofinsanity.bandcamp.com/album/influx-the-collection">Influx of Insanity</a></td>
-<td style="text-align:center">2017-2021</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://karmaviolets.bandcamp.com/music">Karma Violets</a></td>
-<td style="text-align:center">2019-2021</td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://feedthemammoth.bandcamp.com/">Feed the Mammoth</a></td>
-<td style="text-align:center">2021-2025</td>
-</tr>
-</tbody>
-</table>
 
-			</heading-anchors>
-		</main>
-
-		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
-			<p style="margin: 0; font-weight: bold;">Oliver Kiran Brown</p>
-			<div style="margin-top: 0.5em;">
+			<div class="social-icons">
 				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
 					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
 						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
 						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
-
 					</svg>
 				</a>
 				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-  						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
 					</svg>
 				</a>
 				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-  						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
 					</svg>
 				</a>
-				</div>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+<h1 id="music">Music</h1>
+<p>Outside of formal work and study, I'm a big music fan. I've been playing drums in bands for years and it's come to form an important part of my identity. So, in a vain attempt to beat the maths nerd allegations (double meaning intentional!), I thought I'd chuck in a few links on my personal site so showcase what I've been getting up to.</p>
+<h2 id="projects">Projects</h2>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Years Active</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://influxofinsanity.bandcamp.com/album/influx-the-collection">Influx of Insanity</a></td>
+<td>2016 - 2021</td>
+</tr>
+<tr>
+<td><a href="https://karmaviolets.bandcamp.com/music">The Karma Violets</a></td>
+<td>2019 - 2021</td>
+</tr>
+<tr>
+<td><a href="https://feedthemammoth.bandcamp.com/">Feed the Mammoth</a></td>
+<td>2021 - 2025</td>
+</tr>
+<tr>
+<td><a href="https://www.instagram.com/balloon_tomb/">Balloon Tomb</a></td>
+<td>2024 - 2025</td>
+</tr>
+</tbody>
+</table>
+<h2 id="some-background-if-you-care">Some Background (if you care!)</h2>
+<h3 id="influx-of-insanity">Influx of Insanity</h3>
+<p>It all started aged 14 with a noisy prog metal double-act called <a href="https://www.instagram.com/influxofinsanity/">Influx of Insanity</a>. We played a <em>lot</em> of gigs, wrote some hilarious, teenage angst-ridden lyrics and released some self-produced music out into the world. It was great fun! This <a href="https://www.youtube.com/watch?v=Ot16iTOSIvc">video</a> gives you a good idea of what we were all about...</p>
+<p>My partner in crime <a href="https://linktr.ee/Dom.howard_">Dom Howard</a> went on to study jazz at RCM after we finished in 2021 and he's utterly brilliant, go <a href="https://domhoward.bandcamp.com/album/all-the-paths-join-up-here">check him out</a>.</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=avif&via=transform 2400w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=webp&via=transform 2400w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=jpeg&via=transform" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
+  </div>
+</div>
+<h3 id="the-karma-violets">The Karma Violets</h3>
+<p>The Karma Violets came together thanks to complete chance! I met the lovely <a href="https://www.instagram.com/wesley_ayres_music/">Wes Ayres</a> whilst working as a waiter at Peterhouse College, Cambridge, we got chatting music and decided to form a band. With the addition of the crazy mutual connection Ambrose de Soissons-Page (Wes' family friend who also happened to played the same <a href="https://www.lovemusichateracism.com/home/">LMHR</a> / <a href="https://www.repeatfanzine.co.uk/homepage.htm">REPEAT</a> gigs as me back in the day!), we completed this indie-rock trio. Lockdown couldn't stop us pumping out two EPs - have a listen <a href="https://karmaviolets.bandcamp.com/">here</a>.</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=avif&via=transform 4898w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=webp&via=transform 4898w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=jpeg&via=transform" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
+  </div>
+</div>
+<h3 id="feed-the-mammoth">Feed the Mammoth</h3>
+<p>I headed off to University in 2021 and threw myself straight into the smorgasbord of musical madness that is <a href="https://www.instagram.com/warwickbandsoc/">Warwick BandSoc</a>. I played in a wacky variety of bands - shoutout to the angry garage punk of <a href="https://youtu.be/Jl_S9tzjVro?si=uPLFTgpQNBGDDSsO&amp;t=270">Domestic Love</a> and my good friends in <a href="https://www.instagram.com/sunnysidedownband/">Sunny Side Down</a>! Eventually, I decided to settle down and focus on Feed the Mammoth. We wrote some tunes I'm genuinely proud of and had a banging time doing it. If you want a flavour of what we got up to, check out our <a href="https://www.youtube.com/channel/UCl9l2k9-kfGDI2H8EHLcG9Q">YouTube</a>.</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=avif&via=transform 4318w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=webp&via=transform 4318w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=jpeg&via=transform" alt="FTM Band Photo" width="4318" height="3455"></picture>
+  </div>
+</div>
+<h2 id="community-building">Community Building</h2>
+<p>In my 3rd year, I had the privilege of serving as president of BandSoc. It was busy, intense year and one of the best decisions I've ever made.</p>
+<p>Alongside my fantastic exec team, I put on around 50 events during my term. Highlights included organising a week-long tour around the UK for 5 bands, instituting a free annual summer festival on campus and organising the massive annual Battle of the Bands competition. It was a blast!</p>
+<p>But honestly? Seeing friendships form, those memories made? It was a deeply moving experience. University can be a lonely place, and in our world that so heavily incentivises the <em>individual</em> ('sort <em>yourself</em> out, increase <em>your own</em> following'), there are very few social structures that tie people together like that, forcing your to put your faith in others - in something bigger than yourself.</p>
+<p>This time I spent building a genuine sense of place-based community in BandSoc will stay with me forever. Yes, it's obvious, and I don't want to be too 'let's all hold hands and sing Kumbaya round the fire', but there is <em>real</em> power in building this sense of collective identify. It's something I want to keep chasing in everything I do. Thanks BandSoc ❤️</p>
+<!-- 
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <img src="./CR1_photo.jpg" alt="FTM BotB Final 2023">
+  </div>
+</div>
+-->
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/about/">About</a>
+				<a href="/">Blog</a>
+			</div>
 			<p style="margin-top: 1em; font-size: 0.8em;">
 				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.0</a></em>
 			</p>
 		</footer>
 
-		<!-- This page `/music/` was built on 2025-05-06T23:33:22.483Z -->
+		<!-- This page `/music/` was built on 2025-05-10T23:08:25.700Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

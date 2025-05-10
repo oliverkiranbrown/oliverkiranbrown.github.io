@@ -71,13 +71,8 @@ html {
 	overflow-y: scroll;
 }
 body {
-	/*
-	Makes the body wide
-	max-width: 40em;
-	*/
-	max-width: 40em;
-	margin: 0 auto;
-	padding: 1em;
+	margin: 0;
+	padding: 0;
 	}
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -89,6 +84,11 @@ body {
 	position: absolute;
 	white-space: nowrap;
 	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
 }
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
@@ -143,7 +143,9 @@ main :first-child {
 }
 
 header {
+	/*
 	border-bottom: 1px dashed var(--color-gray-20);
+	*/
 }
 
 .links-nextprev {
@@ -162,12 +164,26 @@ header {
 }
 
 table {
-	margin: 1em 0;
-}
-table td,
-table th {
-	padding-right: 1em;
-}
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
 
 pre,
 code {
@@ -199,10 +215,28 @@ code {
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	font-size: 1.2rem;
+	background-color: #8ba254;  
 	/*
-	background-color: #4682B4;  
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
 	*/
 	padding: 1em;
 	width: 100%;
@@ -210,11 +244,23 @@ code {
 .home-link {
 	flex-grow: 1;
 	font-size: 1em; /* 16px /16 */
-	font-weight: 700;
+	font-weight: 500;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
 }
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
 
 /* Nav */
 .nav {
@@ -223,6 +269,10 @@ code {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	font-weight: 200;
+	align-items: center;
+	justify-content: flex-start;
+
 }
 .nav-item {
 	display: inline-block;
@@ -236,7 +286,6 @@ code {
 
 /* Posts list */
 .postlist {
-	counter-reset: start-from var(--postlist-index);
 	list-style: none;
 	padding: 0;
 	padding-left: 1.5rem;
@@ -245,13 +294,11 @@ code {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
-	counter-increment: start-from -1;
 	margin-bottom: 1em;
-}
+  }
 .postlist-item:before {
 	display: inline-block;
 	pointer-events: none;
-	content: "" counter(start-from, decimal-leading-zero) ". ";
 	line-height: 100%;
 	text-align: right;
 	margin-left: -1.5rem;
@@ -263,6 +310,7 @@ code {
 }
 .postlist-date {
 	word-spacing: -0.5px;
+	margin-left: 1.7rem;
 }
 .postlist-link {
 	font-size: 1.1875em; /* 19px /16 */
@@ -277,7 +325,11 @@ code {
 .postlist-item-active .postlist-link {
 	font-weight: bold;
 }
-
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
 /* Tags */
 .post-tag {
 	display: inline-flex;
@@ -366,27 +418,28 @@ code {
 		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 	</head>
 	<body>
-		<header class="top-bar" style="color: white;">
+		<header class="top-bar">
 			<a href="/" class="home-link">Oliver Kiran Brown</a>
 			<nav>
-				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 				<ul class="nav">
 					<li class="nav-item"><a href="/about/">About</a></li>
 					<li class="nav-item"><a href="/">Blog</a></li>
 					<li class="nav-item"><a href="/music/">Music</a></li>
 					<li class="nav-item"><a href="/contact/" aria-current="page">Contact</a></li>
 				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 			</nav>
 		</header>
-		<main id="skip">
-			<heading-anchors>
-				
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
 <h1 id="contact-infomation">Contact Infomation</h1>
 <p>Please contact me via the following links</p>
 
-			</heading-anchors>
-		</main>
-
+				</heading-anchors>
+			</main>
+		</div>
 		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
 			<p style="margin: 0; font-weight: bold;">Oliver Kiran Brown</p>
 			<div style="margin-top: 0.5em;">
@@ -414,7 +467,7 @@ code {
 			</p>
 		</footer>
 
-		<!-- This page `/contact/` was built on 2025-05-06T23:33:22.483Z -->
+		<!-- This page `/contact/` was built on 2025-05-10T21:55:19.365Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

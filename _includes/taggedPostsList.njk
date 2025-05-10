@@ -7,9 +7,15 @@
   {% endfor %}
 </div>
 
-<ol reversed class="postlist" style="--postlist-index: {{ (postslistCounter or collections.blog.length) + 1 }}" id="post-list">
-  {%- for post in collections.blog | reverse %}
-    <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}" data-tags="{{ post.data.tags | join(',') }}">
+<ol class="postlist" id="post-list">
+  {%- set posts = collections.blog -%}
+  {%- for post in posts %}
+    <li 
+      class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}" 
+      data-tags="{{ post.data.tags | join(',') }}"
+      data-number="{{ posts.length - loop.index0 }}"
+    >
+      <span class="post-number">{{ posts.length - loop.index0 }}.</span>
       <a href="{{ post.url }}" class="postlist-link">
         {% if post.data.title %}
           {{ post.data.title }}
