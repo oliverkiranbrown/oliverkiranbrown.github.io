@@ -5,17 +5,10 @@ eleventyNavigation:
     order: 1
 permalink: /about/
 ---
-<!--
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <img src="./headshot_wide.jpg" alt="Home Profile Photo">
-  </div>
-</div>
--->
 
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <img src="./FTM_photo.jpg" alt="Test Photo">
+    <img src="./headshot.jpg" alt="Headshot">
   </div>
 </div>
 
