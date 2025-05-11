@@ -7,6 +7,10 @@ import markdownItMathjax3 from "markdown-it-mathjax3";
 
 import pluginFilters from "./_config/filters.js";
 
+// to specify image file paths manually with a shortcode
+import Image from "@11ty/eleventy-img";
+import path from "path";
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function(eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
@@ -105,6 +109,27 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addShortcode("currentBuildDate", () => {
 		return (new Date()).toISOString();
 	});
+	
+	// Shortcode for manually optimized images with output dir
+	eleventyConfig.addNunjucksAsyncShortcode("myImage", async function(src, alt) {
+		let srcPath = path.join("content", src); // e.g. "about/headshot.jpg"
+
+		let metadata = await Image(srcPath, {
+			widths: [600, null],
+			formats: ["avif", "webp", "jpeg"],
+			urlPath: "/.11ty/",
+			outputDir: "./_site/.11ty/", // actual location to emit the images
+		});
+
+		let imageAttributes = {
+			alt,
+			loading: "lazy",
+			decoding: "async",
+		};
+
+		return Image.generateHTML(metadata, imageAttributes);
+	});
+	
 
 	// the whole image folder
 	eleventyConfig.addPassthroughCopy("./public");
