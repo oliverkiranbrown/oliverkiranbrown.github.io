@@ -4,7 +4,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import markdownIt from "markdown-it";
 import markdownItMathjax3 from "markdown-it-mathjax3";
-import pluginJupyter from "eleventy-plugin-jupyter-nb-extract/.eleventy.js";
+//import pluginJupyter from "eleventy-plugin-jupyter-nb-extract/.eleventy.js";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -77,7 +77,7 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
 	// Add in support for rendering Jupyter Noteboooks
-	eleventyConfig.addPlugin(pluginJupyter);
+	//eleventyConfig.addPlugin(pluginJupyter);
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
