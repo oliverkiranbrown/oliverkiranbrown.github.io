@@ -1,35 +1,54 @@
 <style>
   footer {
     text-align: center;
-    padding: 2em 0;
+    padding: 3em 1em;
     font-size: 0.9rem;
-    background: #fff;
-    color: #000;
+    background: #fdfdfd;
+    color: #222;
+    border-top: 1px solid #eee;
+  }
+
+  .footer-widgets-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1em;
   }
 
   .footer-widgets {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2em;
-    margin-top: 1.5em;
+    gap: 2.5em;
+    margin-top: 1em;
   }
 
   .widget {
+    flex: 0 0 300px;
     max-width: 300px;
-    flex: 1 1 250px;
     font-size: 0.85rem;
     display: flex;
     flex-direction: column;
-    height: 460px; /* Match tallest widget */
+    height: 460px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    padding: .1em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+  }
+
+  .widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   }
 
   .widget h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.3em;
-    font-weight: normal;
+    font-size: 1rem;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    color: #333;
     border-bottom: 1px solid #eee;
-    padding-bottom: 0.2em;
+    padding-bottom: 0.3em;
   }
 
   .widget iframe {
@@ -37,49 +56,56 @@
     height: 100%;
     flex: 1;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
   }
 
-  /* Goodreads fallback styling */
   .gr_custom_container_1747961986 {
-    border-radius: 10px;
-    padding: 10px 5px;
-    background-color: transparent;
+    border-radius: 8px;
+    padding: 0.5em;
+    background-color: #fafafa;
     width: 100%;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .widget {
+      max-width: 100%;
+    }
   }
 </style>
 
+
 <footer>
-  <div class="footer-widgets">
+  <div class="footer-widgets-container">
+    <div class="footer-widgets">
 
-    <!-- Strava Widget -->
-    <div class="widget">
-      <h3>🏃‍♂️ Latest Runs</h3>
-      <iframe
-        src="https://www.strava.com/athletes/18718372/latest-rides/481c454c2194e9dd1d72b6b017809632f2b0804c"
-        scrolling="yes"
-        allowtransparency="true">
-      </iframe>
-    </div>
+      <!-- Strava Widget -->
+      <div class="widget">
+        <h3>🏃‍♂️ Latest Runs</h3>
+        <iframe
+          src="https://www.strava.com/athletes/18718372/latest-rides/481c454c2194e9dd1d72b6b017809632f2b0804c"
+          scrolling="yes"
+          allowtransparency="true">
+        </iframe>
+      </div>
 
-    <!-- Goodreads Widget -->
-    <div class="widget">
-      <h3>📚 Currently Reading</h3>
-      <div id="gr_custom_widget_1747961986" style="flex: 1;"></div>
-      <script src="https://www.goodreads.com/review/custom_widget/129474819.Oliver's%20bookshelf:%20currently-reading?cover_position=middle&cover_size=medium&num_books=1&order=d&shelf=currently-reading&show_author=1&show_cover=1&show_rating=0&show_review=0&show_tags=0&show_title=1&sort=date_added&widget_bg_color=FFFFFF&widget_bg_transparent=true&widget_border_width=1&widget_id=1747961986&widget_text_color=000000&widget_title_size=small&widget_width=thin" type="text/javascript" charset="utf-8"></script>
-    </div>
+      <!-- Goodreads Widget -->
+      <div class="widget">
+        <h3>📚 Currently Reading</h3>
+        <div id="gr_custom_widget_1747961986" style="flex: 1;"></div>
+        <script src="https://www.goodreads.com/review/custom_widget/129474819.Oliver's%20bookshelf:%20currently-reading?cover_position=middle&cover_size=medium&num_books=1&order=d&shelf=currently-reading&show_author=1&show_cover=1&show_rating=0&show_review=0&show_tags=0&show_title=1&sort=date_added&widget_bg_color=FFFFFF&widget_bg_transparent=true&widget_border_width=1&widget_id=1747961986&widget_text_color=000000&widget_title_size=small&widget_width=thin" type="text/javascript" charset="utf-8"></script>
+      </div>
 
-    <!-- Spotify Widget 
-    <div class="widget">
-      <h3>🎵 Now Playing</h3>
-      <iframe 
-        src="https://open.spotify.com/embed/playlist/5sPnrbKJ2M9gz95TiTWr0x?utm_source=generator&theme=0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
+      <!-- Spotify Widget -->
+      <div class="widget">
+        <h3>🎵 Now Playing</h3>
+        <iframe 
+          src="https://open.spotify.com/embed/playlist/5sPnrbKJ2M9gz95TiTWr0x?utm_source=generator&theme=0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      </div>
+
     </div>
-    --->
   </div>
 </footer>
-
-

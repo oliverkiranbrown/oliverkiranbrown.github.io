@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>This is my first post.</title>
-		<meta name="description" content="This is a post on My Blog about agile frameworks.">
+		<title>Oliver Kiran Brown</title>
+		<meta name="description" content="Oli&#39;s personal site">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
@@ -491,174 +491,49 @@ code {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
-/**
- * okaidia theme for JavaScript, CSS and HTML
- * Loosely based on Monokai textmate theme by http://www.monokai.nl/
- * @author ocodia
- */
-
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #f8f8f2;
-	background: none;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-	border-radius: 0.3em;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #272822;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #8292a2;
-}
-
-.token.punctuation {
-	color: #f8f8f2;
-}
-
-.token.namespace {
-	opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #f92672;
-}
-
-.token.boolean,
-.token.number {
-	color: #ae81ff;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #a6e22e;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: #f8f8f2;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.function,
-.token.class-name {
-	color: #e6db74;
-}
-
-.token.keyword {
-	color: #66d9ef;
-}
-
-.token.regex,
-.token.important {
-	color: #fd971f;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
-/*
- * New diff- syntax
- */
-
-pre[class*="language-diff-"] {
-	--eleventy-code-padding: 1.25em;
-	padding-left: var(--eleventy-code-padding);
-	padding-right: var(--eleventy-code-padding);
-}
-.token.deleted {
-	background-color: hsl(0, 51%, 37%);
-	color: inherit;
-}
-.token.inserted {
-	background-color: hsl(126, 31%, 39%);
-	color: inherit;
-}
-
-/* Make the + and - characters unselectable for copy/paste */
-.token.prefix.unchanged,
-.token.prefix.inserted,
-.token.prefix.deleted {
-	-webkit-user-select: none;
-	user-select: none;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-.token.prefix.inserted,
-.token.prefix.deleted {
-	width: var(--eleventy-code-padding);
-	background-color: rgba(0,0,0,.2);
-}
-
-/* Optional: full-width background color */
-.token.inserted:not(.prefix),
-.token.deleted:not(.prefix) {
-	display: block;
-	margin-left: calc(-1 * var(--eleventy-code-padding));
-	margin-right: calc(-1 * var(--eleventy-code-padding));
-	text-decoration: none; /* override del, ins, mark defaults */
-	color: inherit; /* override del, ins, mark defaults */
-}</style>
+footer {
+    text-align: center;
+    padding: 2em 0;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #000;
+  }
+<p>.footer-widgets {<br>
+display: flex;<br>
+justify-content: center;<br>
+flex-wrap: wrap;<br>
+gap: 2em;<br>
+margin-top: 1.5em;<br>
+}</p>
+<p>.widget {<br>
+max-width: 300px;<br>
+flex: 1 1 250px;<br>
+font-size: 0.85rem;<br>
+display: flex;<br>
+flex-direction: column;<br>
+height: 460px; /* Match tallest widget */<br>
+}</p>
+<p>.widget h3 {<br>
+font-size: 0.9rem;<br>
+margin-bottom: 0.3em;<br>
+font-weight: normal;<br>
+border-bottom: 1px solid #eee;<br>
+padding-bottom: 0.2em;<br>
+}</p>
+<p>.widget iframe {<br>
+width: 100%;<br>
+height: 100%;<br>
+flex: 1;<br>
+border: none;<br>
+border-radius: 6px;<br>
+}</p>
+<p>/* Goodreads fallback styling */<br>
+.gr_custom_container_1747961986 {<br>
+border-radius: 10px;<br>
+padding: 10px 5px;<br>
+background-color: transparent;<br>
+width: 100%;<br>
+}<br></style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -703,35 +578,32 @@ pre[class*="language-diff-"] {
 			<main id="skip">
 				<heading-anchors>
 					
-
-
-<h1 id="this-is-my-first-post">This is my first post.</h1>
-
-<ul class="post-metadata">
-	<li><time datetime="2018-05-01">01 May 2018</time></li>
-</ul>
-<ul class="post-tags">
-		<li><a href="/tags/bar/" class="post-tag">bar</a></li>
-</ul>
-
-<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
-<p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
-<h2 id="section-header">Section Header</h2>
-<p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-<pre class="language-diff-js" tabindex="0"><code class="language-diff-js"><span class="token unchanged language-js"><span class="token prefix unchanged"> </span><span class="token comment">// this is a command</span>
-<span class="token prefix unchanged"> </span><span class="token keyword">function</span> <span class="token function">myCommand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="token inserted-sign inserted language-js"><span class="token prefix inserted">+</span>  <span class="token keyword">let</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-</span><span class="token deleted-sign deleted language-js"><span class="token prefix deleted">-</span>  <span class="token keyword">let</span> counter <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-</span><span class="token unchanged language-js"><span class="token prefix unchanged"> </span>  counter<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token prefix unchanged"> </span><span class="token punctuation">}</span>
-</span>
-<span class="token unchanged language-js"><span class="token prefix unchanged"> </span><span class="token comment">// Test with a line break above this line.</span>
-<span class="token prefix unchanged"> </span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span></code></pre>
-
-<ul class="links-nextprev"><li class="links-nextprev-next">Next →<br><a href="/blog/secondpost/">This is my second post with a much longer title.</a></li>
-</ul>
-
+<div>
+	<p></p>
+<footer>
+  <div class="footer-widgets">
+<p><!-- Strava Widget --><br>
+</p><div class="widget"><br>
+<h3 id="latest-runs">🏃‍♂️ Latest Runs</h3><br>
+<iframe src="https://www.strava.com/athletes/18718372/latest-rides/481c454c2194e9dd1d72b6b017809632f2b0804c" scrolling="yes" allowtransparency="true"><br>
+</iframe><br>
+</div><p></p>
+<p><!-- Goodreads Widget --><br>
+</p><div class="widget"><br>
+<h3 id="currently-reading">📚 Currently Reading</h3><br>
+<div id="gr_custom_widget_1747961986" style="flex: 1;"></div><br>
+<script src="https://www.goodreads.com/review/custom_widget/129474819.Oliver's%20bookshelf:%20currently-reading?cover_position=middle&cover_size=medium&num_books=1&order=d&shelf=currently-reading&show_author=1&show_cover=1&show_rating=0&show_review=0&show_tags=0&show_title=1&sort=date_added&widget_bg_color=FFFFFF&widget_bg_transparent=true&widget_border_width=1&widget_id=1747961986&widget_text_color=000000&widget_title_size=small&widget_width=thin" type="text/javascript" charset="utf-8"></script><br>
+</div><p></p>
+<p>&lt;!-- Spotify Widget<br>
+</p><div class="widget"><br>
+<h3 id="now-playing">🎵 Now Playing</h3><br>
+<iframe src="https://open.spotify.com/embed/playlist/5sPnrbKJ2M9gz95TiTWr0x?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"><br>
+</iframe><br>
+</div><br>
+---&gt;<p></p>
+  </div>
+</footer>
+</div>
 				</heading-anchors>
 			</main>
 		</div>
@@ -740,14 +612,13 @@ pre[class*="language-diff-"] {
 			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
 				<a href="/about/">About</a>
 				<a href="/">Blog</a>
-				<a href="/now/">Now</a>
 			</div>
 			<p style="margin-top: 1em; font-size: 0.8em;">
 				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.0</a></em>
 			</p>
 		</footer>
 
-		<!-- This page `/blog/firstpost/` was built on 2025-05-25T23:19:43.744Z -->
+		<!-- This page `/about/now/` was built on 2025-05-25T22:39:28.658Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

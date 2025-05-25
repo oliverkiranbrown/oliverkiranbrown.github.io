@@ -19,7 +19,7 @@ Before Lloyds, I completed a placement year in the [Department of Energy Securit
 
 Between 2021 and 2024, I completed by maths undergrad at Warwick. The course was just *fantastic*. Challenging at times, but very fun. My highlights were Mathematics of ML, Complex Analysis (so pretty!) and High Dimensional Probability. I'm taking a break from formal education for now, but my self-study will continue! I hope my blog can form part of this. 
 
-If you want to contact me, please reach out to oliverkiranbrown@gmail.com.
+If you want to contact me, please reach out to oliverkiranbrown@gmail.com. Check out my [now](/now/) page to see what I'm up to at the moment. 
 
 **About My Blog**
 In our modern slot machine media economy, it's super easy to just passively consume content without reflection. I'm certainly guilty of this. I want to make a shift from being this passive consumer to an active producer - to become someone who actually *makes stuff*. Moreover, I've always loved my writing and want to develop my own voice hence...weekly blog posts! 
