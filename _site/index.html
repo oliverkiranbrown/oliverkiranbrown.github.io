@@ -8,8 +8,496 @@
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
-		
-		
+		<style>/* This is an arbitrary CSS string added to the bundle */</style>
+		<style>/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+/*
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		/*
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+*/
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	/*
+	border-bottom: 1px dashed var(--color-gray-20);
+	*/
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 0;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+.top-bar {
+	color: white !important;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
+	/*
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
+	*/
+	padding: 1em;
+	width: 100%;
+}
+.home-link {
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin-bottom: 1em;
+  }
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 1.7rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+.tag-filter-label {
+	font-weight: bold;
+	margin-right: 0.5em;
+  }
+  
+  .tag-filter-dropdown {
+	margin-bottom: 1em;
+	padding: 0.4em;
+	font-size: 1rem;
+  }
+  
+  .postlist-item {
+	margin-bottom: 0.8em;
+  }
+
+  #tag-filter-container {
+	margin-bottom: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+  }
+  
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+  }
+  
+  .tag-checkbox input {
+	margin-right: 0.4em;
+	margin-top: 0.4em;
+  }
+
+  .post-metadata,
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-tags {
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  background: #f0f0f0;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.post-tag:hover {
+  background: #ddd;
+}
+
+/* control over maths */
+mjx-container[jax="CHTML"][display="true"] {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5rem 0;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+	box-sizing: border-box;
+  }
+
+/* custom checkbox */
+/* Hide the native checkbox */
+.tag-checkbox input[type="checkbox"] {
+	display: none;
+  }
+  
+  /* Style the label to align nicely */
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+	cursor: pointer;
+	position: relative;
+  }
+  
+  /* Style the custom checkbox square */
+  .custom-checkmark {
+	width: 1em;
+	height: 1em;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	position: relative;
+	transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* When checked, change the background color */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: #8ba254; /* your custom green */
+	border-color: #8ba254;
+  }
+  
+  /* Optional: add a checkmark icon */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 7px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }</style>
 		
 		<style>/* This is an arbitrary CSS string added to the bundle */
 /* Defaults */
@@ -446,6 +934,16 @@ code {
   background: #ddd;
 }
 
+/* control over maths */
+mjx-container[jax="CHTML"][display="true"] {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5rem 0;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+	box-sizing: border-box;
+  }
+
 /* custom checkbox */
 /* Hide the native checkbox */
 .tag-checkbox input[type="checkbox"] {
@@ -491,11 +989,248 @@ code {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }</style>
-		
+		<script type="module">// Thank you to https://github.com/daviddarnes/heading-anchors
+// Thank you to https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+
+let globalInstanceIndex = 0;
+
+class HeadingAnchors extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "heading-anchors", HeadingAnchors);
+		}
+	}
+
+	static attributes = {
+		exclude: "data-ha-exclude",
+		prefix: "prefix",
+		content: "content",
+	}
+
+	static classes = {
+		anchor: "ha",
+		placeholder: "ha-placeholder",
+		srOnly: "ha-visualhide",
+	}
+
+	static defaultSelector = "h2,h3,h4,h5,h6";
+
+	static css = `
+.${HeadingAnchors.classes.srOnly} {
+	clip: rect(0 0 0 0);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+}
+.${HeadingAnchors.classes.anchor} {
+	position: absolute;
+	left: var(--ha_offsetx);
+	top: var(--ha_offsety);
+	text-decoration: none;
+	opacity: 0;
+}
+.${HeadingAnchors.classes.placeholder} {
+	opacity: .3;
+}
+.${HeadingAnchors.classes.anchor}:is(:focus-within, :hover) {
+	opacity: 1;
+}
+.${HeadingAnchors.classes.anchor},
+.${HeadingAnchors.classes.placeholder} {
+	display: inline-block;
+	padding: 0 .25em;
+
+	/* Disable selection of visually hidden label */
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+@supports (anchor-name: none) {
+	.${HeadingAnchors.classes.anchor} {
+		position: absolute;
+		left: anchor(left);
+		top: anchor(top);
+	}
+}`;
+
+	get supports() {
+		return "replaceSync" in CSSStyleSheet.prototype;
+	}
+
+	get supportsAnchorPosition() {
+		return CSS.supports("anchor-name: none");
+	}
+
+	constructor() {
+		super();
+
+		if(!this.supports) {
+			return;
+		}
+
+		let sheet = new CSSStyleSheet();
+		sheet.replaceSync(HeadingAnchors.css);
+		document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+
+		this.headingStyles = {};
+		this.instanceIndex = globalInstanceIndex++;
+	}
+
+	connectedCallback() {
+		if (!this.supports) {
+			return;
+		}
+
+		this.headings.forEach((heading, index) => {
+			if(!heading.hasAttribute(HeadingAnchors.attributes.exclude)) {
+				let anchor = this.getAnchorElement(heading);
+				let placeholder = this.getPlaceholderElement();
+
+				// Prefers anchor position approach for better accessibility
+				// https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+				if(this.supportsAnchorPosition) {
+					let anchorName = `--ha_${this.instanceIndex}_${index}`;
+					placeholder.style.setProperty("anchor-name", anchorName);
+					anchor.style.positionAnchor = anchorName;
+				}
+
+				heading.appendChild(placeholder);
+				heading.after(anchor);
+			}
+		});
+	}
+
+	// Polyfill-only
+	positionAnchorFromPlaceholder(placeholder) {
+		if(!placeholder) {
+			return;
+		}
+
+		let heading = placeholder.closest("h1,h2,h3,h4,h5,h6");
+		if(!heading.nextElementSibling) {
+			return;
+		}
+
+		// TODO next element could be more defensive
+		this.positionAnchor(heading.nextElementSibling);
+	}
+
+	// Polyfill-only
+	positionAnchor(anchor) {
+		if(!anchor || !anchor.previousElementSibling) {
+			return;
+		}
+
+		// TODO previous element could be more defensive
+		let heading = anchor.previousElementSibling;
+		this.setFontProp(heading, anchor);
+
+		if(this.supportsAnchorPosition) {
+			// quit early
+			return;
+		}
+
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			anchor.style.setProperty("--ha_offsetx", `${placeholder.offsetLeft}px`);
+			anchor.style.setProperty("--ha_offsety", `${placeholder.offsetTop}px`);
+		}
+	}
+
+	setFontProp(heading, anchor) {
+		let placeholder = heading.querySelector(`.${HeadingAnchors.classes.placeholder}`);
+		if(placeholder) {
+			let style = getComputedStyle(placeholder);
+			let props = ["font-weight", "font-size", "line-height", "font-family"];
+			let font = props.map(name => style.getPropertyValue(name));
+			anchor.style.setProperty("font", `${font[0]} ${font[1]}/${font[2]} ${font[3]}`);
+		}
+	}
+
+	getAccessibleTextPrefix() {
+		// Useful for i18n
+		return this.getAttribute(HeadingAnchors.attributes.prefix) || "Jump to section titled";
+	}
+
+	getContent() {
+		if(this.hasAttribute(HeadingAnchors.attributes.content)) {
+			return this.getAttribute(HeadingAnchors.attributes.content);
+		}
+		return "#";
+	}
+
+	// Placeholder nests inside of heading
+	getPlaceholderElement() {
+		let ph = document.createElement("span");
+		ph.setAttribute("aria-hidden", true);
+		ph.classList.add(HeadingAnchors.classes.placeholder);
+		let content = this.getContent();
+		if(content) {
+			ph.textContent = content;
+		}
+
+		ph.addEventListener("mouseover", (e) => {
+			let placeholder = e.target.closest(`.${HeadingAnchors.classes.placeholder}`);
+			if(placeholder) {
+				this.positionAnchorFromPlaceholder(placeholder);
+			}
+		});
+
+		return ph;
+	}
+
+	getAnchorElement(heading) {
+		let anchor = document.createElement("a");
+		anchor.href = `#${heading.id}`;
+		anchor.classList.add(HeadingAnchors.classes.anchor);
+
+		let content = this.getContent();
+		anchor.innerHTML = `<span class="${HeadingAnchors.classes.srOnly}">${this.getAccessibleTextPrefix()}: ${heading.textContent}</span>${content ? `<span aria-hidden="true">${content}</span>` : ""}`;
+
+		anchor.addEventListener("focus", e => {
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			if(anchor) {
+				this.positionAnchor(anchor);
+			}
+		});
+
+		anchor.addEventListener("mouseover", (e) => {
+			// when CSS anchor positioning is supported, this is only used to set the font
+			let anchor = e.target.closest(`.${HeadingAnchors.classes.anchor}`);
+			this.positionAnchor(anchor);
+		});
+
+		return anchor;
+	}
+
+	get headings() {
+		return this.querySelectorAll(this.selector.split(",").map(entry => `${entry.trim()}[id]`));
+	}
+
+	get selector() {
+		return this.getAttribute("selector") || HeadingAnchors.defaultSelector;
+	}
+}
+
+HeadingAnchors.register();
+
+export { HeadingAnchors }
+</script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
-		
+		<script>
+			MathJax = {
+				tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [['$$', '$$'], ['\\[', '\\]']]
+				},
+				svg: {
+				fontCache: 'global'
+				}
+			};
+		</script>
 		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 	</head>
 	<body>
@@ -556,7 +1291,24 @@ code {
     </li>
 </ol>
 
+<script>
+  const checkboxes = document.querySelectorAll('#tag-filter-container input[type="checkbox"]');
+  const posts = document.querySelectorAll('#post-list .postlist-item');
 
+  function filterPosts() {
+    const selectedTags = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+    posts.forEach(post => {
+      const tags = post.dataset.tags.split(',');
+      const show = selectedTags.length === 0 || tags.some(tag => selectedTags.includes(tag));
+      post.style.display = show ? '' : 'none';
+    });
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', filterPosts));
+</script>
 
 
 				</heading-anchors>
@@ -566,7 +1318,6 @@ code {
 			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
 			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
 				<a href="/about/">About</a>
-				<a href="/">Blog</a>
 				<a href="/notes/">Notes</a>
 				<a href="/now/">Now</a>
 			</div>
@@ -575,7 +1326,7 @@ code {
 			</p>
 		</footer>
 
-		<!-- This page `/` was built on 2025-06-25T18:20:46.954Z -->
+		<!-- This page `/` was built on 2025-06-25T23:53:11.627Z -->
 		<script type="module" src="/dist/9Or_lbGDQQ.js"></script>
 	</body>
 </html>

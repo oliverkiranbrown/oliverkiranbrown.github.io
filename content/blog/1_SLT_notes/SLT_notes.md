@@ -609,7 +609,7 @@ Taking logs and optimising over $\lambda\geq 0$ yields the result `LINK TO RESUL
 - Lotz, M. (n.d.). _Mathematics of Machine Learning_. Available at: [https://www.studocu.com/in/document/birla-open-minds-school/mathematics-applications-and-interpretation-sl/mathematics-of-machine-learning-by-martin-lotz/78566747](https://www.studocu.com/in/document/birla-open-minds-school/mathematics-applications-and-interpretation-sl/mathematics-of-machine-learning-by-martin-lotz/78566747) [Accessed 23 June 2025].
 - Shah, R. D. (n.d.). _Machine Learning Lecture Notes_ [PDF]. University of Cambridge. Available at: [https://www.statslab.cam.ac.uk/~rds37/teaching/machine_learning/notes.pdf](https://www.statslab.cam.ac.uk/~rds37/teaching/machine_learning/notes.pdf) [Accessed 23 June 2025].
 ## Personal
-- *Summary of Clarice Poon’s 2024 Mathematics of Machine Learning Lecture Notes*. [online] Available [here](/notes/mml_summary.pdf)
-- *Summary of Mario Micallef’s 2023 Multivariable Calculus Lecture Notes*. [online] Available [here](/notes/mvc_summary.pdf)  
-- *Summary of Stefan Adams’s 2024 High Dimensional Probability Lecture Notes*. [online] Available [here](/notes/hdp_summary.pdf)  
-- *Summary of Krys Latuszynski’s 2023 Introduction to Mathematical Statistics Lecture Notes*. [online] Available [here](/notes/math_stat_summary.pdf)
+- *Summary of Clarice Poon’s 2024 Mathematics of Machine Learning Lecture Notes*. [online] Available [here](/notes/third_year/mml_summary.pdf)
+- *Summary of Mario Micallef’s 2023 Multivariable Calculus Lecture Notes*. [online] Available [here](/notes/second_year/mvc_summary.pdf)  
+- *Summary of Stefan Adams’s 2024 High Dimensional Probability Lecture Notes*. [online] Available [here](/notes/third_year/hdp_summary.pdf)  
+- *Summary of Krys Latuszynski’s 2023 Introduction to Mathematical Statistics Lecture Notes*. [online] Available [here](/notes/third_year/math_stat_summary.pdf)

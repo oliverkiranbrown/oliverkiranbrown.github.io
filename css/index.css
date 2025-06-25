@@ -432,6 +432,16 @@ code {
   background: #ddd;
 }
 
+/* control over maths */
+mjx-container[jax="CHTML"][display="true"] {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5rem 0;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+	box-sizing: border-box;
+  }
+
 /* custom checkbox */
 /* Hide the native checkbox */
 .tag-checkbox input[type="checkbox"] {
@@ -477,4 +487,3 @@ code {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
-  
