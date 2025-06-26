@@ -602,12 +602,12 @@ $$
 Taking logs and optimising over $\lambda\geq 0$ yields the result `LINK TO RESULT IN TEXT`.
 # References
 ## General
-- Sharan, V. (n.d.). _Rademacher calculation_ [PDF]. Available at: [https://vatsalsharan.github.io/lecture_notes/lec4_final.pdf](https://vatsalsharan.github.io/lecture_notes/lec4_final.pdf) [Accessed 23 June 2025].
-- Nakkiran, P., Kaplun, G., Bansal, Y., Yang, T., Barak, B. and Sutskever, I., 2019. _A modern take on the bias-variance tradeoff in neural networks_. arXiv preprint arXiv:1810.08591. Available at: [https://arxiv.org/pdf/1810.08591](https://arxiv.org/pdf/1810.08591) [Accessed 23 June 2025].
-- Vershynin, R. (2018). _High-Dimensional Probability: An Introduction with Applications in Data Science_. Cambridge: Cambridge University Press. Available at: [https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) [Accessed 23 June 2025].
-- Stanford University, 2020. _CS229M - Lecture 5: Rademacher complexity, empirical Rademacher complexity_ [video]. Available at: [https://www.youtube.com/watch?v=tkJd2B98hII](https://www.youtube.com/watch?v=tkJd2B98hII) [Accessed 23 June 2025].
-- Lotz, M. (n.d.). _Mathematics of Machine Learning_. Available at: [https://www.studocu.com/in/document/birla-open-minds-school/mathematics-applications-and-interpretation-sl/mathematics-of-machine-learning-by-martin-lotz/78566747](https://www.studocu.com/in/document/birla-open-minds-school/mathematics-applications-and-interpretation-sl/mathematics-of-machine-learning-by-martin-lotz/78566747) [Accessed 23 June 2025].
-- Shah, R. D. (n.d.). _Machine Learning Lecture Notes_ [PDF]. University of Cambridge. Available at: [https://www.statslab.cam.ac.uk/~rds37/teaching/machine_learning/notes.pdf](https://www.statslab.cam.ac.uk/~rds37/teaching/machine_learning/notes.pdf) [Accessed 23 June 2025].
+- Sharan, V. (n.d.). _Rademacher calculation_ [PDF]. Available [here](https://vatsalsharan.github.io/lecture_notes/lec4_final.pdf). [Accessed 23 June 2025].
+- Nakkiran, P., Kaplun, G., Bansal, Y., Yang, T., Barak, B. and Sutskever, I., 2019. _A modern take on the bias-variance tradeoff in neural networks_. arXiv preprint arXiv:1810.08591. Available [here](https://arxiv.org/pdf/1810.08591) [Accessed 23 June 2025].
+- Vershynin, R. (2018). _High-Dimensional Probability: An Introduction with Applications in Data Science_. Cambridge: Cambridge University Press. Available [here](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html) [Accessed 23 June 2025].
+- Stanford University, 2020. _CS229M - Lecture 5: Rademacher complexity, empirical Rademacher complexity_ [video]. Available [here](https://www.youtube.com/watch?v=tkJd2B98hII) [Accessed 23 June 2025].
+- Lotz, M. (n.d.). _Mathematics of Machine Learning_. Available [here](https://www.studocu.com/in/document/birla-open-minds-school/mathematics-applications-and-interpretation-sl/mathematics-of-machine-learning-by-martin-lotz/78566747) [Accessed 23 June 2025].
+- Shah, R. D. (n.d.). _Machine Learning Lecture Notes_ [PDF]. University of Cambridge. Available [here](https://www.statslab.cam.ac.uk/~rds37/teaching/machine_learning/notes.pdf) [Accessed 23 June 2025].
 ## Personal
 - *Summary of Clarice Poon’s 2024 Mathematics of Machine Learning Lecture Notes*. [online] Available [here](/notes/third_year/mml_summary.pdf)
 - *Summary of Mario Micallef’s 2023 Multivariable Calculus Lecture Notes*. [online] Available [here](/notes/second_year/mvc_summary.pdf)  
