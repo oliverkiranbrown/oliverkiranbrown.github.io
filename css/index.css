@@ -433,14 +433,16 @@ code {
 }
 
 /* control over maths */
-mjx-container[jax="CHTML"][display="true"] {
-	display: block;
+mjx-container {
+	display: inline-flex;
 	overflow-x: auto;
-	padding: 0.5rem 0;
-	-webkit-overflow-scrolling: touch;
+	overflow-y: hidden;
 	max-width: 100%;
-	box-sizing: border-box;
   }
+  
+mjx-container::-webkit-scrollbar {
+	height: 6px;
+}
 
 /* custom checkbox */
 /* Hide the native checkbox */
