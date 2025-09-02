@@ -3,12 +3,12 @@ layout: layouts/about.njk
 eleventyNavigation:
     key: About
     order: 1
-permalink: /about/
+permalink: /
 ---
 
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <img src="./headshot.jpg" alt="Headshot">
+    <img src="headshot.jpg" alt="Headshot">
   </div>
 </div>
 
@@ -17,7 +17,7 @@ Hey! I'm Oli, a prospective Data Science and Analytics graduate at  [Lloyds Bank
 
 Before Lloyds, I completed a placement year in the [Department of Energy Security and Net Zero](https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero) (DESNZ). I worked with a fantastic team of analysts researching the techno-economically feasible and social least-cost pathways towards the decarbonisation of UK industry. After a lot of learning, coding and networking, I emerged from DESNZ a changed man! My currently thinking has been heavily informed by this experience. I've been inspired by some fantastic colleagues. I've seen and got really excited by what data can do. I've also left with a deep conviction that the energy transition needs to be community led. DESNZ was an utter blessing!
 
-Between 2021 and 2024, I completed by maths undergrad at Warwick. The course was just *fantastic*. Challenging at times, but very fun. My highlights were Mathematics of ML, Complex Analysis (so pretty!) and High Dimensional Probability. I'm taking a break from formal education for now, but my self-study will continue! I hope my blog can form part of this. 
+Between 2021 and 2024, I completed by mathŸs undergrad at Warwick. The course was just *fantastic*. Challenging at times, but very fun. My highlights were Mathematics of ML, Complex Analysis (so pretty!) and High Dimensional Probability. I'm taking a break from formal education for now, but my self-study will continue! I hope my blog can form part of this. 
 
 If you want to contact me, please reach out to oliverkiranbrown@gmail.com. Check out my [now](/now/) page to see what I'm up to at the moment. 
 
