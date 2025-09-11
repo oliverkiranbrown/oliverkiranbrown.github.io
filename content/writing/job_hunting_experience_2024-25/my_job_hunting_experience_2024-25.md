@@ -1,7 +1,7 @@
 ---
 title: My Job Hunting Experience 2024-25
 description: My reflections on job-hunting as a 2023 maths graduate. 
-tags: ['Personal']
+tags: ['Writing','Personal']
 date: 2025-07-27
 layout: layouts/post.njk
 eleventyNavigation:

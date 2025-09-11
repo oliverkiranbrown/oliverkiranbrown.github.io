@@ -1,7 +1,7 @@
 ---
 title: Taking the Plunge
 description: A story about hairloss.
-tags: ['Personal', 'Experimental']
+tags: ['Personal', 'Experimental','Writing']
 date: 2025-08-27
 layout: layouts/post.njk
 eleventyNavigation:

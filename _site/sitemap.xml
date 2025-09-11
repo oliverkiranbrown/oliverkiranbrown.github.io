@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/blog/</loc>
+		<loc>https://oliverkiranbrown.github.io/writing/</loc>
 		<lastmod>2025-04-28</lastmod>
 	</url>
 	
@@ -17,12 +17,17 @@
 	</url>
 	
 	<url>
+		<loc>https://oliverkiranbrown.github.io/tag-pages/</loc>
+		<lastmod>2025-04-28</lastmod>
+	</url>
+	
+	<url>
 		<loc>https://oliverkiranbrown.github.io/now/</loc>
 		<lastmod>2025-05-25</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/blog/SLT_notes/</loc>
+		<loc>https://oliverkiranbrown.github.io/writing/SLT_notes/</loc>
 		<lastmod>2025-06-24</lastmod>
 	</url>
 	
@@ -32,12 +37,12 @@
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/blog/job_hunting_experience_2024-25/my_job_hunting_experience_2024-25/</loc>
+		<loc>https://oliverkiranbrown.github.io/writing/job_hunting_experience_2024-25/my_job_hunting_experience_2024-25/</loc>
 		<lastmod>2025-07-27</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/blog/taking_the_plunge/</loc>
+		<loc>https://oliverkiranbrown.github.io/writing/taking_the_plunge/</loc>
 		<lastmod>2025-08-27</lastmod>
 	</url>
 </urlset>

@@ -1,7 +1,7 @@
 ---
 title: Notes on Statistical Learning Theory
 description: A tour though basic SLT
-tags: ['ML']
+tags: ['ML','Writing']
 date: 2025-06-24
 layout: layouts/post.njk
 eleventyNavigation:

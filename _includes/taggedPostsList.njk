@@ -9,7 +9,7 @@
 </div>
 
 <ol class="postlist" id="post-list">
-  {%- set posts = collections.blog -%}
+  {%- set posts = collections.Writing | reverse -%}
   {%- for post in posts %}
     <li 
       class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}" 
