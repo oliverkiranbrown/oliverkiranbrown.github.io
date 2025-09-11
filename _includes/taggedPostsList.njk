@@ -11,7 +11,7 @@
 <ol class="postlist" id="post-list">
   {%- set posts = collections.Writing | reverse -%}
   {%- for post in posts %}
-    <li 
+    <li `
       class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}" 
       data-tags="{{ post.data.tags | join(',') }}"
       data-number="{{ posts.length - loop.index0 }}"
