@@ -118,6 +118,7 @@ export default async function(eleventyConfig) {
 
 	// the whole image folder
 	eleventyConfig.addPassthroughCopy("./public");
+	eleventyConfig.addPassthroughCopy("./public");
 
 	// build the list of unique tags in the blog posts
 	eleventyConfig.addCollection("tagList", function(collectionApi) {
