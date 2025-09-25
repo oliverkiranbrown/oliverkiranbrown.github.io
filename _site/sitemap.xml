@@ -45,4 +45,24 @@
 		<loc>https://oliverkiranbrown.github.io/writing/taking_the_plunge/</loc>
 		<lastmod>2025-08-27</lastmod>
 	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/DS_AI_bootcamp_home/</loc>
+		<lastmod>2025-09-25</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Intro%20to%20Time%20Series%20Analysis/</loc>
+		<lastmod>2025-09-25</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Logistic%20Regression/</loc>
+		<lastmod>2025-09-25</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Linear%20Regression/</loc>
+		<lastmod>2025-09-25</lastmod>
+	</url>
 </urlset>

@@ -30,4 +30,5 @@ Old and scrappy but interesting to see the transition from A-level maths to Uni.
 - Summary of Keith Ball's *Analysis II*. Avalible [here](/notes/first_year/anal_II_summary.pdf). 
 - Map of *Probability A*. Avalible [here](/notes/first_year/probability_a_map.pdf). 
 ## Misc
-- My SustAI Research Proposal. Avalible [here](/notes/soton/sustai_research_proposal.pdf). 
+- My SustAI Research Proposal. Avalible [here](/notes/soton/sustai_research_proposal.pdf).
+- Cambridge Spark Data Science & AI Graduate Scheme Bootcamp. Avalible [here](/notes/spark_bootcamp/DS_AI_bootcamp_home.md).
