@@ -8,6 +8,7 @@
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet">
 		
 		
 		
@@ -201,13 +202,69 @@ table {
 	background-color: #f5f5f5;
   }
 
+
+
+/* Base code font setup */
+pre, code {
+	font-family: var(--font-family-monospace, "Fira Code", monospace);
+	font-size: 0.95rem;
+	line-height: 1.5;
+  }
+  
+  /* Preformatted blocks (full code snippets) */
+  pre[class*="language-"] {
+	background: #1e1e1e; /* Dark IDE-like background */
+	color: #d4d4d4; /* Default text */
+	padding: 1em;
+	border-radius: 0.5rem;
+	margin: 1em 0;
+	overflow-x: auto; /* Horizontal scroll if too wide */
+	box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  
+  /* Scrollbar style (Chrome/Edge/WebKit) */
+  pre[class*="language-"]::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+  }
+  pre[class*="language-"]::-webkit-scrollbar-thumb {
+	background: #555;
+	border-radius: 4px;
+  }
+  pre[class*="language-"]::-webkit-scrollbar-track {
+	background: #2a2a2a;
+  }
+  
+  /* Inline code (not full blocks) */
+  :not(pre) > code {
+	background: #2a2a2a;
+	padding: 0.2em 0.4em;
+	border-radius: 0.3em;
+	font-size: 0.9rem;
+	word-break: break-word;
+  }
+  
+  /* Prism token colors (Python syntax) */
+  .token.comment       { color: #6a9955; font-style: italic; }
+  .token.keyword       { color: #569cd6; }
+  .token.string        { color: #d69d85; }
+  .token.function      { color: #db7997; }
+  .token.number        { color: #b5cea8; }
+  .token.operator      { color: #d4d4d4; }
+  .token.punctuation   { color: #d4d4d4; }
+  .token.variable      { color: #9cdcfe; }
+  .token.class-name    { color: #4ec9b0; }
+  .token.imports       { color: #c586c0; }
+
+
+/*
 pre,
 code {
 	font-family: var(--font-family-monospace);
 }
 pre:not([class*="language-"]) {
 	margin: .5em 0;
-	line-height: 1.375; /* 22px /16 */
+	line-height: 1.375; 
 	-moz-tab-size: var(--syntax-tab-size);
 	-o-tab-size: var(--syntax-tab-size);
 	tab-size: var(--syntax-tab-size);
@@ -221,9 +278,14 @@ pre:not([class*="language-"]) {
 	word-break: normal;
 	overflow-x: auto;
 }
+
+*/
+
+/*
 code {
 	word-break: break-all;
 }
+*/
 
 /* Header */
 .top-bar {
@@ -605,7 +667,7 @@ mjx-container[display] {
 <li><strong>SARIMAX</strong>: finally, add in eXogenous factors to the modelling</li>
 </ul>
 <h2 id="minimal-recipe">Minimal Recipe</h2>
-<pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">import</span> pmdarima <span class="token keyword">as</span> pm
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> pmdarima <span class="token keyword">as</span> pm
 <span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>statespace <span class="token keyword">import</span> SARIMAX
 <span class="token keyword">import</span> pmdarima <span class="token keyword">as</span> pm
 
@@ -647,7 +709,7 @@ forcast <span class="token operator">=</span> arima_model<span class="token punc
 <ul>
 <li><strong>Decomposition</strong> of series into a trend, seasonal term and residuals</li>
 </ul>
-<pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>seasonal <span class="token keyword">import</span> seasonal_decomposition
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>seasonal <span class="token keyword">import</span> seasonal_decomposition
 df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'/path/to/data/'</span><span class="token punctuation">)</span>
 df <span class="token operator">=</span> df<span class="token punctuation">.</span>asfreq<span class="token punctuation">(</span><span class="token string">'h'</span><span class="token punctuation">,</span> method<span class="token operator">=</span>ffill<span class="token punctuation">)</span> <span class="token comment"># converts to an hourly time series</span>
 decomposition <span class="token operator">=</span> seasonal_decomposition<span class="token punctuation">(</span>df<span class="token punctuation">,</span> model<span class="token operator">=</span><span class="token string">'additive'</span><span class="token punctuation">,</span> period<span class="token operator">=</span><span class="token number">24</span><span class="token punctuation">)</span>
@@ -660,7 +722,7 @@ decomposition<span class="token punctuation">.</span>plot<span class="token punc
 </ul>
 </li>
 </ul>
-<pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>stattools <span class="token keyword">import</span> adfuller<span class="token punctuation">,</span> kpss
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>stattools <span class="token keyword">import</span> adfuller<span class="token punctuation">,</span> kpss
 adf_result <span class="token operator">=</span> addfuller<span class="token punctuation">(</span>time_series_data<span class="token punctuation">)</span>
 kpss_result <span class="token operator">=</span> kpss<span class="token punctuation">(</span>time_series_data<span class="token punctuation">,</span> regression<span class="token operator">=</span><span class="token string">'c'</span><span class="token punctuation">)</span> <span class="token comment"># assume a constant trend, can use 'ct' if broadly linear</span></code></pre>
 <p>See the <a href="https://www.statsmodels.org/stable/examples/notebooks/generated/stationarity_detrending_adf_kpss.html">docs</a> for implementation and test interpretation details. The series is only ready for modelling when both tests indicate stationarity. Keep differencing till you get there via</p>
@@ -672,13 +734,13 @@ kpss_result <span class="token operator">=</span> kpss<span class="token punctua
 </ul>
 </li>
 </ul>
-<pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>graphics<span class="token punctuation">.</span>tsaplots <span class="token keyword">import</span> plot_pacf<span class="token punctuation">,</span> plot_acf
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>graphics<span class="token punctuation">.</span>tsaplots <span class="token keyword">import</span> plot_pacf<span class="token punctuation">,</span> plot_acf
 plot_acf<span class="token punctuation">(</span>df<span class="token punctuation">,</span> lags<span class="token operator">=</span><span class="token number">24</span><span class="token operator">*</span><span class="token number">14</span><span class="token punctuation">)</span> <span class="token comment"># 14 days ago to look for weekly trends</span>
 plot_pacf<span class="token punctuation">(</span>df<span class="token punctuation">,</span> lags<span class="token operator">=</span><span class="token number">24</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment"># look two days ago</span></code></pre>
 <ul>
 <li>Finding the <strong>optimal lags</strong> in a more basic setting. BIC tends to prefer simpler models that avoid overfitting</li>
 </ul>
-<pre class="language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>ar_model <span class="token keyword">import</span> ar_select_order
+<pre class="language-python"><code class="language-python"><span class="token keyword">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>ar_model <span class="token keyword">import</span> ar_select_order
 mod <span class="token operator">=</span> ar_select_order<span class="token punctuation">(</span>df<span class="token punctuation">,</span> maxlag<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> ic<span class="token operator">=</span><span class="token string">'bic'</span><span class="token punctuation">)</span> <span class="token comment"># can specifiy the infomation criterion</span>
 optlag <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>mod<span class="token punctuation">.</span>ar_lags<span class="token punctuation">)</span></code></pre>
 
@@ -698,7 +760,7 @@ optlag <span class="token operator">=</span> <span class="token builtin">max</sp
 			</p>
 		</footer>
 
-		<!-- This page `/notes/spark_bootcamp/1_foundations_of_ml/Intro to Time Series Analysis/` was built on 2025-09-28T21:46:02.634Z -->
+		<!-- This page `/notes/spark_bootcamp/1_foundations_of_ml/Intro to Time Series Analysis/` was built on 2025-09-29T22:06:36.059Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

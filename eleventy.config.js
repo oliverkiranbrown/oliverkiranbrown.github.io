@@ -2,6 +2,7 @@ import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import markdownIt from "markdown-it";
 import markdownItMathjax3 from "markdown-it-mathjax3";
 //import pluginJupyter from "eleventy-plugin-jupyter-nb-extract/.eleventy.js";
@@ -79,6 +80,9 @@ export default async function(eleventyConfig) {
 
 	// Add in support for rendering Jupyter Noteboooks
 	//eleventyConfig.addPlugin(pluginJupyter);
+
+	// Add in support for code syntax highlighting
+	eleventyConfig.addPlugin(syntaxHighlight);
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
