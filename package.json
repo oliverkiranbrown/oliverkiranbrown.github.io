@@ -52,6 +52,7 @@
 		"markdown-it-mathjax3": "^4.3.2",
 		"markdown-it-texmath": "^1.0.0",
 		"mathjax": "^3.2.2",
-		"netlify-plugin-cache": "^1.0.3"
+		"netlify-plugin-cache": "^1.0.3",
+		"sharp": "^0.34.5"
 	}
 }

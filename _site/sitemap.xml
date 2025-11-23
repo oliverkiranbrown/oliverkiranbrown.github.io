@@ -2,38 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/writing/</loc>
-		<lastmod>2025-04-28</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/</loc>
-		<lastmod>2025-04-28</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/music/</loc>
-		<lastmod>2025-04-28</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/tag-pages/</loc>
-		<lastmod>2025-04-28</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/now/</loc>
-		<lastmod>2025-05-25</lastmod>
-	</url>
-	
-	<url>
 		<loc>https://oliverkiranbrown.github.io/writing/SLT_notes/</loc>
 		<lastmod>2025-06-24</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/notes/</loc>
-		<lastmod>2025-06-25</lastmod>
 	</url>
 	
 	<url>
@@ -47,27 +17,57 @@
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/DS_AI_bootcamp_home/</loc>
-		<lastmod>2025-09-25</lastmod>
+		<loc>https://oliverkiranbrown.github.io/writing/slop_and_dreams/Slop%20and%20dreams/</loc>
+		<lastmod>2025-10-15</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/music/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/</loc>
+		<lastmod>2025-11-23</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Intro%20to%20Time%20Series%20Analysis/</loc>
-		<lastmod>2025-09-25</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Logistic%20Regression/</loc>
-		<lastmod>2025-09-25</lastmod>
+		<lastmod>2025-11-23</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Linear%20Regression/</loc>
-		<lastmod>2025-09-25</lastmod>
+		<lastmod>2025-11-23</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.github.io/writing/slop_and_dreams/Slop%20and%20dreams/</loc>
-		<lastmod>2025-10-15</lastmod>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/1_foundations_of_ml/Logistic%20Regression/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/notes/spark_bootcamp/DS_AI_bootcamp_home/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/now/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/tag-pages/</loc>
+		<lastmod>2025-11-23</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.github.io/writing/</loc>
+		<lastmod>2025-11-23</lastmod>
 	</url>
 </urlset>

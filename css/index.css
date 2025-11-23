@@ -122,8 +122,21 @@ p {
 	text-align: justify;
 }
 
+h2 {
+	text-align: left;
+}
+
+h3 {
+	text-align: left;
+}
+
+h4 {
+	text-align: left;
+}
+
 li {
 	line-height: 1.5;
+	text-align: left;
 }
 
 a[href] {
