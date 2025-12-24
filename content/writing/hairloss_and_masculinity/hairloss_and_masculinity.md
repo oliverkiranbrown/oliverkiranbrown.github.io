@@ -1,5 +1,5 @@
 ---
-title: In 2025, I thought a lot about hairloss and masculinity
+title: In 2025, I thought alot about...
 description: A submission for lovely writing project <3
 tags: ['Writing','Personal']
 date: 2025-12-12
