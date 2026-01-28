@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Deploying a Next.js site to a VPS</title>
+		<meta name="description" content="First steps into the world of web development.">
+		<link rel="icon" href="/img/favicon.png">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
+		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+/*
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		/*
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+*/
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+blockquote {
+	border-left: 3px solid #8ba254; /* thin green line on LHS */
+	margin: 1em 0;                  /* vertical spacing */
+	padding-left: 1em;              /* space between line and text */
+	color: var(--text-color);       /* inherit normal text color */
+	background: transparent;        /* keep background clean */
+  }
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+	text-align: justify;
+}
+
+h2 {
+	text-align: left;
+}
+
+h3 {
+	text-align: left;
+}
+
+h4 {
+	text-align: left;
+}
+
+li {
+	line-height: 1.5;
+	text-align: left;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer p {
+	padding: 1rem;
+	text-align: center;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	/*
+	border-bottom: 1px dashed var(--color-gray-20);
+	*/
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 0;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
+
+
+
+/* Base code font setup */
+/* ===== Modern light code theme ===== */
+
+pre, code {
+  font-family: var(--font-family-monospace);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Block code */
+pre {
+  background: #f6f8fa;
+  color: #24292e;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1em 0;
+  overflow-x: auto;
+  text-align: left;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: rgba(228, 210, 210, 0.05);
+  color: #24292e;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  word-break: break-word;
+}
+
+/* Prevent double styling */
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Prism light tokens */
+.token.comment       { color: #6a737d; font-style: italic; }
+.token.keyword       { color: #d73a49; }
+.token.string        { color: #032f62; }
+.token.function      { color: #6f42c1; }
+.token.number        { color: #005cc5; }
+.token.operator      { color: #24292e; }
+.token.punctuation   { color: #24292e; }
+.token.variable      { color: #e36209; }
+.token.class-name    { color: #22863a; }
+.token.imports       { color: #b31d28; }
+
+/* Header */
+.top-bar {
+	color: white !important;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
+	/*
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
+	*/
+	padding: 1em;
+	width: 100%;
+}
+.home-link {
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin-bottom: 1em;
+  }
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 1.7rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+	text-align: left;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+.tag-filter-label {
+	font-weight: bold;
+	margin-right: 0.5em;
+  }
+  
+  .tag-filter-dropdown {
+	margin-bottom: 1em;
+	padding: 0.4em;
+	font-size: 1rem;
+  }
+  
+  .postlist-item {
+	margin-bottom: 0.8em;
+  }
+
+  #tag-filter-container {
+	margin-bottom: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+  }
+  
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+  }
+  
+  .tag-checkbox input {
+	margin-right: 0.4em;
+	margin-top: 0.4em;
+  }
+
+  .post-metadata,
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-tags {
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  background: #f0f0f0;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.post-tag:hover {
+  background: #ddd;
+}
+
+/* control over maths */
+mjx-container[display] {
+	display: inline-flex;
+	overflow-x: auto;
+	overflow-y: hidden;
+	max-width: 100%;
+  }
+
+/* custom checkbox */
+/* Hide the native checkbox */
+.tag-checkbox input[type="checkbox"] {
+	display: none;
+  }
+  
+  /* Style the label to align nicely */
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+	cursor: pointer;
+	position: relative;
+  }
+  
+  /* Style the custom checkbox square */
+  .custom-checkmark {
+	width: 1em;
+	height: 1em;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	position: relative;
+	transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* When checked, change the background color */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: #8ba254; /* your custom green */
+	border-color: #8ba254;
+  }
+  
+  /* Optional: add a checkmark icon */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 7px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		
+		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
+	</head>
+	<body>
+		<header class="top-bar">
+			<a href="/" class="home-link">Oliver Kiran Brown</a>
+			<nav>
+				<ul class="nav">
+					<li class="nav-item"><a href="/">About</a></li>
+					<li class="nav-item"><a href="/writing/">Writing</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
+				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+			</nav>
+
+			<div class="social-icons">
+				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
+					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
+					</svg>
+				</a>
+				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+					</svg>
+				</a>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+
+
+<h1 id="deploying-a-next-js-site-to-a-vps">Deploying a Next.js site to a VPS</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2026-01-28">28 January 2026</time></li>
+</ul>
+<ul class="post-tags">
+		<li><a href="/tags/writing/" class="post-tag">Writing</a></li>
+		<li><a href="/tags/coding/" class="post-tag">Coding</a></li>
+</ul>
+
+<h1 id="deploying-a-next-js-app-on-a-vps">Deploying a Next.js app on a VPS</h1>
+<h2 id="intro">Intro</h2>
+<p>Currently, I’m learning how to build a modern mobile application which should be able to handle (hopefully!) many 1000s of users. And while I've been coding for a while, most of my scripts have been one-off experiments, implementations of an algorithm, or a demo UI that stayed on <code>localhost</code> — never leaving my laptop.</p>
+<p>So, if I want to build this app, I'll need to understand the modern infrastructure stack that enables a user to go on their phone, connect to some application, and speak to the database behind it. Hopefully, understanding this stack means I'll be able to finally <em>scale</em> any tech I build, so people can actually use it!</p>
+<p>More granularly, this means understanding:</p>
+<ul>
+<li><strong>DNS</strong>: The Domain Name System (how you tie your domain name to the IP address of your machine)</li>
+<li><strong>VPS</strong>: you let your application run on Virtual Private Server — it's just some massive computer, cut it up into little piece (virtualisation) which you can then rent out and treat as your own machine.</li>
+<li><strong>Reverse proxies</strong>: routes HTTP traffic from the server IP address to the correct part of your application.</li>
+<li><strong>API requests</strong>: how information be transferred over the internet via JSON payloads via HTTP.</li>
+<li><strong>Database Architecture</strong>: how to setup and interact with your backend via SQL.</li>
+<li>The benefits of containerisation via <strong>Docker</strong>: allowing multiple devs to work on the same backend infrastructure despite different OS, plus enabling smoother deployment onto a VPS.</li>
+</ul>
+<h2 id="diagram-overview">Diagram Overview</h2>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=avif&via=transform 2718w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=webp&via=transform 2718w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=jpeg&via=transform" alt="Diagram Oveview" width="2718" height="1077"></picture></p>
+<p>To learn these concepts, I needed a concrete goal...so, why not make a website for my band! We'll seem more pro or something...</p>
+<p><em>Diagram wrong - Cerbot is not a CA!</em></p>
+<h2 id="building-the-frontend-locally">Building the frontend locally</h2>
+<p>Luckily, my band Balloon Tomb has a pretty particular aesthetic, so the design goal was simple: build a blocky retro/8-bit/early-2000s style website which let's people learn about our band, (in the future) buy merch, read our lyrics, find out about our shows and submit some stories / audio which could enter our songs...</p>
+<p>So, I picked a modern frontend framework (Next.js + an 8-bit Shadcn extension) and using an LLM as a coach (no copy paste! understand every line!) I mocked up a 'good enough' frontend.</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=avif&via=transform 1396w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=webp&via=transform 1396w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=png&via=transform" alt="Manifesto Page" width="1396" height="1878"></picture></p>
+<p>At this point, I wanted to get some feedback from bandmates about the website design, so I deployed the site using <code>pm2</code> onto my VPS.</p>
+<p>This was great but a simple static site is pretty dull, so before getting into deployment, let's add some backend to our site... we can then learn about <strong>containerisation</strong> which will make spinning the application up on our VPS a breeze down the line.</p>
+<h2 id="adding-user-interactivity">Adding User Interactivity</h2>
+<p>To get some experience with handling user-submitted data, I created a text and audio submission form. It was pretty fun to learn about the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</a>. All the tools you need to manipulate audio in the web (recording, storage, even <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode">FFTs</a> for manipulation and visualisation), all accessible via an open web standard. Neat.</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=avif&via=transform 1396w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=webp&via=transform 1396w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=png&via=transform" alt="Audio Submission Form" width="1396" height="1878"></picture></p>
+<p>But where to store this data?</p>
+<h3 id="creating-a-database-and-api-locally">Creating a database and API locally</h3>
+<p>I wanted to build up the complexity one level at a time. So, I started by simply creating a database on my local machine with <a href="https://www.postgresql.org/docs/current/"><code>psql</code></a>.</p>
+<p>After installation, you can create a client to interact with <code>postgres</code> process via the command line. For <a href="https://www.postgresql.org/docs/current/app-psql.html">example</a>,</p>
+<ol>
+<li><code>psql -U postgres</code> to login to Postgres as the user <code>postgres</code></li>
+<li>Create a server with <code>CREATE DATABASE &lt;db-name&gt;</code>.</li>
+<li>Connect to a server via <code>\c &lt;db-name&gt;</code></li>
+<li>Then, create an empty table in that database. For example, for my user's text submissions, you'd run the following SQL command</li>
+</ol>
+<pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> form_submissions <span class="token punctuation">(</span>
+  id <span class="token keyword">SERIAL</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+  name <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  email <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  message <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  created_at <span class="token keyword">TIMESTAMP</span> <span class="token keyword">DEFAULT</span> <span class="token function">NOW</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Then, you'd just need to hook up a button such that when a user presses, this triggers an API call which sends a <code>POST</code> request via HTTPs to our application's server. The server would then execute SQL to to insert the information into the database.</p>
+<h3 id="limitations-of-configuring-a-postgres-database-manually">Limitations of configuring a <code>postgres</code> database manually</h3>
+<p>While this setup works, if we want to pickup our db and site from our local machine where we're developing and then plop it down inside our VPS, then this process would become frustrating. We'd have to write down exactly what tables we created inside our server and implement it manually. We'd like some kind of tool to programmatically setup the entire environment that our 'full-stack' application lives...</p>
+<h3 id="docker-and-containerisation">Docker and containerisation</h3>
+<p>This is where Docker comes in. Instead of having to manually build our environment every-time we spin up our application, we can write down all of these details using docker-compose and then let Docker handle the process of building the environment in which our application lives.</p>
+<p>This has the great added benefit of being machine agnostic. If you specify the <code>docker-compose.yaml</code> file, then it doesn't matter if your local machine is a Mac, Windows, Linux..., it just spins up a linux-based process for each of your services, which all share the host's kernel. We can abstract away the specifics of the particular machine you're working on - amazing!</p>
+<p>This has been a key mental shift in the deployment of software in the last few years — shifting the server from being <a href="%5Bthis%5D(https://queue.acm.org/detail.cfm?id=2898444)">machine oriented to application oriented</a>. Tools like <em>Terraform</em> soup-up this idea for major applications, allowing you specify your <a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code">infrastructure as code</a>.</p>
+<p>So, for the Balloon Tomb site, we just need the following services, each running in their own container.</p>
+<ol>
+<li>The site itself, spun up and running on <code>localhost:3000</code></li>
+<li>The database for the site, spun up and running on port <code>5432</code></li>
+<li>(Optional) An instance of pgAdmin so that we can query the database in a nice GUI.</li>
+</ol>
+<p>We can go ahead an implement this by creating a file called <code>docker-compose.dev.yaml</code> in the root of the directory. The <a href="https://docs.docker.com/get-started/workshop/02_our_app/">official tutorials</a> are excellent at explaining what is going on and how to get started.</p>
+<p>In development, here's a simplified version of my docker compose file for the app. In production, we need to be careful about what ports we expose to the web.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">app</span><span class="token punctuation">:</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> balloon<span class="token punctuation">-</span>tomb<span class="token punctuation">-</span>site
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">context</span><span class="token punctuation">:</span> ./site
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile.dev
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token string">"3000:3000"</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> ./site<span class="token punctuation">:</span>/app
+     <span class="token punctuation">-</span> /app/node_modules
+     <span class="token punctuation">-</span> ./audio<span class="token punctuation">:</span>/app/audio
+    <span class="token key atrule">env_file</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> .env.local</code></pre>
+<p>This basically says, &quot;create a container for the app, build it according to how I specify in my <code>Dockerfile</code>, let the app run on port 3000 and build these volumes inside the container where my data will be stored&quot;.</p>
+<p>For the app, the <code>Dockerfile.dev</code> just specifies a clean environmental for local development.</p>
+<pre class="language-Dockerfile"><code class="language-Dockerfile">FROM node:20-alpine
+
+# Set working directory.
+WORKDIR /app
+
+# Install all the package dependices needed in the project (e.g. UI components)
+COPY package.json package-lock.json ./
+
+# RUN npm install to download all of those packages to the container
+RUN npm ci
+
+# Copy the source code
+COPY . .
+
+# Expose Next.js dev port
+EXPOSE 3000
+
+# Start next.js in dev mode
+CMD ["npm", "run", "dev"]</code></pre>
+<p>We can then add a service to our <code>docker-compose.yaml</code>  to spin up a PostgreSQL database.</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">db</span><span class="token punctuation">:</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> balloon<span class="token punctuation">-</span>tomb<span class="token punctuation">-</span>db
+    <span class="token key atrule">env_files</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> .env.local
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> postgres<span class="token punctuation">:</span>16<span class="token punctuation">-</span>alpine
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token string">"5432:5432"</span> <span class="token comment"># Don't do this in prod!!!!</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> postgres_data<span class="token punctuation">:</span>/var/lib/postgresql/data
+     <span class="token punctuation">-</span> ./db<span class="token punctuation">-</span>init<span class="token punctuation">:</span>/docker<span class="token punctuation">-</span>entrypoint<span class="token punctuation">-</span>initdb.d
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> unless<span class="token punctuation">-</span>stopped</code></pre>
+<p>Neatly, we can just clone the official Docker <a href="https://hub.docker.com/_/postgres">image hosted online</a>. The <code>.env.local</code> file contains all of our database connection information.</p>
+<pre class="language-.env"><code class="language-.env"># Database
+POSTGRES_DB=balloon_tomb_db
+POSTGRES_USER=admin_user
+POSTGRES_PASSWORD=something_very_secure
+DATABASE_URL=postgresql://admin_user:something_very_secure@db:5432/balloon_tomb_db
+
+# site
+NODE_ENV=development
+NEXT_PUBLIC_API_URL=http://localhost:3000</code></pre>
+<p>We also spin up all of the tables programmatically via a folder at the project root called <code>db-init</code>, which has some SQL queries to initially create the tables we want.</p>
+<h3 id="spinning-up-our-container">Spinning up our container</h3>
+<p>Now that we're defined the infrastructure we want our application to run on, we can just spin it up via</p>
+<pre><code>docker compose up
+</code></pre>
+<p>We can then inspect all of the containers inside of our compose stack</p>
+<pre><code>docker compose ps
+</code></pre>
+<p>You can even move into the terminal of the linux machine you've spun up. The flag <code>-it</code> means 'interactive terminal'.</p>
+<pre><code>sudo docker exec -it &lt;container name&gt; &lt;shell command&gt;
+</code></pre>
+<h2 id="deploying-to-a-vps">Deploying to a VPS</h2>
+<p>With this basic website functioning locally, we now want to deploy this to the web. This'll show us how you take a project from being a fun local demo to being deployed on an actual server in the big bad world. There's 5 key steps (modified from <a href="https://gist.github.com/hp0098v1/68de312b4dce4f38a9d121873ece6b53">this</a> article by <a href="https://github.com/hp0098v1">Erfan Paya</a>):</p>
+<h3 id="0-prerequisites">0. Prerequisites</h3>
+<p>We had the website working locally, so I went onto the internet and rented out...</p>
+<ol>
+<li><strong>A Virtual Private Server</strong></li>
+</ol>
+<p>This is a physical computer, living in some data centre, somewhere in the actual real world. Choices for large scale infrastructure (major banks / social media platforms) would be AWS or GCP. But for smaller indie developers, there's <em>loads</em> of options to pick from (e.g. DigitalOcean, Linode, ...). You just need to balance your requirements and costs.</p>
+<p>The VPS will allocate you a IPv4 address. This is the 4th version of the internet protocol that controls routing internet traffic. It's just a 32-bits number, often expressed as four 8-bit hexadecimal values <code>x.x.x.x</code> written in <a href="https://en.wikipedia.org/wiki/Dot-decimal_notation">dot-decimal notation</a>. This value is unique across the entire internet, but with only <mjx-container class="MathJax" jax="SVG" style="direction: ltr; position: relative;"><svg style="overflow: visible; min-height: 1px; min-width: 1px; vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="5.307ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 2345.9 833.9" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" style="stroke-width: 3;"></path></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" style="stroke-width: 3;"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)" style="stroke-width: 3;"></path></g></g></g><g data-mml-node="mo" transform="translate(1567.9,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z" style="stroke-width: 3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top: 0px; left: 0px; clip: rect(1px, 1px, 1px, 1px); -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: absolute; padding: 1px 0px 0px 0px; border: 0px; display: block; width: auto; overflow: hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow data-mjx-texclass="ORD"><mn>32</mn></mrow></msup><mo>≈</mo></math></mjx-assistive-mml></mjx-container> 4.2bn addresses, IPv6 is set to replace it in the long-term.<br>
+<picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=avif&via=transform 1576w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=webp&via=transform 1576w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=png&via=transform" alt="Dotted Quad Example" width="1576" height="922"></picture><br>
+2. <strong>A Domain Name</strong></p>
+<p>Once you buy your domain name from <a href="https://www.top10-websitehosting.co.uk/best-domain-registrars/">any retailer</a> (e.g. Porkbun, GoDaddy, Namecheap, ...), you can then manage the DNS (domain name system) records for your domain. So, if the host domain was <a href="http://www.example.com">www.example.com</a> then the provider then routes traffic to the particular IP address you configure - exactly the IP address of your newly created VPS.</p>
+<p>The DNS record is basically a switchboard, connecting traffic that visits your domain, and securely routing to your server.</p>
+<pre class="language-sh"><code class="language-sh">A   @     your.vps.ip
+A   www   your.vps.ip</code></pre>
+<p>It can take a few minutes for this record to propagate once you change the configuration.</p>
+<h3 id="1-preparing-the-vps">1. Preparing the VPS</h3>
+<p>We've rented this VPS, but how do we connect and use it?</p>
+<p>The internet is a magical thing — we can create a secure shell connection to our remote computer and then simply ssh into the machine to start running terminal commands inside it! After providing a locally generated <a href="https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/">ssh key to your VPS provider</a>, you can then run</p>
+<pre><code>ssh root@&lt;ip.address.of.machine&gt;
+</code></pre>
+<p>You're now inside!</p>
+<h4 id="updating-the-system">Updating the system</h4>
+<p>Because this is your own machine, you're responsible for updating and managing the machine yourself. So let's get the latest package list. <code>sudo</code> stands for 'superuser do', and let's the Linux OS execute commands with full permissions. <code>apt</code> is the advanced package tool, used for package management on <a href="https://en.wikipedia.org/wiki/Debian">Debian</a>-based Linux.</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span></code></pre>
+<p>We'll install git, <code>cd</code> into a sensible folder and then clone the repo.</p>
+<h2 id="2-clone-the-project">2. Clone the project</h2>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token function">curl</span> <span class="token parameter variable">-y</span>
+<span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>somewhere you like <span class="token keyword">in</span> your machine<span class="token operator">></span>
+<span class="token function">git</span> clone https://github.com/your-username/your-repo.git
+<span class="token builtin class-name">cd</span> your-repo</code></pre>
+<p>We now want to spin up this application with Docker, so will install it as follows</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker.io <span class="token function">docker-compose</span></code></pre>
+<p>And verify the installation</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> <span class="token parameter variable">--version</span> <span class="token function">docker-compose</span> <span class="token parameter variable">--version</span></code></pre>
+<h2 id="3-building-the-stack">3. Building the stack</h2>
+<p>You can then build the compose stack we've defined. This pulls all the relevant packages from the web, creating the environment you've specified in your <code>docker-compose.yaml</code>.</p>
+<pre><code>docker compose build
+</code></pre>
+<p>For production, we need to make a few changes to the compose stack. Namely having a <code>next build</code> process which <a href="https://nextjs.org/docs/app/guides/local-development">optimises the site build</a> for the web and only exposing the database to our internal server, not the public web. In the <code>.env.prod</code>, there's a line like below to set this up.</p>
+<pre><code>DATABASE_URL=postgresql://username:password@db:5432/dbname
+</code></pre>
+<p>Now the environment is built, you can spin it up! The <code>-d</code> flag means detach, so these processes run in the background.</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> compose up <span class="token parameter variable">-d</span></code></pre>
+<h2 id="4-setting-up-nginx-as-a-reverse-proxy">4. Setting up nginx as a reverse proxy</h2>
+<h3 id="install-nginx">Install <code>nginx</code></h3>
+<p>'Engine-x' (<a href="https://nginx.org/en/docs/beginners_guide.html">nginx</a>) is used here as a web server and <a href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse-proxy</a>. It receives requests that have been routed to the IP address of our server and then forwards them on to the correct port running internally.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx <span class="token parameter variable">-y</span></code></pre>
+<p>In the image below, the internet cannot tell the difference between the web server and the reverse proxy:<br>
+<picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=avif&via=transform 960w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=webp&via=transform 960w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=png&via=transform" alt="Reverse Proxy" width="960" height="360"></picture></p>
+<h3 id="defining-the-nginx-configuration">Defining the <code>nginx</code> configuration</h3>
+<p>Inside our terminal, we need to create a file which defines our configuration on our VPS.</p>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/sites-available/yourdomain.com</code></pre>
+<p>Warning! This command creates a new file with a <a href="https://vim.rtorr.com">vim editor</a>. This can feel counter-intuitive to type in.</p>
+<p>Then, paste in a file like this. The code below basically says, &quot;when traffic lands at this IP address, look at what domain name it's requested from the HTTP metadata and then forward the request on to the correct internal port of the VPS&quot;.</p>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">server_name</span> yourdomain.com www.yourdomain.com</span><span class="token punctuation">;</span>
+
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">proxy_pass</span> http://localhost:3000</span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_http_version</span> 1.1</span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> Host <span class="token variable">$host</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Real-IP <span class="token variable">$remote_addr</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Forwarded-For <span class="token variable">$proxy_add_x_forwarded_for</span></span><span class="token punctuation">;</span>
+        <span class="token directive"><span class="token keyword">proxy_set_header</span> X-Forwarded-Proto <span class="token variable">$scheme</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The app we've built has no idea about HTTPS or privileges. It's nginx which is handling certificates and TLS (transport layer security) for us.</p>
+<h3 id="enabling-nginx">Enabling nginx</h3>
+<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
+<span class="token function">sudo</span> nginx <span class="token parameter variable">-t</span>
+<span class="token function">sudo</span> systemctl reload nginx</code></pre>
+<p><code>nginx</code>  should now be routing traffic from our IP address to the port on our VPS where we've exposed our site. We're live!</p>
+<h2 id="5-enabling-https-with-lets-encrypt">5. Enabling HTTPS with Let's Encrypt</h2>
+<p>You don't want to look like a scam website... We need a secure HTTP connection. Thankfully, the Electronic Frontier Foundation has an open source tool called <code>certbot</code> which can handle this for us.</p>
+<p><a href="https://certbot.eff.org">Certbot</a> proves that our webserver actually controls this domain name. The <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> Certificate authority looks at the domain name being requested and issues some challenges. If our cerbot succeeds, then it's allowed to handle certificate management for our domain name.</p>
+<h3 id="install-certbot">Install Certbot</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> certbot python3-certbot-nginx <span class="token parameter variable">-y</span></code></pre>
+<h3 id="obtain-ssl-certificate">Obtain SSL Certificate</h3>
+<p>This proves that I own the domain and issues TLS certs.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> certbot <span class="token parameter variable">--nginx</span> <span class="token parameter variable">-d</span> yourdomain.com <span class="token parameter variable">-d</span> www.yourdomain.com</code></pre>
+<p>The site should now be available at <code>https://example.com</code>!</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. Check it out here: www.balloontomb.band. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo <a href="https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main">here</a>. This mini-project has given me the confidence to tackle some more hefty projects in the near future...</p>
+
+
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/">About</a>
+				<a href="https://oliverkiranbrown.github.io/drum_sequencer/">Groove!</a>
+				<a href="/notes/">Notes</a>
+				<a href="/now/">Now</a>
+				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
+			</div>
+			<p style="margin-top: 0.5em; font-size: 0.8em;">
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/writing/deploying_nextjs_site_to_vps/nextjs_web_deployment/` was built on 2026-01-28T23:53:24.396Z -->
+		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+	</body>
+</html>
