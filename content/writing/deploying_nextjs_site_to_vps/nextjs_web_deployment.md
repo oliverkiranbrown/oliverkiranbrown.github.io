@@ -9,8 +9,6 @@ eleventyNavigation:
   parent: writing
 ---
 
-# Deploying a Next.js app on a VPS
-
 ## Intro
 
 Currently, I’m learning how to build a modern mobile application which should be able to handle (hopefully!) many 1000s of users. And while I've been coding for a while, most of my scripts have been one-off experiments, implementations of an algorithm, or a demo UI that stayed on `localhost` — never leaving my laptop. 
