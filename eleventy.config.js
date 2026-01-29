@@ -82,7 +82,10 @@ export default async function(eleventyConfig) {
 	//eleventyConfig.addPlugin(pluginJupyter);
 
 	// Add in support for code syntax highlighting
-	eleventyConfig.addPlugin(syntaxHighlight);
+	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+		preAttributes: { tabindex: 0 },
+		alwaysWrapLineHighlights: false
+	});
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {

@@ -8,7 +8,6 @@
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
-		<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet">
 		
 		
 		
@@ -551,129 +550,6 @@ mjx-container[display] {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
-/**
- * okaidia theme for JavaScript, CSS and HTML
- * Loosely based on Monokai textmate theme by http://www.monokai.nl/
- * @author ocodia
- */
-
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #f8f8f2;
-	background: none;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-	border-radius: 0.3em;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #272822;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #8292a2;
-}
-
-.token.punctuation {
-	color: #f8f8f2;
-}
-
-.token.namespace {
-	opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #f92672;
-}
-
-.token.boolean,
-.token.number {
-	color: #ae81ff;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #a6e22e;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: #f8f8f2;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.function,
-.token.class-name {
-	color: #e6db74;
-}
-
-.token.keyword {
-	color: #66d9ef;
-}
-
-.token.regex,
-.token.important {
-	color: #fd971f;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
 /*
  * New diff- syntax
  */
@@ -811,7 +687,7 @@ pre[class*="language-diff-"] {
 <li>Connect to a server via <code>\c &lt;db-name&gt;</code></li>
 <li>Then, create an empty table in that database. For example, for my user's text submissions, you'd run the following SQL command</li>
 </ol>
-<pre class="language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> form_submissions <span class="token punctuation">(</span>
+<pre class="language-sql" tabindex="0"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> form_submissions <span class="token punctuation">(</span>
   id <span class="token keyword">SERIAL</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
   name <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
   email <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
@@ -833,7 +709,7 @@ pre[class*="language-diff-"] {
 </ol>
 <p>We can go ahead an implement this by creating a file called <code>docker-compose.dev.yaml</code> in the root of the directory. The <a href="https://docs.docker.com/get-started/workshop/02_our_app/">official tutorials</a> are excellent at explaining what is going on and how to get started.</p>
 <p>In development, here's a simplified version of my docker compose file for the app. In production, we need to be careful about what ports we expose to the web.</p>
-<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+<pre class="language-yaml" tabindex="0"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
   <span class="token key atrule">app</span><span class="token punctuation">:</span>
     <span class="token key atrule">container_name</span><span class="token punctuation">:</span> balloon<span class="token punctuation">-</span>tomb<span class="token punctuation">-</span>site
     <span class="token key atrule">build</span><span class="token punctuation">:</span>
@@ -849,7 +725,7 @@ pre[class*="language-diff-"] {
      <span class="token punctuation">-</span> .env.local</code></pre>
 <p>This basically says, &quot;create a container for the app, build it according to how I specify in my <code>Dockerfile</code>, let the app run on port 3000 and build these volumes inside the container where my data will be stored&quot;.</p>
 <p>For the app, the <code>Dockerfile.dev</code> just specifies a clean environmental for local development.</p>
-<pre class="language-Dockerfile"><code class="language-Dockerfile">FROM node:20-alpine
+<pre class="language-Dockerfile" tabindex="0"><code class="language-Dockerfile">FROM node:20-alpine
 
 # Set working directory.
 WORKDIR /app
@@ -869,7 +745,7 @@ EXPOSE 3000
 # Start next.js in dev mode
 CMD ["npm", "run", "dev"]</code></pre>
 <p>We can then add a service to our <code>docker-compose.yaml</code>  to spin up a PostgreSQL database.</p>
-<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+<pre class="language-yaml" tabindex="0"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
   <span class="token key atrule">db</span><span class="token punctuation">:</span>
     <span class="token key atrule">container_name</span><span class="token punctuation">:</span> balloon<span class="token punctuation">-</span>tomb<span class="token punctuation">-</span>db
     <span class="token key atrule">env_files</span><span class="token punctuation">:</span>
@@ -882,7 +758,7 @@ CMD ["npm", "run", "dev"]</code></pre>
      <span class="token punctuation">-</span> ./db<span class="token punctuation">-</span>init<span class="token punctuation">:</span>/docker<span class="token punctuation">-</span>entrypoint<span class="token punctuation">-</span>initdb.d
     <span class="token key atrule">restart</span><span class="token punctuation">:</span> unless<span class="token punctuation">-</span>stopped</code></pre>
 <p>Neatly, we can just clone the official Docker <a href="https://hub.docker.com/_/postgres">image hosted online</a>. The <code>.env.local</code> file contains all of our database connection information.</p>
-<pre class="language-.env"><code class="language-.env"># Database
+<pre class="language-.env" tabindex="0"><code class="language-.env"># Database
 POSTGRES_DB=balloon_tomb_db
 POSTGRES_USER=admin_user
 POSTGRES_PASSWORD=something_very_secure
@@ -894,14 +770,11 @@ NEXT_PUBLIC_API_URL=http://localhost:3000</code></pre>
 <p>We also spin up all of the tables programmatically via a folder at the project root called <code>db-init</code>, which has some SQL queries to initially create the tables we want.</p>
 <h3 id="spinning-up-our-container">Spinning up our container</h3>
 <p>Now that we're defined the infrastructure we want our application to run on, we can just spin it up via</p>
-<pre><code>docker compose up
-</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> compose up</code></pre>
 <p>We can then inspect all of the containers inside of our compose stack</p>
-<pre><code>docker compose ps
-</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> compose <span class="token function">ps</span></code></pre>
 <p>You can even move into the terminal of the linux machine you've spun up. The flag <code>-it</code> means 'interactive terminal'.</p>
-<pre><code>sudo docker exec -it &lt;container name&gt; &lt;shell command&gt;
-</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> <span class="token operator">&lt;</span>container name<span class="token operator">></span> <span class="token operator">&lt;</span>shell command<span class="token operator">></span></code></pre>
 <h2 id="deploying-to-a-vps">Deploying to a VPS</h2>
 <p>With this basic website functioning locally, we now want to deploy this to the web. This'll show us how you take a project from being a fun local demo to being deployed on an actual server in the big bad world. There's 5 key steps (modified from <a href="https://gist.github.com/hp0098v1/68de312b4dce4f38a9d121873ece6b53">this</a> article by <a href="https://github.com/hp0098v1">Erfan Paya</a>):</p>
 <h3 id="0-prerequisites">0. Prerequisites</h3>
@@ -915,49 +788,47 @@ NEXT_PUBLIC_API_URL=http://localhost:3000</code></pre>
 2. <strong>A Domain Name</strong></p>
 <p>Once you buy your domain name from <a href="https://www.top10-websitehosting.co.uk/best-domain-registrars/">any retailer</a> (e.g. Porkbun, GoDaddy, Namecheap, ...), you can then manage the DNS (domain name system) records for your domain. So, if the host domain was <a href="http://www.example.com">www.example.com</a> then the provider then routes traffic to the particular IP address you configure - exactly the IP address of your newly created VPS.</p>
 <p>The DNS record is basically a switchboard, connecting traffic that visits your domain, and securely routing to your server.</p>
-<pre class="language-sh"><code class="language-sh">A   @     your.vps.ip
+<pre class="language-sh" tabindex="0"><code class="language-sh">A   @     your.vps.ip
 A   www   your.vps.ip</code></pre>
 <p>It can take a few minutes for this record to propagate once you change the configuration.</p>
 <h3 id="1-preparing-the-vps">1. Preparing the VPS</h3>
 <p>We've rented this VPS, but how do we connect and use it?</p>
 <p>The internet is a magical thing — we can create a secure shell connection to our remote computer and then simply ssh into the machine to start running terminal commands inside it! After providing a locally generated <a href="https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/">ssh key to your VPS provider</a>, you can then run</p>
-<pre><code>ssh root@&lt;ip.address.of.machine&gt;
-</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">ssh</span> root@<span class="token operator">&lt;</span>ip.address.of.machine<span class="token operator">></span></code></pre>
 <p>You're now inside!</p>
 <h4 id="updating-the-system">Updating the system</h4>
 <p>Because this is your own machine, you're responsible for updating and managing the machine yourself. So let's get the latest package list. <code>sudo</code> stands for 'superuser do', and let's the Linux OS execute commands with full permissions. <code>apt</code> is the advanced package tool, used for package management on <a href="https://en.wikipedia.org/wiki/Debian">Debian</a>-based Linux.</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span></code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span></code></pre>
 <p>We'll install git, <code>cd</code> into a sensible folder and then clone the repo.</p>
 <h2 id="2-clone-the-project">2. Clone the project</h2>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token function">curl</span> <span class="token parameter variable">-y</span>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token function">curl</span> <span class="token parameter variable">-y</span>
 <span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>somewhere you like <span class="token keyword">in</span> your machine<span class="token operator">></span>
 <span class="token function">git</span> clone https://github.com/your-username/your-repo.git
 <span class="token builtin class-name">cd</span> your-repo</code></pre>
 <p>We now want to spin up this application with Docker, so will install it as follows</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker.io <span class="token function">docker-compose</span></code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> docker.io <span class="token function">docker-compose</span></code></pre>
 <p>And verify the installation</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> <span class="token parameter variable">--version</span> <span class="token function">docker-compose</span> <span class="token parameter variable">--version</span></code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> <span class="token parameter variable">--version</span> <span class="token function">docker-compose</span> <span class="token parameter variable">--version</span></code></pre>
 <h2 id="3-building-the-stack">3. Building the stack</h2>
 <p>You can then build the compose stack we've defined. This pulls all the relevant packages from the web, creating the environment you've specified in your <code>docker-compose.yaml</code>.</p>
-<pre><code>docker compose build
-</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> compose build</code></pre>
 <p>For production, we need to make a few changes to the compose stack. Namely having a <code>next build</code> process which <a href="https://nextjs.org/docs/app/guides/local-development">optimises the site build</a> for the web and only exposing the database to our internal server, not the public web. In the <code>.env.prod</code>, there's a line like below to set this up.</p>
 <pre><code>DATABASE_URL=postgresql://username:password@db:5432/dbname
 </code></pre>
 <p>Now the environment is built, you can spin it up! The <code>-d</code> flag means detach, so these processes run in the background.</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">docker</span> compose up <span class="token parameter variable">-d</span></code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> compose up <span class="token parameter variable">-d</span></code></pre>
 <h2 id="4-setting-up-nginx-as-a-reverse-proxy">4. Setting up nginx as a reverse proxy</h2>
 <h3 id="install-nginx">Install <code>nginx</code></h3>
 <p>'Engine-x' (<a href="https://nginx.org/en/docs/beginners_guide.html">nginx</a>) is used here as a web server and <a href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse-proxy</a>. It receives requests that have been routed to the IP address of our server and then forwards them on to the correct port running internally.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx <span class="token parameter variable">-y</span></code></pre>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx <span class="token parameter variable">-y</span></code></pre>
 <p>In the image below, the internet cannot tell the difference between the web server and the reverse proxy:<br>
 <picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=avif&via=transform 960w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=webp&via=transform 960w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=png&via=transform" alt="Reverse Proxy" width="960" height="360"></picture></p>
 <h3 id="defining-the-nginx-configuration">Defining the <code>nginx</code> configuration</h3>
 <p>Inside our terminal, we need to create a file which defines our configuration on our VPS.</p>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/sites-available/yourdomain.com</code></pre>
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/sites-available/yourdomain.com</code></pre>
 <p>Warning! This command creates a new file with a <a href="https://vim.rtorr.com">vim editor</a>. This can feel counter-intuitive to type in.</p>
 <p>Then, paste in a file like this. The code below basically says, &quot;when traffic lands at this IP address, look at what domain name it's requested from the HTTP metadata and then forward the request on to the correct internal port of the VPS&quot;.</p>
-<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+<pre class="language-nginx" tabindex="0"><code class="language-nginx"><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span></span><span class="token punctuation">;</span>
     <span class="token directive"><span class="token keyword">server_name</span> yourdomain.com www.yourdomain.com</span><span class="token punctuation">;</span>
 
@@ -972,7 +843,7 @@ A   www   your.vps.ip</code></pre>
 <span class="token punctuation">}</span></code></pre>
 <p>The app we've built has no idea about HTTPS or privileges. It's nginx which is handling certificates and TLS (transport layer security) for us.</p>
 <h3 id="enabling-nginx">Enabling nginx</h3>
-<pre class="language-sh"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
+<pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
 <span class="token function">sudo</span> nginx <span class="token parameter variable">-t</span>
 <span class="token function">sudo</span> systemctl reload nginx</code></pre>
 <p><code>nginx</code>  should now be routing traffic from our IP address to the port on our VPS where we've exposed our site. We're live!</p>
@@ -980,13 +851,14 @@ A   www   your.vps.ip</code></pre>
 <p>You don't want to look like a scam website... We need a secure HTTP connection. Thankfully, the Electronic Frontier Foundation has an open source tool called <code>certbot</code> which can handle this for us.</p>
 <p><a href="https://certbot.eff.org">Certbot</a> proves that our webserver actually controls this domain name. The <a href="https://letsencrypt.org/how-it-works/">Let's Encrypt</a> Certificate authority looks at the domain name being requested and issues some challenges. If our cerbot succeeds, then it's allowed to handle certificate management for our domain name.</p>
 <h3 id="install-certbot">Install Certbot</h3>
-<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> certbot python3-certbot-nginx <span class="token parameter variable">-y</span></code></pre>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> certbot python3-certbot-nginx <span class="token parameter variable">-y</span></code></pre>
 <h3 id="obtain-ssl-certificate">Obtain SSL Certificate</h3>
 <p>This proves that I own the domain and issues TLS certs.</p>
-<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> certbot <span class="token parameter variable">--nginx</span> <span class="token parameter variable">-d</span> yourdomain.com <span class="token parameter variable">-d</span> www.yourdomain.com</code></pre>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> certbot <span class="token parameter variable">--nginx</span> <span class="token parameter variable">-d</span> yourdomain.com <span class="token parameter variable">-d</span> www.yourdomain.com</code></pre>
 <p>The site should now be available at <code>https://example.com</code>!</p>
 <h2 id="wrapping-up">Wrapping up</h2>
-<p>Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. Check it out here: www.balloontomb.band. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo <a href="https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main">here</a>. This mini-project has given me the confidence to tackle some more hefty projects in the near future...</p>
+<p>Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo <a href="https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main">here</a>. This mini-project has given me the confidence to tackle some more hefty projects in the near future...</p>
+<p>Final result: <a href="https://balloontomb.band">www.balloontomb.band</a>!</p>
 
 
 				</heading-anchors>
@@ -1006,7 +878,7 @@ A   www   your.vps.ip</code></pre>
 			</p>
 		</footer>
 
-		<!-- This page `/writing/deploying_nextjs_site_to_vps/nextjs_web_deployment/` was built on 2026-01-28T23:53:24.396Z -->
+		<!-- This page `/writing/deploying_nextjs_site_to_vps/nextjs_web_deployment/` was built on 2026-01-29T00:08:36.860Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

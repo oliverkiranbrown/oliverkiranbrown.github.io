@@ -174,19 +174,19 @@ We also spin up all of the tables programmatically via a folder at the project r
 
 Now that we're defined the infrastructure we want our application to run on, we can just spin it up via
 
-```
+```sh
 docker compose up
 ```
 
 We can then inspect all of the containers inside of our compose stack
 
-```
+```sh
 docker compose ps
 ```
 
 You can even move into the terminal of the linux machine you've spun up. The flag `-it` means 'interactive terminal'.
 
-```
+```sh
 sudo docker exec -it <container name> <shell command>
 ```
 
@@ -221,7 +221,7 @@ We've rented this VPS, but how do we connect and use it?
 
 The internet is a magical thing — we can create a secure shell connection to our remote computer and then simply ssh into the machine to start running terminal commands inside it! After providing a locally generated [ssh key to your VPS provider](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/), you can then run 
 
-```
+```sh
 ssh root@<ip.address.of.machine>
 ```
 
@@ -262,7 +262,7 @@ docker --version docker-compose --version
 
 You can then build the compose stack we've defined. This pulls all the relevant packages from the web, creating the environment you've specified in your `docker-compose.yaml`. 
 
-```
+```sh
 docker compose build
 ```
 
@@ -353,4 +353,6 @@ The site should now be available at `https://example.com`!
 
 ## Wrapping up
 
-Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. Check it out here: www.balloontomb.band. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo [here](https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main). This mini-project has given me the confidence to tackle some more hefty projects in the near future... 
+Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo [here](https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main). This mini-project has given me the confidence to tackle some more hefty projects in the near future... 
+
+Final result: [www.balloontomb.band](https://balloontomb.band)!
