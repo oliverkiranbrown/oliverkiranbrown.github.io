@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Oliver Kiran Brown</title>
-		<meta name="description" content="Oli&#39;s personal site">
+		<title>My Job Hunting Experience 2024-25</title>
+		<meta name="description" content="My reflections on job-hunting as a 2023 maths graduate.">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
@@ -549,7 +549,52 @@ mjx-container[display] {
 	border: solid white;
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
-  }</style>
+  }
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -564,7 +609,7 @@ mjx-container[display] {
 				<ul class="nav">
 					<li class="nav-item"><a href="/">About</a></li>
 					<li class="nav-item"><a href="/writing/">Writing</a></li>
-					<li class="nav-item"><a href="/music/" aria-current="page">Music</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
 				</ul>
 				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 			</nav>
@@ -594,70 +639,47 @@ mjx-container[display] {
 			<main id="skip">
 				<heading-anchors>
 					
-<h1 id="music">Music</h1>
-<p>Outside of formal work and study, I'm a big music fan. I've been playing drums in bands for years and it's come to form an important part of my identity. So, in a vain attempt to beat the maths nerd allegations (double meaning intentional!), I thought I'd chuck in a few links on my personal site so showcase what I've been getting up to.</p>
-<h2 id="projects">Projects</h2>
-<table>
-<thead>
-<tr>
-<th>Band</th>
-<th>Years Active</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://influxofinsanity.bandcamp.com/album/influx-the-collection">Influx of Insanity</a></td>
-<td>2016 - 2021</td>
-</tr>
-<tr>
-<td><a href="https://karmaviolets.bandcamp.com/music">The Karma Violets</a></td>
-<td>2019 - 2021</td>
-</tr>
-<tr>
-<td><a href="https://feedthemammoth.bandcamp.com/">Feed the Mammoth</a></td>
-<td>2021 - 2025</td>
-</tr>
-<tr>
-<td><a href="https://www.instagram.com/balloon_tomb/">Balloon Tomb</a></td>
-<td>2024 - 2026</td>
-</tr>
-</tbody>
-</table>
-<h2 id="some-background-if-you-care">Some Background (if you care!)</h2>
-<h3 id="influx-of-insanity">Influx of Insanity</h3>
-<p>It all started aged 14 with a noisy prog metal double-act called <a href="https://www.instagram.com/influxofinsanity/">Influx of Insanity</a>. We played a <em>lot</em> of gigs, wrote some hilarious, teenage angst-ridden lyrics and released some self-produced music out into the world. It was great fun! This <a href="https://www.youtube.com/watch?v=Ot16iTOSIvc">video</a> gives you a good idea of what we were all about...</p>
-<p>My partner in crime <a href="https://linktr.ee/Dom.howard_">Dom Howard</a> went on to study jazz at RCM after we finished in 2021 and he's utterly brilliant, go <a href="https://domhoward.bandcamp.com/album/all-the-paths-join-up-here">check him out</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=avif&via=transform 2400w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=webp&via=transform 2400w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=jpeg&via=transform" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
-  </div>
-</div>
-<h3 id="the-karma-violets">The Karma Violets</h3>
-<p>The Karma Violets came together thanks to complete chance! I met the lovely <a href="https://www.instagram.com/wesley_ayres_music/">Wes Ayres</a> whilst working as a waiter at Peterhouse College, Cambridge, we got chatting music and decided to form a band. With the addition of the crazy mutual connection Ambrose de Soissons-Page (Wes' family friend who also happened to played the same <a href="https://www.lovemusichateracism.com/home/">LMHR</a> / <a href="https://www.repeatfanzine.co.uk/homepage.htm">REPEAT</a> gigs as me back in the day!), we completed this indie-rock trio. Lockdown couldn't stop us pumping out two EPs - have a listen <a href="https://karmaviolets.bandcamp.com/">here</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=avif&via=transform 4898w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=webp&via=transform 4898w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=jpeg&via=transform" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
-  </div>
-</div>
-<h3 id="feed-the-mammoth">Feed the Mammoth</h3>
-<p>I headed off to University in 2021 and threw myself straight into the smorgasbord of musical madness that is <a href="https://www.instagram.com/warwickbandsoc/">Warwick BandSoc</a>. I played in a wacky variety of bands - shoutout to the angry garage punk of <a href="https://youtu.be/Jl_S9tzjVro?si=uPLFTgpQNBGDDSsO&amp;t=270">Domestic Love</a> and my good friends in <a href="https://www.instagram.com/sunnysidedownband/">Sunny Side Down</a>! Eventually, I decided to settle down and focus on Feed the Mammoth. We wrote some tunes I'm genuinely proud of and had a banging time doing it. If you want a flavour of what we got up to, check out our <a href="https://www.youtube.com/channel/UCl9l2k9-kfGDI2H8EHLcG9Q">YouTube</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=avif&via=transform 4318w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=webp&via=transform 4318w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=jpeg&via=transform" alt="FTM Band Photo" width="4318" height="3455"></picture>
-  </div>
-</div>
-<h2 id="community-building">Community Building</h2>
-<p>In my 3rd year, I had the privilege of serving as president of BandSoc. It was busy, intense year and one of the best decisions I've ever made.</p>
-<p>Alongside my fantastic exec team, I put on around 50 events during my term. Highlights included organising a week-long tour around the UK for 5 bands, instituting a free annual summer festival on campus and organising the massive annual Battle of the Bands competition. It was a blast!</p>
-<p>But honestly? Seeing friendships form, those memories made? It was a deeply moving experience. University can be a lonely place, and in our world that so heavily incentivises the <em>individual</em> ('sort <em>yourself</em> out, increase <em>your own</em> following'), there are very few social structures that tie people together like that, forcing your to put your faith in others - in something bigger than yourself.</p>
-<p>This time I spent building a genuine sense of place-based community in BandSoc will stay with me forever. Yes, it's obvious, and I don't want to be too 'let's all hold hands and sing Kumbaya round the fire', but there is <em>real</em> power in building this sense of collective identify. It's something I want to keep chasing in everything I do. Thanks BandSoc ❤️</p>
-<!-- 
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <img src="./CR1_photo.jpg" alt="FTM BotB Final 2023">
-  </div>
-</div>
--->
+
+
+<h1 id="my-job-hunting-experience-2024-25">My Job Hunting Experience 2024-25</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-07-27">27 July 2025</time></li>
+</ul>
+<ul class="post-tags">
+		<li><a href="/tags/writing/" class="post-tag">Writing</a></li>
+		<li><a href="/tags/personal/" class="post-tag">Personal</a></li>
+</ul>
+
+<p>I've managed to land myself a graduate scheme with Lloyds and I'm thrilled. But that neat celebratory Linkedin post hides the ups and downs on the long road to a 'plan for September'. I faced so many rejections — it was brutal. At the time, I found myself finishing a Linkedin scroll entirely depressed. So many people saying, &quot;I'm pleased to announce that...&quot;, &quot;I'm thrilled to be starting a new position at...&quot;. <em>How?!?!</em> Now it's all over, I thought I'd take a moment to step-back and reflect on my experience job hunting from September 2024 to April 2025.</p>
+<h3 id="the-search-begins-september-to-december">The search begins (September to December)</h3>
+<p>At first, I did a stock take. My goal was to get decent plan in-place before my internship finished in September. I wanted to put my dense maths degree to use and enjoyed the ML modules at Warwick so it felt natural to aim for some sort of Data Science role.</p>
+<p>So, I started applying. And instantly, I hit this impersonal brick-wall of computerised assessment. It was an onslaught: tailored CVs gave way to situational awareness tests, numerical reasoning assessments, two-hour coding assignments, lengthy written responses, pre-recorded video interviews — talking to this camera that doesn't talk back. I'd sit alone in my room, firing off these applications into my laptop after work, the same details again and again, staring at my screen, without ever talking to a human. Bleak.</p>
+<p>After after putting hours into each company, investing so much mental effort into each word written and button pressed, stressing that if you don't click right, it'll be you who's unemployed; after all that work...silence. And then the dreaded, useless bot response three months later, <em>Thank you for taking the time to complete our assessments. We regret to inform you that...</em></p>
+<p>In the first few months, I had occasional success. An assessment centre here, a final stage interview there. Close, but no cigar. Thankfully, I got some genuinely useful feedback. <em>Be concise</em>. And after a big office Oxford Street in-person interview for this role I <em>really</em> wanted: &quot;you were great; you knew the most, but the nerves shined through. Slow down and be more confident&quot;. Those flashes of genuine human interaction meant a lot after the tirade of faceless rejection.</p>
+<h3 id="the-first-bites-january-to-march">The first bites (January to March)</h3>
+<p>As time progressed and the rejections mounted, I started to get more and more stressed, <em>Will I find something?</em> I remember staying to myself, '<em>no Oli, you have to find something. If you're back home and unemployed in September, you're a failure'</em> — high but harsh standards. That pressure would be a barb in the brain, only be removed upon success.</p>
+<p>With good grades, masters and PhDs also seemed like an expensive but sensible option. I organised references from lecturers and researched heavily, meticulously editing my applications to perfect the tone. Some rejections, some acceptances. I didn't take much pleasure in these wins — you're paying them after all. And while I did want to learn more, after looking into the alumni from prestigious UCL MSc courses who struggled to find post-graduate employment, the old truism '<em>more education means better job prospects</em>' was starting to break down in my head. I kept applying for jobs...surely something will bite.</p>
+<p>And they did! After months of worry, in February, I got a yes. I was thrilled. A fully-funded PhD in (buzzwords incoming!) AI for Sustainability with Southampton University. To get this? <em>Weeks</em> of work! During my internship in DESNZ, I saw wiz kids at the <em>Clean Energy Superpower Hackathon</em> and I got really interested in how machine learning could be used to support the energy transition. Genuine months of reading, learning and thinking lead me to a five page <a href="/notes/soton/sustai_research_proposal.pdf">research proposal</a>. I was glad to see all that effort paid off.</p>
+<p>A four year PhD programme was a serious commitment. I needed to be 100% sure it was the right path forward. I decided to keep my options open until Southampton gave me a deadline for acceptance. Nose to the grindstone again...</p>
+<p>More rejections, and then out of the blue...another catch: '<em>you're invited to a final stage assessment centre with Lloyds</em>'. After their rigorous multi-stage grilling earlier in the year, I was pleased to hear back.</p>
+<p>Three factors came together in their final interrogation. First, after preparing so throughly for the big-office interview in January, my examples were polished; I knew how to answer an interview question well. Second, I could smash the technical interview because Warwick's courses in ML and a DESNZ dashboard-building project gave me directly relevant skills. Finally, because I had the PhD offer on the table, the pressure was off. I didn't <em>need</em> this job. I came into the interviews with an exuberant yet laissez-faire confidence, genuinely relaxed, free to crack jokes and just be myself.</p>
+<p>The assessment centre went OK. I put it out of my mind and just assumed I didn't get the job — then you can't be disappointed.</p>
+<h3 id="considering-options-april-may">Considering Options (April - May)</h3>
+<p>As April's spring freshness brought respite from the dark trenches of winter, I chewed over the thought of a four-year PhD programme. <em>Is this right for me?</em> I got on a train which rumbled it's way down to Southampton for an offer-holder day with nervous trepidation. <em>Will I like the city? The cohort? The research?</em> While I desperately wanted a firm plan for September, Southampton had to feel like a <em>positive</em> choice, rather than a negative, by-default acceptance. I wanted to feel this gut instinct <em>'yes'</em>.</p>
+<p>It was a wonderful day. Golden sunlight. An ambling stroll through the forest. Lovely professors, students and parks, a pretty campus, a rich, wide-ranging course with exciting opportunities and Industry connections. The <a href="https://sustai.info/">CDT</a> was an excellent path forward. The deadline for accepting was the 10th April so unless anything came up before then, the decision was made.</p>
+<p>As that final deadline loomed, I started researching my niche like crazy. Setting up meetings with community energy researchers, reading 60-page reports about smart energy trials in Oxfordshire, understanding the barriers to creating a <em><a href="https://www.lowcarbonhub.org/p/programmes/peoples-power-station/">People's Power Station</a></em> <em>Is this right for me?</em> I pulled an 80-hour week trying to understand. By Sunday, I was burnt-out. I struggled to put my finger on it, but something just didn't feel right. <em>What was it?</em></p>
+<p>I was living in a naff town, miles from anywhere, without any mates around me. Long travel-times and the evening job hunt meant my usual social trump card — <em>go to events and meet new people</em> — had been thrown out of my hand. This period had taught me the importance of place-based community. While exciting, the Southampton CDT meant moving to another new town, miles away from my pre-built support network for the second year in a row. I didn't want to make the same mistake again.</p>
+<h3 id="decision-made">Decision Made</h3>
+<p>So when — on <em>the day</em> of the PhD deadline, with my offer letter signed and the acceptance email sitting in my drafts — I got an affirmative call from Lloyds, I lost my shit. Bristol! Where my network of friends is based. A two year contract rather than Southampton's four. Better pay, fantastic training, professional experience — the start of a 'serious' career. I knew my decision and accepted on the spot.</p>
+<p>And this weight just <em>lifted</em>. I didn't think it was real. I punched the air for a week straight. After eight months of fear and worry, not wanting to regress, to achieve what our social contact has always told us is the aspiration: <em>work hard, go to a good uni, get a good job</em>. It was just relief. Unbelievable, spellbinding, ecstatic relief.</p>
+<p>The journey here has been bedrock-hard. I was exhausted and shocked: Out of perhaps 60-70 applications (I stopped counting after 30), after investing <em>so much</em> time, as a Warwick maths graduate with good grades, serious society involvement and solid work experience, I could only land <em>one</em> proper job offer.</p>
+<h3 id="the-social-contract">The social contract</h3>
+<p>I'd been able to tick enough boxes to land a role but if you don't, what are your options? Where are your opportunities? My scheme had 10,000 people apply. There's entry level Government roles with thousands of applications. Corporates have to throw half the CVs away without ever looking at them. It's insane! It feels like the social contract — <em>work hard, go to uni, get a good job</em> — is starting to break down.</p>
+<p>More broadly, I think you're starting to see this bifurcation in my generation. Through a variable mixture of aptitude, privilege, hard-work and luck, those who manage to secure solid graduate employment will be able to eke out a semi-comfortable existence; some might even thrive. But for those did everything they were told but couldn't land that crucial first job, their economic situation is hostile. Bouncing between insecure work without the stability you need to build a dignified life.</p>
+<p>Those in the 'successful' bubble should remember: you were a weighted coin-flip away from this terrifying precarity. Think compassionately about those who landed on tails instead of heads. <em>How would you feel?</em> And get out of the bubble when you can. You're blessed — don't forget it.</p>
+
+
 				</heading-anchors>
 			</main>
 		</div>
@@ -675,7 +697,7 @@ mjx-container[display] {
 			</p>
 		</footer>
 
-		<!-- This page `/music/` was built on 2026-02-04T01:29:30.120Z -->
+		<!-- This page `/writing/job_hunting_experience_2024-25/` was built on 2026-02-04T01:29:30.120Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

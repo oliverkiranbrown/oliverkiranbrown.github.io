@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Oliver Kiran Brown</title>
-		<meta name="description" content="Oli&#39;s personal site">
+		<title>Slop and Dreams</title>
+		<meta name="description" content="GenAI, the hype-train and a alternative path.">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
@@ -549,7 +549,52 @@ mjx-container[display] {
 	border: solid white;
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
-  }</style>
+  }
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -564,7 +609,7 @@ mjx-container[display] {
 				<ul class="nav">
 					<li class="nav-item"><a href="/">About</a></li>
 					<li class="nav-item"><a href="/writing/">Writing</a></li>
-					<li class="nav-item"><a href="/music/" aria-current="page">Music</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
 				</ul>
 				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
 			</nav>
@@ -594,70 +639,31 @@ mjx-container[display] {
 			<main id="skip">
 				<heading-anchors>
 					
-<h1 id="music">Music</h1>
-<p>Outside of formal work and study, I'm a big music fan. I've been playing drums in bands for years and it's come to form an important part of my identity. So, in a vain attempt to beat the maths nerd allegations (double meaning intentional!), I thought I'd chuck in a few links on my personal site so showcase what I've been getting up to.</p>
-<h2 id="projects">Projects</h2>
-<table>
-<thead>
-<tr>
-<th>Band</th>
-<th>Years Active</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://influxofinsanity.bandcamp.com/album/influx-the-collection">Influx of Insanity</a></td>
-<td>2016 - 2021</td>
-</tr>
-<tr>
-<td><a href="https://karmaviolets.bandcamp.com/music">The Karma Violets</a></td>
-<td>2019 - 2021</td>
-</tr>
-<tr>
-<td><a href="https://feedthemammoth.bandcamp.com/">Feed the Mammoth</a></td>
-<td>2021 - 2025</td>
-</tr>
-<tr>
-<td><a href="https://www.instagram.com/balloon_tomb/">Balloon Tomb</a></td>
-<td>2024 - 2026</td>
-</tr>
-</tbody>
-</table>
-<h2 id="some-background-if-you-care">Some Background (if you care!)</h2>
-<h3 id="influx-of-insanity">Influx of Insanity</h3>
-<p>It all started aged 14 with a noisy prog metal double-act called <a href="https://www.instagram.com/influxofinsanity/">Influx of Insanity</a>. We played a <em>lot</em> of gigs, wrote some hilarious, teenage angst-ridden lyrics and released some self-produced music out into the world. It was great fun! This <a href="https://www.youtube.com/watch?v=Ot16iTOSIvc">video</a> gives you a good idea of what we were all about...</p>
-<p>My partner in crime <a href="https://linktr.ee/Dom.howard_">Dom Howard</a> went on to study jazz at RCM after we finished in 2021 and he's utterly brilliant, go <a href="https://domhoward.bandcamp.com/album/all-the-paths-join-up-here">check him out</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=avif&via=transform 2400w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=webp&via=transform 2400w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=jpeg&via=transform" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
-  </div>
-</div>
-<h3 id="the-karma-violets">The Karma Violets</h3>
-<p>The Karma Violets came together thanks to complete chance! I met the lovely <a href="https://www.instagram.com/wesley_ayres_music/">Wes Ayres</a> whilst working as a waiter at Peterhouse College, Cambridge, we got chatting music and decided to form a band. With the addition of the crazy mutual connection Ambrose de Soissons-Page (Wes' family friend who also happened to played the same <a href="https://www.lovemusichateracism.com/home/">LMHR</a> / <a href="https://www.repeatfanzine.co.uk/homepage.htm">REPEAT</a> gigs as me back in the day!), we completed this indie-rock trio. Lockdown couldn't stop us pumping out two EPs - have a listen <a href="https://karmaviolets.bandcamp.com/">here</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=avif&via=transform 4898w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=webp&via=transform 4898w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=jpeg&via=transform" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
-  </div>
-</div>
-<h3 id="feed-the-mammoth">Feed the Mammoth</h3>
-<p>I headed off to University in 2021 and threw myself straight into the smorgasbord of musical madness that is <a href="https://www.instagram.com/warwickbandsoc/">Warwick BandSoc</a>. I played in a wacky variety of bands - shoutout to the angry garage punk of <a href="https://youtu.be/Jl_S9tzjVro?si=uPLFTgpQNBGDDSsO&amp;t=270">Domestic Love</a> and my good friends in <a href="https://www.instagram.com/sunnysidedownband/">Sunny Side Down</a>! Eventually, I decided to settle down and focus on Feed the Mammoth. We wrote some tunes I'm genuinely proud of and had a banging time doing it. If you want a flavour of what we got up to, check out our <a href="https://www.youtube.com/channel/UCl9l2k9-kfGDI2H8EHLcG9Q">YouTube</a>.</p>
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=avif&via=transform 4318w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=webp&via=transform 4318w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=jpeg&via=transform" alt="FTM Band Photo" width="4318" height="3455"></picture>
-  </div>
-</div>
-<h2 id="community-building">Community Building</h2>
-<p>In my 3rd year, I had the privilege of serving as president of BandSoc. It was busy, intense year and one of the best decisions I've ever made.</p>
-<p>Alongside my fantastic exec team, I put on around 50 events during my term. Highlights included organising a week-long tour around the UK for 5 bands, instituting a free annual summer festival on campus and organising the massive annual Battle of the Bands competition. It was a blast!</p>
-<p>But honestly? Seeing friendships form, those memories made? It was a deeply moving experience. University can be a lonely place, and in our world that so heavily incentivises the <em>individual</em> ('sort <em>yourself</em> out, increase <em>your own</em> following'), there are very few social structures that tie people together like that, forcing your to put your faith in others - in something bigger than yourself.</p>
-<p>This time I spent building a genuine sense of place-based community in BandSoc will stay with me forever. Yes, it's obvious, and I don't want to be too 'let's all hold hands and sing Kumbaya round the fire', but there is <em>real</em> power in building this sense of collective identify. It's something I want to keep chasing in everything I do. Thanks BandSoc ❤️</p>
-<!-- 
-<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
-    <img src="./CR1_photo.jpg" alt="FTM BotB Final 2023">
-  </div>
-</div>
--->
+
+
+<h1 id="slop-and-dreams">Slop and Dreams</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-10-15">15 October 2025</time></li>
+</ul>
+<ul class="post-tags">
+		<li><a href="/tags/writing/" class="post-tag">Writing</a></li>
+		<li><a href="/tags/ml/" class="post-tag">ML</a></li>
+</ul>
+
+<p>I'm scared of living in a world of slop. Of a world without thought. I can already feel this slop sloshing against the walls of my increasingly barren brain. Nuanced concepts, summarised. <a href="https://www.media.mit.edu/projects/your-brain-on-chatgpt/overview/">Critical thinking, going</a>. Fresh ideas, generated. And now? Your thumbs can drift over to reels and without blinking, you're consuming these 10-second-long, data-centre melting, child's brain mushing, regression to the mean inducing slop videos generated by OpenAI's latest contribution to human flourishing—Sora 2.</p>
+<p>Don't get me wrong, as a tech nerd, the underlying maths is fascinating. It must be unbelievably gratifying to sit in your <a href="https://nypost.com/2023/05/20/inside-silicon-valleys-free-wheeling-sex-parties/">silicon valley polycule</a>, dreaming in tensor calculus, coding in PyTorch on £500k/year, with access to unlimited resources and just push the boundaries of what's possible with ML.</p>
+<p>But at what cost? What's the business model here? Where's the value add? And who does it effect?</p>
+<p>These generative tools can be fantastic personal assistants. Their excellent coding tools. LLM-based agents are automating away dull admin. There are productivity gains, efficiency improvements and value add, in <em>some</em> use-cases. And, hey maybe I'm a skeptic. Who knows, maybe in 10 years, we'll live in a world without apps, where every smartphone interaction is interfaced by LLM agents. But these models are fundamentally probabilistic, next-token guessing, hallucination guaranteed word vomiters. Can monetisation match the hype? Really? And further, ever since OAI shed it's benevolent credentials and went private, they've followed the classic VC-backed formulae: start cheap to lure people in and dominate market share, but then what?</p>
+<p>We've been here before.</p>
+<p>In what's been affectionately deemed &quot;<a href="https://www.washingtonindependentreviewofbooks.com/bookreview/enshittification-why-everything-suddenly-got-worse-and-what-to-do-about-it">the Enshittification of the Internet</a>&quot;, when central bank interest rates jumped back up from zero and the glory days of free debt ended, 'institutional investors' started clamouring for a return, pushing FAANG to drive their services into the ground in the pursuit of profit. Do you remember when Amazon was actually cheap? Now, Bezos' captive market charges the same as the high street. <em>So screw big tech, I'll just shop local!</em> Oh wait, <a href="https://www.parliament.uk/business/lords/media-centre/house-of-lords-media-notices/2024/november-2024/look-beyond-retail-to-reverse-high-street-decline-says-new-lords-report/">it doesn't exist</a>.... Triple 30 second unskippable ads on YouTube. AI-generated music on Spotify, clawing away from smaller artists already pitiful streaming income. Ads on Netflix (even though you pay!!!). Uber gutting local taxi companies with VC-cheap rides. Scrolling past pages of sponsorship on Google before you get the result you wanted. X descending into right-wing armageddon. The internet is not what it used to be.</p>
+<p>If OAI is forced to similarly return the value promised to VC, I do worry what this means. Via your prompting, these valley-tech nerds have access to your wildest hopes and dreams, you at your darkest moments, you at your most creative or mundane. Copilot are <a href="https://adzooma.com/blog/ai-to-roi-why-ads-in-copilot-are-the-next-big-breakthrough-for-ppc/">already floating</a> the idea of serving you ads via their chatbot based on your context. What does this mean for trust and transparency, if the first place you look for information—your default AI summary—is subtly stuffed full of ads?</p>
+<p>In these lonely and divided times, <a href="https://www.bbc.co.uk/news/articles/cpd2qv58yl5o">even love</a> can't escape the chopping block of corporate capture. An LLM can make a <a href="https://www.reddit.com/r/MyBoyfriendIsAI/">perfect partner</a> — you can whisper your deepest darkest secrets to them in the depths of the night without a mess of dirty plates and stinky socks. And why stop at chat? For the low price of <a href="https://www.youtube.com/watch?v=jjkaYyysYhA">sucking all of the groundwater</a> out of local ecosystems and <a href="https://www.theguardian.com/technology/2024/sep/15/data-center-gas-emissions-tech">belching CO2 into the atmosphere</a> in an urgent period of climate breakdown, you can fry some GPUs and generate your perfect <a href="https://www.iwf.org.uk/about-us/why-we-exist/our-research/how-ai-is-being-abused-to-create-child-sexual-abuse-imagery/">disturbed sexual fantasy</a>. The erotica industry is worth <a href="https://www.researchandmarkets.com/reports/6005580/adult-entertainment-market-report?srsltid=AfmBOoqsPJMtJ0_HiGGBJHyaLfLdu6Vy7RFrI0ceXrq6zo9gCY-KwKHR">billions a year</a>—what a depressing interpretation of AI-value add.</p>
+<p>Sora and this scary world we're moving into feels like the logical endpoint of extreme individualism. It's the apex of this contradictory phenomenon: our online world has connected the world like we could never have imagined—instantaneous video calls across the world, practicing languages live on Omegle from your bedroom, <a href="https://www.youtube.com/watch?v=6WlI24rv__g">clips of Mongolian throat-singers</a> on YouTube—we're never been so technologically advanced, so tightly networked, yet simultaneously, <a href="https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf">so atomised and lonely</a>.</p>
+<p>And as a chief enabler of this online world, it's only right that Amazon personifies this individualisation <a href="https://webassets.oxfamamerica.org/media/documents/At_Work_and_Under_Watch.pdf">in their working practice</a>. Bezos makes his workers wear little trackers, to spot which colleagues are off on break together, possibly discussing their precarious working conditions. Once potential friendship is detected, their shifts are automatically desynchronised. This algorithmically removes the <em>preconditions</em> for workers recognising their collective bargaining power. <a href="https://journals.sagepub.com/doi/10.1177/23780231251318389">These systems</a> <em>enforce</em> atomisation. We really have moved a long way from the techno-optimism of the early 2000s. These technologies promised connection, but their implementation divides.</p>
+<p>Sure, it's scary. But fundamentally, technology <em>itself</em> is a neutral force. It's who controls the technology that matters. And it doesn't <em>have</em> to be this way. Social media, LLMs... these are transformative technologies that—taking a long-term view—are just getting out of the womb. And as our benevolent tech overlords have built their oligopoly, they've bestowed humanity with these wonderful gifts. Github, Flutter, HuggingFace — there's this wonderful open-source treasure trove of possibility. The foundations for a different future are here. We don't have to accept our overlord's value-less, attention-enveloping, eyeball-mining platforms. We can build back <a href="https://melvillehouse.s3.amazonaws.com/documents/AGAINST-PLATFORMS_Teaching-Guide.pdf">institutions</a> that genuinely <em>care</em> — creating with the public, for the public, now. There's a world to win.</p>
+
+
 				</heading-anchors>
 			</main>
 		</div>
@@ -675,7 +681,7 @@ mjx-container[display] {
 			</p>
 		</footer>
 
-		<!-- This page `/music/` was built on 2026-02-04T01:29:30.120Z -->
+		<!-- This page `/writing/slop_and_dreams/post/` was built on 2026-02-04T01:28:16.511Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
