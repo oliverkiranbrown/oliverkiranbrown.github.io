@@ -71,6 +71,14 @@ CREATE TABLE form_submissions (
 ```
 
 Then, you'd just need to hook up a button such that when a user presses, this triggers an API call which sends a `POST` request via HTTPs to our application's server. The server would then execute SQL to to insert the information into the database. 
+
+### Viewing the user-submitted data
+
+The band needed a user-friendly interface to view our user submitted content. So, after some work configuring an secure user, I created a sub-domain at `admin.balloontomb.band` and built a dashboard to display the contents of our database.
+
+![Admin Page](./admin_page.png)
+
+
 ### Limitations of configuring a `postgres` database manually
 
 While this setup works, if we want to pickup our db and site from our local machine where we're developing and then plop it down inside our VPS, then this process would become frustrating. We'd have to write down exactly what tables we created inside our server and implement it manually. We'd like some kind of tool to programmatically setup the entire environment that our 'full-stack' application lives...
@@ -166,7 +174,7 @@ NODE_ENV=development
 NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 
-We also spin up all of the tables programmatically via a folder at the project root called `db-init`, which has some SQL queries to initially create the tables we want. 
+We also spin up all of the tables programmatically via a folder at the project root called `db-init`, which has some SQL queries to initially create the tables we want. Finally, I made [a script](https://github.com/oliverkiranbrown/balloon-tomb-website/blob/main/site/scripts/create_admins.ts) which can be run in the VM terminal to provision admin users securely. 
 
 ### Spinning up our container
 
@@ -351,6 +359,6 @@ The site should now be available at `https://example.com`!
 
 ## Wrapping up
 
-Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo [here](https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main). This mini-project has given me the confidence to tackle some more hefty projects in the near future... 
+Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. This mini-project has given me the confidence to tackle some more hefty projects in the near future... 
 
-Final result: [www.balloontomb.band](https://balloontomb.band)!
+Checkout the [repo](https://github.com/oliverkiranbrown/balloon-tomb-website) and final result at [www.balloontomb.band](https://balloontomb.band)!

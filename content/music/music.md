@@ -15,7 +15,7 @@ Outside of formal work and study, I'm a big music fan. I've been playing drums i
 | [Influx of Insanity](https://influxofinsanity.bandcamp.com/album/influx-the-collection) | 2016 - 2021  |
 | [The Karma Violets](https://karmaviolets.bandcamp.com/music)                            | 2019 - 2021  |
 | [Feed the Mammoth](https://feedthemammoth.bandcamp.com/)                                | 2021 - 2025  |
-| [Balloon Tomb](https://www.instagram.com/balloon_tomb/)                                 | 2024 - 2025  |
+| [Balloon Tomb](https://www.instagram.com/balloon_tomb/)                                 | 2024 - 2026  |
 
 ## Some Background (if you care!)
 ### Influx of Insanity

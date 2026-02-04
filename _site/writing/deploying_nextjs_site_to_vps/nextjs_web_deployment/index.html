@@ -694,6 +694,9 @@ pre[class*="language-diff-"] {
   created_at <span class="token keyword">TIMESTAMP</span> <span class="token keyword">DEFAULT</span> <span class="token function">NOW</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Then, you'd just need to hook up a button such that when a user presses, this triggers an API call which sends a <code>POST</code> request via HTTPs to our application's server. The server would then execute SQL to to insert the information into the database.</p>
+<h3 id="viewing-the-user-submitted-data">Viewing the user-submitted data</h3>
+<p>The band needed a user-friendly interface to view our user submitted content. So, after some work configuring an secure user, I created a sub-domain at <code>admin.balloontomb.band</code> and built a dashboard to display the contents of our database.</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=avif&via=transform 2630w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=webp&via=transform 2630w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=png&via=transform" alt="Admin Page" width="2630" height="1422"></picture></p>
 <h3 id="limitations-of-configuring-a-postgres-database-manually">Limitations of configuring a <code>postgres</code> database manually</h3>
 <p>While this setup works, if we want to pickup our db and site from our local machine where we're developing and then plop it down inside our VPS, then this process would become frustrating. We'd have to write down exactly what tables we created inside our server and implement it manually. We'd like some kind of tool to programmatically setup the entire environment that our 'full-stack' application lives...</p>
 <h3 id="docker-and-containerisation">Docker and containerisation</h3>
@@ -766,7 +769,7 @@ DATABASE_URL=postgresql://admin_user:something_very_secure@db:5432/balloon_tomb_
 # site
 NODE_ENV=development
 NEXT_PUBLIC_API_URL=http://localhost:3000</code></pre>
-<p>We also spin up all of the tables programmatically via a folder at the project root called <code>db-init</code>, which has some SQL queries to initially create the tables we want.</p>
+<p>We also spin up all of the tables programmatically via a folder at the project root called <code>db-init</code>, which has some SQL queries to initially create the tables we want. Finally, I made <a href="https://github.com/oliverkiranbrown/balloon-tomb-website/blob/main/site/scripts/create_admins.ts">a script</a> which can be run in the VM terminal to provision admin users securely.</p>
 <h3 id="spinning-up-our-container">Spinning up our container</h3>
 <p>Now that we're defined the infrastructure we want our application to run on, we can just spin it up via</p>
 <pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">docker</span> compose up</code></pre>
@@ -856,8 +859,8 @@ A   www   your.vps.ip</code></pre>
 <pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> certbot <span class="token parameter variable">--nginx</span> <span class="token parameter variable">-d</span> yourdomain.com <span class="token parameter variable">-d</span> www.yourdomain.com</code></pre>
 <p>The site should now be available at <code>https://example.com</code>!</p>
 <h2 id="wrapping-up">Wrapping up</h2>
-<p>Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. See the full repo <a href="https://github.com/oliverkiranbrown/balloon-tomb-website/tree/main">here</a>. This mini-project has given me the confidence to tackle some more hefty projects in the near future...</p>
-<p>Final result: <a href="https://balloontomb.band">www.balloontomb.band</a>!</p>
+<p>Here, we've successfully deployed a simple full-stack Next.js app on a VPS and exposed it to the world wide web. On the road, we've learnt several concepts which are vital to the proper development and deployment of modern web applications. This mini-project has given me the confidence to tackle some more hefty projects in the near future...</p>
+<p>Checkout the <a href="https://github.com/oliverkiranbrown/balloon-tomb-website">repo</a> and final result at <a href="https://balloontomb.band">www.balloontomb.band</a>!</p>
 
 
 				</heading-anchors>
@@ -877,7 +880,7 @@ A   www   your.vps.ip</code></pre>
 			</p>
 		</footer>
 
-		<!-- This page `/writing/deploying_nextjs_site_to_vps/nextjs_web_deployment/` was built on 2026-01-29T00:12:07.067Z -->
+		<!-- This page `/writing/deploying_nextjs_site_to_vps/nextjs_web_deployment/` was built on 2026-02-04T00:48:04.373Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
