@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Oliver Kiran Brown</title>
+		<meta name="description" content="Oli&#39;s personal site">
+		<link rel="icon" href="/img/favicon.png">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
+		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+/*
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		/*
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+*/
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+blockquote {
+	border-left: 3px solid #8ba254; /* thin green line on LHS */
+	margin: 1em 0;                  /* vertical spacing */
+	padding-left: 1em;              /* space between line and text */
+	color: var(--text-color);       /* inherit normal text color */
+	background: transparent;        /* keep background clean */
+  }
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+	text-align: justify;
+}
+
+h2 {
+	text-align: left;
+}
+
+h3 {
+	text-align: left;
+}
+
+h4 {
+	text-align: left;
+}
+
+li {
+	line-height: 1.5;
+	text-align: left;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer p {
+	padding: 1rem;
+	text-align: center;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	/*
+	border-bottom: 1px dashed var(--color-gray-20);
+	*/
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 0;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
+
+
+
+/* Base code font setup */
+/* ===== Modern light code theme ===== */
+
+pre, code {
+  font-family: var(--font-family-monospace);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Block code */
+pre {
+  background: #f6f8fa;
+  color: #24292e;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1em 0;
+  overflow-x: auto;
+  text-align: left;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: rgba(228, 210, 210, 0.05);
+  color: #24292e;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  word-break: break-word;
+}
+
+/* Prevent double styling */
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Prism light tokens */
+.token.comment       { color: #6a737d; font-style: italic; }
+.token.keyword       { color: #d73a49; }
+.token.string        { color: #032f62; }
+.token.function      { color: #6f42c1; }
+.token.number        { color: #005cc5; }
+.token.operator      { color: #24292e; }
+.token.punctuation   { color: #24292e; }
+.token.variable      { color: #e36209; }
+.token.class-name    { color: #22863a; }
+.token.imports       { color: #b31d28; }
+
+/* Header */
+.top-bar {
+	color: white !important;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
+	/*
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
+	*/
+	padding: 1em;
+	width: 100%;
+}
+.home-link {
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin-bottom: 1em;
+  }
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 1.7rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+	text-align: left;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+.tag-filter-label {
+	font-weight: bold;
+	margin-right: 0.5em;
+  }
+  
+  .tag-filter-dropdown {
+	margin-bottom: 1em;
+	padding: 0.4em;
+	font-size: 1rem;
+  }
+  
+  .postlist-item {
+	margin-bottom: 0.8em;
+  }
+
+  #tag-filter-container {
+	margin-bottom: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+  }
+  
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+  }
+  
+  .tag-checkbox input {
+	margin-right: 0.4em;
+	margin-top: 0.4em;
+  }
+
+  .post-metadata,
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-tags {
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  background: #f0f0f0;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.post-tag:hover {
+  background: #ddd;
+}
+
+/* control over maths */
+mjx-container[display] {
+	display: inline-flex;
+	overflow-x: auto;
+	overflow-y: hidden;
+	max-width: 100%;
+  }
+
+/* custom checkbox */
+/* Hide the native checkbox */
+.tag-checkbox input[type="checkbox"] {
+	display: none;
+  }
+  
+  /* Style the label to align nicely */
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+	cursor: pointer;
+	position: relative;
+  }
+  
+  /* Style the custom checkbox square */
+  .custom-checkmark {
+	width: 1em;
+	height: 1em;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	position: relative;
+	transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* When checked, change the background color */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: #8ba254; /* your custom green */
+	border-color: #8ba254;
+  }
+  
+  /* Optional: add a checkmark icon */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 7px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }</style>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		
+		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
+	</head>
+	<body>
+		<header class="top-bar">
+			<a href="/" class="home-link">Oliver Kiran Brown</a>
+			<nav>
+				<ul class="nav">
+					<li class="nav-item"><a href="/">About</a></li>
+					<li class="nav-item"><a href="/writing/">Writing</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
+				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+			</nav>
+
+			<div class="social-icons">
+				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
+					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
+					</svg>
+				</a>
+				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+					</svg>
+				</a>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+<h1 id="notes">Notes</h1>
+<h2 id="warwick">Warwick</h2>
+<p>Asorted notes for some of the modules I took at Warwick.</p>
+<h3 id="third-year">Third Year</h3>
+<ul>
+<li>Summary of Clarice Poon’s <em>Mathematics of Machine Learning</em>. Available <a href="/notes/third_year/mml_summary.pdf">here</a>.</li>
+<li>Summary of Peter Topping's <em>Complex Analysis</em>. Avalible <a href="/notes/third_year/complex_analysis_summary.pdf">here</a>.</li>
+<li>Summary of Stefan Adams’s <em>High Dimensional Probability Lecture Notes</em>. Available <a href="/notes/third_year/hdp_summary.pdf">here</a>  .</li>
+<li>Summary of Krys Latuszynski’s <em>Introduction to Mathematical Statistics</em>. Available <a href="/notes/third_year/math_stat_summary.pdf">here</a>.</li>
+<li>Notes from John Smillie's <em>Introduction to Topology</em>. Avalible <a href="/notes/third_year/topology_intro_ln.pdf">here</a>.</li>
+<li>Summary of Ferran Brosa Planella's <em>Fluid Dynamics</em>. Avalible <a href="/notes/third_year/basic_fluids_summary.pdf">here</a>.</li>
+</ul>
+<h3 id="second-year">Second Year</h3>
+<ul>
+<li>Summary of Mario Micallef’s 2023 <em>Multivariable Calculus</em>. Available <a href="/notes/second_year/mvc_summary.pdf">here</a>.</li>
+<li>Summary of Ed Brambley's 2023 <em>Asymptotics and Integral Transforms</em>. Avalible <a href="/notes/second_year/asymptotics_int_transforms_two_pager.pdf">here</a>.</li>
+<li>Summary of Christian Böhning's <em>Algebra I: Advanced Linear Algebra</em>. Avalible <a href="/notes/second_year/alg_I_adv_la_summary.pdf">here</a>.</li>
+<li>Summary of Oleg Zaboronski's <em>Analysis III</em>. Avalible <a href="/notes/second_year/anal_III_summary.pdf">here</a>.</li>
+<li>Summary of Nicholas Jackson's <em>Algebra II: Groups and Rings</em>. Avalible <a href="/notes/second_year/alg_II_groups_rings_summary.pdf">here</a></li>
+<li>Summary of Rohini Ramadas' <em>Norms, Metrics and Topologies</em>. Avalible <a href="notes/second_year/MNT_summary.pdf">here</a>.</li>
+<li>Notes from <em>Introduction to Mathematical Biology</em>. Avalible <a href="/notes/second_year/math_bio_ln.pdf">here</a>.</li>
+<li>Notes from <em>Combinatorics</em>. Avalible <a href="/notes/second_year/combi_ln.pdf">here</a></li>
+<li>Mindmap of Helena Verrill's <em>Geometry</em>. Avalible <a href="/notes/second_year/geom_mindmap.pdf">here</a>.</li>
+<li>Summary of Björn Stinner's <em>Introduction to Partial Differential Equations</em>. Avalible <a href="/notes/second_year/PDEs_summary.pdf">here</a>.</li>
+</ul>
+<h3 id="first-year">First Year</h3>
+<p>Old and scrappy but interesting to see the transition from A-level maths to Uni. Quite the jump!</p>
+<ul>
+<li>Summary notes from Diane Maclagan and Marco Schlichting's <em>Linear Algebra</em>. See <a href="/notes/first_year/MA106_summary_pt1.pdf">Part One</a> and <a href="/notes/first_year/MA106_summary_pt2.pdf">Part Two</a>.</li>
+<li>Summary of Dave Wood's <em>Differential Equations</em>. Avalible <a href="/notes/first_year/MA132_summary.pdf">here</a>.</li>
+<li>Summary of Siri Chongchitnan's <em>Geometry and Motion</em>. Avalible <a href="/notes/first_year/MA134_summary.pdf">here</a>.</li>
+<li>Summary of Richard Lissaman's <em>Intro to Abstract Algebra</em>. Avalible <a href="/notes/first_year/MA136_notes.pdf">here</a>.</li>
+<li>Summary of Keith Ball's <em>Analysis II</em>. Avalible <a href="/notes/first_year/anal_II_summary.pdf">here</a>.</li>
+<li>Map of <em>Probability A</em>. Avalible <a href="/notes/first_year/probability_a_map.pdf">here</a>.</li>
+</ul>
+<h2 id="misc">Misc</h2>
+<ul>
+<li>My SustAI Research Proposal. Avalible <a href="/notes/soton/sustai_research_proposal.pdf">here</a>.</li>
+<li>Cambridge Spark Data Science &amp; AI Graduate Scheme Bootcamp. Avalible <a href="/notes/spark_bootcamp/DS_AI_bootcamp_home/">here</a>.</li>
+</ul>
+
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/">About</a>
+				<a href="https://oliverkiranbrown.github.io/drum_sequencer/">Groove!</a>
+				<a href="/notes/">Notes</a>
+				<a href="/now/">Now</a>
+				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
+			</div>
+			<p style="margin-top: 0.5em; font-size: 0.8em;">
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/notes/` was built on 2026-02-04T01:30:55.873Z -->
+		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+	</body>
+</html>
