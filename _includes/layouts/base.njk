@@ -7,10 +7,6 @@
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async></script>
-		
-		{#- 						Trying to fix code css issues  #}
-		{#- <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" /> #}
 
 
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
@@ -45,10 +41,13 @@
 		{#- Add an extra font for the home link#}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
 
-		{#- Load MathJax #}
-		<script>
+		{#- Load MathJax. eleventy:ignore keeps this out of the page's bundled
+		JS (which loads at the bottom of body): the config object must run
+		before the async tex-svg.js script below, or MathJax initializes
+		without the custom $...$ delimiters. #}
+		<script eleventy:ignore>
 			MathJax = {
 				tex: {
 				inlineMath: [['$', '$'], ['\\(', '\\)']],

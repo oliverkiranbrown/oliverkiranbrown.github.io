@@ -7,7 +7,6 @@
 		<meta name="description" content="First steps into the world of web development.">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
-		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
 		
 		
 		
@@ -33,6 +32,11 @@
 	--color-gray-90: #333;
 
 	--background-color: #fff;
+	/* Sage Olive, the site's one brand accent. Deepened from the original
+	   #8ba254: white text on that lighter tone measured 2.84:1 and failed
+	   WCAG AA. This shade holds white text at 4.73:1 while staying the
+	   same hue. */
+	--color-accent: #687a3f;
 
 	--text-color: var(--color-gray-90);
 	--text-color-link: #082840;
@@ -41,23 +45,6 @@
 
 	--syntax-tab-size: 2;
 }
-/*
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-gray-20: #e0e0e0;
-		--color-gray-50: #C0C0C0;
-		--color-gray-90: #dad8d8;
-
-		/* --text-color is assigned to --color-gray-_ above */
-		/*
-		--text-color-link: #1493fb;
-		--text-color-link-active: #6969f7;
-		--text-color-link-visited: #a6a6f8;
-
-		--background-color: #15202b;
-	}
-}
-*/
 /* Global stylesheet */
 * {
 	box-sizing: border-box;
@@ -65,6 +52,29 @@
 
 @view-transition {
 	navigation: auto;
+}
+
+/* Page-to-page navigation: a quiet settle-in rather than the browser's
+   plain crossfade default. Falls back to an instant page swap automatically
+   in browsers without View Transitions support and under reduced motion. */
+::view-transition-old(root) {
+	animation: ds-page-out 0.15s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+::view-transition-new(root) {
+	animation: ds-page-in 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes ds-page-out {
+	to { opacity: 0; }
+}
+@keyframes ds-page-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+	}
 }
 
 html,
@@ -100,12 +110,11 @@ body {
 }
 
 blockquote {
-	border-left: 3px solid #8ba254; /* thin green line on LHS */
-	margin: 1em 0;                  /* vertical spacing */
-	padding-left: 1em;              /* space between line and text */
-	color: var(--text-color);       /* inherit normal text color */
-	background: transparent;        /* keep background clean */
-  }
+	margin: 1em 0;
+	padding-left: 1.25em;
+	color: var(--text-color);
+	font-style: italic;
+}
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
 img{
@@ -155,6 +164,10 @@ li {
 
 a[href] {
 	color: var(--text-color-link);
+	text-underline-position: from-font;
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+	transition: color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 a[href]:visited {
 	color: var(--text-color-link-visited);
@@ -173,11 +186,6 @@ main :first-child {
 	margin-top: 0;
 }
 
-header {
-	/*
-	border-bottom: 1px dashed var(--color-gray-20);
-	*/
-}
 
 .links-nextprev {
 	display: flex;
@@ -269,34 +277,13 @@ pre code {
 
 /* Header */
 .top-bar {
-	color: white !important;
+	color: white;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	font-size: 1.2rem;
-	background-color: #8ba254;  
+	background-color: var(--color-accent);
 	align-items: center;
-	/*
-	--auto-generated colour palette
-	--sorrell-brown: #d3b89c;
-	--green-waterloo: #1c1d07;
-	--dallas: #785c26;
-	--bronze-olive: #4d410d;
-	--chelsea-cucumber: #8ba254;
-	--saratoga: #526a17;
-	--clover: #38480f;
-	--medium-carmine: #a54630;
-	--oslo-gray: #82888a;
-	--fuscous-gray: #514f49;
-
-	--favourites
-	--sorrell-brown: #d3b89c;
-	--chelsea-cucumber: #8ba254;
-	--oslo-gray: #82888a;
-
-	--final
-	--chelsea-cucumber: #8ba254;
-	*/
 	padding: 1em;
 	width: 100%;
 }
@@ -314,14 +301,17 @@ pre code {
 .top-bar a {
 	color: white;
   }
-  
+
   .top-bar a:visited {
 	color: white;
   }
-  
+
   .top-bar a:hover,
   .top-bar a:active {
-	color: #f0f0f0; /* or any lighter shade for hover effect */
+	/* Underline is the hover signal, not a color change: any shade
+	   dimmer than pure white drops below the 4.5:1 contrast this
+	   background needs. */
+	color: white;
   }
 
 /* Nav */
@@ -358,12 +348,14 @@ pre code {
   .social-icons svg {
 	width: 19px;
 	height: 19px;
-	fill: white; /* Match your header color */
-	transition: fill 0.3s ease;
+	fill: white;
+	transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  
+
   .social-icons a:hover svg {
-	fill: #f0f0f0; /* Lighter on hover */
+	/* Fill stays white (dimming would drop below 4.5:1 on this
+	   background); scale is the hover signal instead. */
+	transform: scale(1.12);
   }
 
 /* Posts list */
@@ -410,7 +402,7 @@ pre code {
 }
 .post-number {
 	font-weight: bold;
-	color: #888;
+	color: var(--color-gray-90);
 	min-width: 2ch;
   }
 /* Tags */
@@ -491,6 +483,7 @@ pre code {
   border-radius: 4px;
   text-decoration: none;
   color: #333;
+  transition: background-color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .post-tag:hover {
@@ -534,8 +527,8 @@ mjx-container[display] {
   
   /* When checked, change the background color */
   .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
-	background-color: #8ba254; /* your custom green */
-	border-color: #8ba254;
+	background-color: var(--color-accent);
+	border-color: var(--color-accent);
   }
   
   /* Optional: add a checkmark icon */
@@ -550,6 +543,44 @@ mjx-container[display] {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
+
+/* Z-index scale: only one layer exists today (the reading progress bar
+   sits above scrolled-past content); extend this scale rather than
+   introducing arbitrary z-index values as new layers are added. */
+:root {
+	--z-reading-progress: 10;
+}
+
+/* Reading progress: a thin Sage Olive bar tracking scroll depth on post pages.
+   Animates transform (compositor-only), never width, to avoid layout thrash
+   on every scroll tick. */
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	background-color: var(--color-accent);
+	transform: scaleX(0);
+	transform-origin: left;
+	z-index: var(--z-reading-progress);
+	transition: transform 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reading-progress {
+		transition-duration: 0.01ms;
+	}
+	a[href],
+	.post-tag,
+	.custom-checkmark,
+	.social-icons svg {
+		transition-duration: 0.01ms !important;
+	}
+	.social-icons a:hover svg {
+		transform: none;
+	}
+}
 /*
  * New diff- syntax
  */
@@ -598,8 +629,18 @@ pre[class*="language-diff-"] {
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
-		
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+		<script>
+			MathJax = {
+				tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [['$$', '$$'], ['\\[', '\\]']]
+				},
+				svg: {
+				fontCache: 'global'
+				}
+			};
+		</script>
 		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 	</head>
 	<body>
@@ -640,7 +681,7 @@ pre[class*="language-diff-"] {
 				<heading-anchors>
 					
 
-
+<div class="reading-progress" aria-hidden="true"></div>
 <h1 id="deploying-a-next-js-site-to-a-vps">Deploying a Next.js site to a VPS</h1>
 
 <ul class="post-metadata">
@@ -664,18 +705,18 @@ pre[class*="language-diff-"] {
 <li>The benefits of containerisation via <strong>Docker</strong>: allowing multiple devs to work on the same backend infrastructure despite different OS, plus enabling smoother deployment onto a VPS.</li>
 </ul>
 <h2 id="diagram-overview">Diagram Overview</h2>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=avif&via=transform 2718w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=webp&via=transform 2718w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2FBT%20Site%20Diagram-1.jpg&width=2718&format=jpeg&via=transform" alt="Diagram Oveview" width="2718" height="1077"></picture></p>
+<p><picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-400.avif 400w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-800.avif 800w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-1600.avif 1600w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-2718.avif 2718w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-400.webp 400w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-800.webp 800w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-1600.webp 1600w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-2718.webp 2718w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-400.jpeg" alt="Diagram Oveview" width="2718" height="1077" srcset="/writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-400.jpeg 400w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-800.jpeg 800w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-1600.jpeg 1600w, /writing/deploying_nextjs_site_to_vps/Xkq5Pd6vSQ-2718.jpeg 2718w" sizes="auto"></picture></p>
 <p>To learn these concepts, I needed a concrete goal...so, why not make a website for my band! We'll seem more pro or something...</p>
 <p><em>Diagram wrong - Cerbot is not a CA!</em></p>
 <h2 id="building-the-frontend-locally">Building the frontend locally</h2>
 <p>Luckily, my band Balloon Tomb has a pretty particular aesthetic, so the design goal was simple: build a blocky retro/8-bit/early-2000s style website which let's people learn about our band, (in the future) buy merch, read our lyrics, find out about our shows and submit some stories / audio which could enter our songs...</p>
 <p>So, I picked a modern frontend framework (Next.js + an 8-bit Shadcn extension) and using an LLM as a coach (no copy paste! understand every line!) I mocked up a 'good enough' frontend.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=avif&via=transform 1396w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=webp&via=transform 1396w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fmanifesto_page.png&width=1396&format=png&via=transform" alt="Manifesto Page" width="1396" height="1878"></picture></p>
+<p><picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/GGwR9hFnN--400.avif 400w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--800.avif 800w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--1396.avif 1396w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/GGwR9hFnN--400.webp 400w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--800.webp 800w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--1396.webp 1396w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/GGwR9hFnN--400.png" alt="Manifesto Page" width="1396" height="1878" srcset="/writing/deploying_nextjs_site_to_vps/GGwR9hFnN--400.png 400w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--800.png 800w, /writing/deploying_nextjs_site_to_vps/GGwR9hFnN--1396.png 1396w" sizes="auto"></picture></p>
 <p>At this point, I wanted to get some feedback from bandmates about the website design, so I deployed the site using <code>pm2</code> onto my VPS.</p>
 <p>This was great but a simple static site is pretty dull, so before getting into deployment, let's add some backend to our site... we can then learn about <strong>containerisation</strong> which will make spinning the application up on our VPS a breeze down the line.</p>
 <h2 id="adding-user-interactivity">Adding User Interactivity</h2>
 <p>To get some experience with handling user-submitted data, I created a text and audio submission form. It was pretty fun to learn about the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API">MediaStream Recording API</a>. All the tools you need to manipulate audio in the web (recording, storage, even <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode">FFTs</a> for manipulation and visualisation), all accessible via an open web standard. Neat.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=avif&via=transform 1396w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=webp&via=transform 1396w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Faudio_submission.png&width=1396&format=png&via=transform" alt="Audio Submission Form" width="1396" height="1878"></picture></p>
+<p><picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/pDoRmphTWM-400.avif 400w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-800.avif 800w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-1396.avif 1396w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/pDoRmphTWM-400.webp 400w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-800.webp 800w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-1396.webp 1396w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/pDoRmphTWM-400.png" alt="Audio Submission Form" width="1396" height="1878" srcset="/writing/deploying_nextjs_site_to_vps/pDoRmphTWM-400.png 400w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-800.png 800w, /writing/deploying_nextjs_site_to_vps/pDoRmphTWM-1396.png 1396w" sizes="auto"></picture></p>
 <p>But where to store this data?</p>
 <h3 id="creating-a-database-and-api-locally">Creating a database and API locally</h3>
 <p>I wanted to build up the complexity one level at a time. So, I started by simply creating a database on my local machine with <a href="https://www.postgresql.org/docs/current/"><code>psql</code></a>.</p>
@@ -696,7 +737,7 @@ pre[class*="language-diff-"] {
 <p>Then, you'd just need to hook up a button such that when a user presses, this triggers an API call which sends a <code>POST</code> request via HTTPs to our application's server. The server would then execute SQL to to insert the information into the database.</p>
 <h3 id="viewing-the-user-submitted-data">Viewing the user-submitted data</h3>
 <p>The band needed a user-friendly interface to view our user submitted content. So, after some work configuring an secure user, I created a sub-domain at <code>admin.balloontomb.band</code> and built a dashboard to display the contents of our database.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=avif&via=transform 2630w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=webp&via=transform 2630w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fdeploying_nextjs_site_to_vps%2Fadmin_page.png&width=2630&format=png&via=transform" alt="Admin Page" width="2630" height="1422"></picture></p>
+<p><picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-400.avif 400w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-800.avif 800w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-1600.avif 1600w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-2630.avif 2630w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-400.webp 400w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-800.webp 800w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-1600.webp 1600w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-2630.webp 2630w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-400.png" alt="Admin Page" width="2630" height="1422" srcset="/writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-400.png 400w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-800.png 800w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-1600.png 1600w, /writing/deploying_nextjs_site_to_vps/mgFxcjgCHW-2630.png 2630w" sizes="auto"></picture></p>
 <h3 id="limitations-of-configuring-a-postgres-database-manually">Limitations of configuring a <code>postgres</code> database manually</h3>
 <p>While this setup works, if we want to pickup our db and site from our local machine where we're developing and then plop it down inside our VPS, then this process would become frustrating. We'd have to write down exactly what tables we created inside our server and implement it manually. We'd like some kind of tool to programmatically setup the entire environment that our 'full-stack' application lives...</p>
 <h3 id="docker-and-containerisation">Docker and containerisation</h3>
@@ -786,7 +827,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3000</code></pre>
 </ol>
 <p>This is a physical computer, living in some data centre, somewhere in the actual real world. Choices for large scale infrastructure (major banks / social media platforms) would be AWS or GCP. But for smaller indie developers, there's <em>loads</em> of options to pick from (e.g. DigitalOcean, Linode, ...). You just need to balance your requirements and costs.</p>
 <p>The VPS will allocate you a IPv4 address. This is the 4th version of the internet protocol that controls routing internet traffic. It's just a 32-bits number, often expressed as four 8-bit hexadecimal values <code>x.x.x.x</code> written in <a href="https://en.wikipedia.org/wiki/Dot-decimal_notation">dot-decimal notation</a>. This value is unique across the entire internet, but with only <mjx-container class="MathJax" jax="SVG" style="direction: ltr; position: relative;"><svg style="overflow: visible; min-height: 1px; min-width: 1px; vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="5.307ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 2345.9 833.9" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" style="stroke-width: 3;"></path></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" style="stroke-width: 3;"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)" style="stroke-width: 3;"></path></g></g></g><g data-mml-node="mo" transform="translate(1567.9,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z" style="stroke-width: 3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top: 0px; left: 0px; clip: rect(1px, 1px, 1px, 1px); -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: absolute; padding: 1px 0px 0px 0px; border: 0px; display: block; width: auto; overflow: hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow data-mjx-texclass="ORD"><mn>32</mn></mrow></msup><mo>≈</mo></math></mjx-assistive-mml></mjx-container> 4.2bn addresses, IPv6 is set to replace it in the long-term.<br>
-<picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=avif&via=transform 1576w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=webp&via=transform 1576w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fbluecatnetworks.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fipv4-1.png&width=1576&format=png&via=transform" alt="Dotted Quad Example" width="1576" height="922"></picture><br>
+<picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/QEyt51_GO0-400.avif 400w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-800.avif 800w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-1576.avif 1576w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/QEyt51_GO0-400.webp 400w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-800.webp 800w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-1576.webp 1576w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/QEyt51_GO0-400.png" alt="Dotted Quad Example" width="1576" height="922" srcset="/writing/deploying_nextjs_site_to_vps/QEyt51_GO0-400.png 400w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-800.png 800w, /writing/deploying_nextjs_site_to_vps/QEyt51_GO0-1576.png 1576w" sizes="auto"></picture><br>
 2. <strong>A Domain Name</strong></p>
 <p>Once you buy your domain name from <a href="https://www.top10-websitehosting.co.uk/best-domain-registrars/">any retailer</a> (e.g. Porkbun, GoDaddy, Namecheap, ...), you can then manage the DNS (domain name system) records for your domain. So, if the host domain was <a href="http://www.example.com">www.example.com</a> then the provider then routes traffic to the particular IP address you configure - exactly the IP address of your newly created VPS.</p>
 <p>The DNS record is basically a switchboard, connecting traffic that visits your domain, and securely routing to your server.</p>
@@ -824,7 +865,7 @@ A   www   your.vps.ip</code></pre>
 <p>'Engine-x' (<a href="https://nginx.org/en/docs/beginners_guide.html">nginx</a>) is used here as a web server and <a href="https://en.wikipedia.org/wiki/Reverse_proxy">reverse-proxy</a>. It receives requests that have been routed to the IP address of our server and then forwards them on to the correct port running internally.</p>
 <pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx <span class="token parameter variable">-y</span></code></pre>
 <p>In the image below, the internet cannot tell the difference between the web server and the reverse proxy:<br>
-<picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=avif&via=transform 960w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=webp&via=transform 960w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F67%2FReverse_proxy_h2g2bob.svg%2F960px-Reverse_proxy_h2g2bob.svg.png&width=960&format=png&via=transform" alt="Reverse Proxy" width="960" height="360"></picture></p>
+<picture><source type="image/avif" srcset="/writing/deploying_nextjs_site_to_vps/BZo5f5pkil-400.avif 400w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-800.avif 800w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-960.avif 960w" sizes="auto"><source type="image/webp" srcset="/writing/deploying_nextjs_site_to_vps/BZo5f5pkil-400.webp 400w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-800.webp 800w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-960.webp 960w" sizes="auto"><img loading="lazy" decoding="async" src="/writing/deploying_nextjs_site_to_vps/BZo5f5pkil-400.png" alt="Reverse Proxy" width="960" height="360" srcset="/writing/deploying_nextjs_site_to_vps/BZo5f5pkil-400.png 400w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-800.png 800w, /writing/deploying_nextjs_site_to_vps/BZo5f5pkil-960.png 960w" sizes="auto"></picture></p>
 <h3 id="defining-the-nginx-configuration">Defining the <code>nginx</code> configuration</h3>
 <p>Inside our terminal, we need to create a file which defines our configuration on our VPS.</p>
 <pre class="language-sh" tabindex="0"><code class="language-sh"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/sites-available/yourdomain.com</code></pre>
@@ -863,6 +904,8 @@ A   www   your.vps.ip</code></pre>
 <p>Checkout the <a href="https://github.com/oliverkiranbrown/balloon-tomb-website">repo</a> and final result at <a href="https://balloontomb.band">www.balloontomb.band</a>!</p>
 
 
+
+
 				</heading-anchors>
 			</main>
 		</div>
@@ -880,7 +923,7 @@ A   www   your.vps.ip</code></pre>
 			</p>
 		</footer>
 
-		<!-- This page `/writing/deploying_nextjs_site_to_vps/` was built on 2026-02-04T01:29:30.120Z -->
-		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+		<!-- This page `/writing/deploying_nextjs_site_to_vps/` was built on 2026-07-13T17:13:49.392Z -->
+		<script type="module" src="/dist/hjHOi2Uhjd.js"></script>
 	</body>
 </html>

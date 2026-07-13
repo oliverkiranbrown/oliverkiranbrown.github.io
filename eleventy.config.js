@@ -92,8 +92,9 @@ export default async function(eleventyConfig) {
 		// Output formats for each image.
 		formats: ["avif", "webp", "auto"],
 
-		// output image widths
-		widths: ["auto"],
+		// output image widths: generate real responsive steps so mobile
+		// devices don't download a multi-thousand-pixel source image.
+		widths: [400, 800, 1600, "auto"],
 
 		failOnError: false,
 		htmlOptions: {

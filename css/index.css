@@ -19,6 +19,11 @@
 	--color-gray-90: #333;
 
 	--background-color: #fff;
+	/* Sage Olive, the site's one brand accent. Deepened from the original
+	   #8ba254: white text on that lighter tone measured 2.84:1 and failed
+	   WCAG AA. This shade holds white text at 4.73:1 while staying the
+	   same hue. */
+	--color-accent: #687a3f;
 
 	--text-color: var(--color-gray-90);
 	--text-color-link: #082840;
@@ -27,23 +32,6 @@
 
 	--syntax-tab-size: 2;
 }
-/*
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-gray-20: #e0e0e0;
-		--color-gray-50: #C0C0C0;
-		--color-gray-90: #dad8d8;
-
-		/* --text-color is assigned to --color-gray-_ above */
-		/*
-		--text-color-link: #1493fb;
-		--text-color-link-active: #6969f7;
-		--text-color-link-visited: #a6a6f8;
-
-		--background-color: #15202b;
-	}
-}
-*/
 /* Global stylesheet */
 * {
 	box-sizing: border-box;
@@ -51,6 +39,29 @@
 
 @view-transition {
 	navigation: auto;
+}
+
+/* Page-to-page navigation: a quiet settle-in rather than the browser's
+   plain crossfade default. Falls back to an instant page swap automatically
+   in browsers without View Transitions support and under reduced motion. */
+::view-transition-old(root) {
+	animation: ds-page-out 0.15s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+::view-transition-new(root) {
+	animation: ds-page-in 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes ds-page-out {
+	to { opacity: 0; }
+}
+@keyframes ds-page-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+	}
 }
 
 html,
@@ -86,12 +97,11 @@ body {
 }
 
 blockquote {
-	border-left: 3px solid #8ba254; /* thin green line on LHS */
-	margin: 1em 0;                  /* vertical spacing */
-	padding-left: 1em;              /* space between line and text */
-	color: var(--text-color);       /* inherit normal text color */
-	background: transparent;        /* keep background clean */
-  }
+	margin: 1em 0;
+	padding-left: 1.25em;
+	color: var(--text-color);
+	font-style: italic;
+}
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
 img{
@@ -141,6 +151,10 @@ li {
 
 a[href] {
 	color: var(--text-color-link);
+	text-underline-position: from-font;
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+	transition: color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 a[href]:visited {
 	color: var(--text-color-link-visited);
@@ -159,11 +173,6 @@ main :first-child {
 	margin-top: 0;
 }
 
-header {
-	/*
-	border-bottom: 1px dashed var(--color-gray-20);
-	*/
-}
 
 .links-nextprev {
 	display: flex;
@@ -255,34 +264,13 @@ pre code {
 
 /* Header */
 .top-bar {
-	color: white !important;
+	color: white;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	font-size: 1.2rem;
-	background-color: #8ba254;  
+	background-color: var(--color-accent);
 	align-items: center;
-	/*
-	--auto-generated colour palette
-	--sorrell-brown: #d3b89c;
-	--green-waterloo: #1c1d07;
-	--dallas: #785c26;
-	--bronze-olive: #4d410d;
-	--chelsea-cucumber: #8ba254;
-	--saratoga: #526a17;
-	--clover: #38480f;
-	--medium-carmine: #a54630;
-	--oslo-gray: #82888a;
-	--fuscous-gray: #514f49;
-
-	--favourites
-	--sorrell-brown: #d3b89c;
-	--chelsea-cucumber: #8ba254;
-	--oslo-gray: #82888a;
-
-	--final
-	--chelsea-cucumber: #8ba254;
-	*/
 	padding: 1em;
 	width: 100%;
 }
@@ -300,14 +288,17 @@ pre code {
 .top-bar a {
 	color: white;
   }
-  
+
   .top-bar a:visited {
 	color: white;
   }
-  
+
   .top-bar a:hover,
   .top-bar a:active {
-	color: #f0f0f0; /* or any lighter shade for hover effect */
+	/* Underline is the hover signal, not a color change: any shade
+	   dimmer than pure white drops below the 4.5:1 contrast this
+	   background needs. */
+	color: white;
   }
 
 /* Nav */
@@ -344,12 +335,14 @@ pre code {
   .social-icons svg {
 	width: 19px;
 	height: 19px;
-	fill: white; /* Match your header color */
-	transition: fill 0.3s ease;
+	fill: white;
+	transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  
+
   .social-icons a:hover svg {
-	fill: #f0f0f0; /* Lighter on hover */
+	/* Fill stays white (dimming would drop below 4.5:1 on this
+	   background); scale is the hover signal instead. */
+	transform: scale(1.12);
   }
 
 /* Posts list */
@@ -396,7 +389,7 @@ pre code {
 }
 .post-number {
 	font-weight: bold;
-	color: #888;
+	color: var(--color-gray-90);
 	min-width: 2ch;
   }
 /* Tags */
@@ -477,6 +470,7 @@ pre code {
   border-radius: 4px;
   text-decoration: none;
   color: #333;
+  transition: background-color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .post-tag:hover {
@@ -520,8 +514,8 @@ mjx-container[display] {
   
   /* When checked, change the background color */
   .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
-	background-color: #8ba254; /* your custom green */
-	border-color: #8ba254;
+	background-color: var(--color-accent);
+	border-color: var(--color-accent);
   }
   
   /* Optional: add a checkmark icon */
@@ -536,3 +530,41 @@ mjx-container[display] {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
+
+/* Z-index scale: only one layer exists today (the reading progress bar
+   sits above scrolled-past content); extend this scale rather than
+   introducing arbitrary z-index values as new layers are added. */
+:root {
+	--z-reading-progress: 10;
+}
+
+/* Reading progress: a thin Sage Olive bar tracking scroll depth on post pages.
+   Animates transform (compositor-only), never width, to avoid layout thrash
+   on every scroll tick. */
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	background-color: var(--color-accent);
+	transform: scaleX(0);
+	transform-origin: left;
+	z-index: var(--z-reading-progress);
+	transition: transform 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reading-progress {
+		transition-duration: 0.01ms;
+	}
+	a[href],
+	.post-tag,
+	.custom-checkmark,
+	.social-icons svg {
+		transition-duration: 0.01ms !important;
+	}
+	.social-icons a:hover svg {
+		transform: none;
+	}
+}

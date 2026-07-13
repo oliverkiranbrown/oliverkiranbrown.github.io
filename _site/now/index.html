@@ -7,7 +7,6 @@
 		<meta name="description" content="Oli&#39;s personal site">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
-		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
 		
 		
 		
@@ -33,6 +32,11 @@
 	--color-gray-90: #333;
 
 	--background-color: #fff;
+	/* Sage Olive, the site's one brand accent. Deepened from the original
+	   #8ba254: white text on that lighter tone measured 2.84:1 and failed
+	   WCAG AA. This shade holds white text at 4.73:1 while staying the
+	   same hue. */
+	--color-accent: #687a3f;
 
 	--text-color: var(--color-gray-90);
 	--text-color-link: #082840;
@@ -41,23 +45,6 @@
 
 	--syntax-tab-size: 2;
 }
-/*
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-gray-20: #e0e0e0;
-		--color-gray-50: #C0C0C0;
-		--color-gray-90: #dad8d8;
-
-		/* --text-color is assigned to --color-gray-_ above */
-		/*
-		--text-color-link: #1493fb;
-		--text-color-link-active: #6969f7;
-		--text-color-link-visited: #a6a6f8;
-
-		--background-color: #15202b;
-	}
-}
-*/
 /* Global stylesheet */
 * {
 	box-sizing: border-box;
@@ -65,6 +52,29 @@
 
 @view-transition {
 	navigation: auto;
+}
+
+/* Page-to-page navigation: a quiet settle-in rather than the browser's
+   plain crossfade default. Falls back to an instant page swap automatically
+   in browsers without View Transitions support and under reduced motion. */
+::view-transition-old(root) {
+	animation: ds-page-out 0.15s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+::view-transition-new(root) {
+	animation: ds-page-in 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes ds-page-out {
+	to { opacity: 0; }
+}
+@keyframes ds-page-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+	}
 }
 
 html,
@@ -100,12 +110,11 @@ body {
 }
 
 blockquote {
-	border-left: 3px solid #8ba254; /* thin green line on LHS */
-	margin: 1em 0;                  /* vertical spacing */
-	padding-left: 1em;              /* space between line and text */
-	color: var(--text-color);       /* inherit normal text color */
-	background: transparent;        /* keep background clean */
-  }
+	margin: 1em 0;
+	padding-left: 1.25em;
+	color: var(--text-color);
+	font-style: italic;
+}
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
 img{
@@ -155,6 +164,10 @@ li {
 
 a[href] {
 	color: var(--text-color-link);
+	text-underline-position: from-font;
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+	transition: color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 a[href]:visited {
 	color: var(--text-color-link-visited);
@@ -173,11 +186,6 @@ main :first-child {
 	margin-top: 0;
 }
 
-header {
-	/*
-	border-bottom: 1px dashed var(--color-gray-20);
-	*/
-}
 
 .links-nextprev {
 	display: flex;
@@ -269,34 +277,13 @@ pre code {
 
 /* Header */
 .top-bar {
-	color: white !important;
+	color: white;
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	font-size: 1.2rem;
-	background-color: #8ba254;  
+	background-color: var(--color-accent);
 	align-items: center;
-	/*
-	--auto-generated colour palette
-	--sorrell-brown: #d3b89c;
-	--green-waterloo: #1c1d07;
-	--dallas: #785c26;
-	--bronze-olive: #4d410d;
-	--chelsea-cucumber: #8ba254;
-	--saratoga: #526a17;
-	--clover: #38480f;
-	--medium-carmine: #a54630;
-	--oslo-gray: #82888a;
-	--fuscous-gray: #514f49;
-
-	--favourites
-	--sorrell-brown: #d3b89c;
-	--chelsea-cucumber: #8ba254;
-	--oslo-gray: #82888a;
-
-	--final
-	--chelsea-cucumber: #8ba254;
-	*/
 	padding: 1em;
 	width: 100%;
 }
@@ -314,14 +301,17 @@ pre code {
 .top-bar a {
 	color: white;
   }
-  
+
   .top-bar a:visited {
 	color: white;
   }
-  
+
   .top-bar a:hover,
   .top-bar a:active {
-	color: #f0f0f0; /* or any lighter shade for hover effect */
+	/* Underline is the hover signal, not a color change: any shade
+	   dimmer than pure white drops below the 4.5:1 contrast this
+	   background needs. */
+	color: white;
   }
 
 /* Nav */
@@ -358,12 +348,14 @@ pre code {
   .social-icons svg {
 	width: 19px;
 	height: 19px;
-	fill: white; /* Match your header color */
-	transition: fill 0.3s ease;
+	fill: white;
+	transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  
+
   .social-icons a:hover svg {
-	fill: #f0f0f0; /* Lighter on hover */
+	/* Fill stays white (dimming would drop below 4.5:1 on this
+	   background); scale is the hover signal instead. */
+	transform: scale(1.12);
   }
 
 /* Posts list */
@@ -410,7 +402,7 @@ pre code {
 }
 .post-number {
 	font-weight: bold;
-	color: #888;
+	color: var(--color-gray-90);
 	min-width: 2ch;
   }
 /* Tags */
@@ -491,6 +483,7 @@ pre code {
   border-radius: 4px;
   text-decoration: none;
   color: #333;
+  transition: background-color 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .post-tag:hover {
@@ -534,8 +527,8 @@ mjx-container[display] {
   
   /* When checked, change the background color */
   .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
-	background-color: #8ba254; /* your custom green */
-	border-color: #8ba254;
+	background-color: var(--color-accent);
+	border-color: var(--color-accent);
   }
   
   /* Optional: add a checkmark icon */
@@ -550,84 +543,111 @@ mjx-container[display] {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
-footer {
-    text-align: center;
-    padding: 3em 1em;
-    font-size: 0.9rem;
-    background: #fdfdfd;
-    color: #222;
-    border-top: 1px solid #eee;
-  }
 
-  .footer-widgets-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1em;
-  }
+/* Z-index scale: only one layer exists today (the reading progress bar
+   sits above scrolled-past content); extend this scale rather than
+   introducing arbitrary z-index values as new layers are added. */
+:root {
+	--z-reading-progress: 10;
+}
 
-  .footer-widgets {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2.5em;
-    margin-top: 1em;
-  }
+/* Reading progress: a thin Sage Olive bar tracking scroll depth on post pages.
+   Animates transform (compositor-only), never width, to avoid layout thrash
+   on every scroll tick. */
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	background-color: var(--color-accent);
+	transform: scaleX(0);
+	transform-origin: left;
+	z-index: var(--z-reading-progress);
+	transition: transform 0.1s linear;
+}
 
-  .widget {
-    flex: 0 0 300px;
-    max-width: 300px;
-    font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    height: 460px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    padding: .1em;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 0 auto;
-  }
+@media (prefers-reduced-motion: reduce) {
+	.reading-progress {
+		transition-duration: 0.01ms;
+	}
+	a[href],
+	.post-tag,
+	.custom-checkmark,
+	.social-icons svg {
+		transition-duration: 0.01ms !important;
+	}
+	.social-icons a:hover svg {
+		transform: none;
+	}
+}
+/* Now page widgets: flat, bordered, no shadows (matches the site's Flat-By-Default rule) */
+.now-widgets {
+	margin-top: 2em;
+	padding-top: 2em;
+	border-top: 1px dashed var(--color-gray-20);
+}
+.now-widgets-container {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 1em;
+}
+.now-widgets-grid {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2.5em;
+	margin-top: 1em;
+}
+.now-widget {
+	flex: 1 1 300px;
+	max-width: 300px;
+	font-size: 0.9rem;
+	display: flex;
+	flex-direction: column;
+	height: 420px;
+}
+.now-widget h3 {
+	font-size: 1em;
+	margin: 0 0 0.5em;
+	font-weight: 700;
+	color: var(--text-color);
+	border-bottom: 1px dashed var(--color-gray-20);
+	padding-bottom: 0.3em;
+}
+.now-widget iframe {
+	width: 100%;
+	height: 100%;
+	flex: 1;
+	border: 1px solid var(--color-gray-20);
+}
+.now-widget-goodreads {
+	flex: 1;
+	overflow: hidden auto;
+	border: 1px solid var(--color-gray-20);
+	padding: 0.5em;
+}
 
-  .widget:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .widget h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5em;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.3em;
-  }
-
-  .widget iframe {
-    width: 100%;
-    height: 100%;
-    flex: 1;
-    border: none;
-    border-radius: 8px;
-  }
-
-  .gr_custom_container_1747961986 {
-    border-radius: 8px;
-    padding: 0.5em;
-    background-color: #fafafa;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  @media (max-width: 768px) {
-    .widget {
-      max-width: 100%;
-    }
-  }</style>
+@media (max-width: 768px) {
+	.now-widget {
+		max-width: 100%;
+	}
+}</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
-		
+		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+		<script>
+			MathJax = {
+				tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [['$$', '$$'], ['\\[', '\\]']]
+				},
+				svg: {
+				fontCache: 'global'
+				}
+			};
+		</script>
 		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
 	</head>
 	<body>
@@ -670,30 +690,30 @@ footer {
 <h1 id="now">Now</h1>
 <p>Here's a selection of what I've been getting up to recently...</p>
 
-<footer>
-  <div class="footer-widgets-container">
-    <div class="footer-widgets">
+<section class="now-widgets" aria-label="What I'm up to right now">
+  <div class="now-widgets-container">
+    <div class="now-widgets-grid">
 <p><!-- Strava Widget --><br>
-</p><div class="widget"><br>
+</p><div class="now-widget"><br>
 <h3 id="latest-runs">🏃‍♂️ Latest Runs</h3><br>
-<iframe src="https://www.strava.com/athletes/18718372/latest-rides/481c454c2194e9dd1d72b6b017809632f2b0804c" scrolling="yes" allowtransparency="true"><br>
+<iframe title="My latest Strava activity" src="https://www.strava.com/athletes/18718372/latest-rides/481c454c2194e9dd1d72b6b017809632f2b0804c" scrolling="yes" loading="lazy" allowtransparency="true"><br>
 </iframe><br>
 </div><p></p>
 <p><!-- Goodreads Widget --><br>
-</p><div class="widget"><br>
+</p><div class="now-widget"><br>
 <h3 id="currently-reading">📚 Currently Reading</h3><br>
-<div id="gr_custom_widget_1747961986" style="flex: 1;"></div><br>
+<div id="gr_custom_widget_1747961986" class="now-widget-goodreads"></div><br>
 <script src="https://www.goodreads.com/review/custom_widget/129474819.Oliver's%20bookshelf:%20currently-reading?cover_position=middle&cover_size=medium&num_books=1&order=d&shelf=currently-reading&show_author=1&show_cover=1&show_rating=0&show_review=0&show_tags=0&show_title=1&sort=date_added&widget_bg_color=FFFFFF&widget_bg_transparent=true&widget_border_width=1&widget_id=1747961986&widget_text_color=000000&widget_title_size=small&widget_width=thin" type="text/javascript" charset="utf-8"></script><br>
 </div><p></p>
 <p><!-- Spotify Widget --><br>
-</p><div class="widget"><br>
+</p><div class="now-widget"><br>
 <h3 id="now-playing">🎵 Now Playing</h3><br>
-<iframe src="https://open.spotify.com/embed/playlist/5sPnrbKJ2M9gz95TiTWr0x?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"><br>
+<iframe title="My current Spotify playlist" src="https://open.spotify.com/embed/playlist/5sPnrbKJ2M9gz95TiTWr0x?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"><br>
 </iframe><br>
 </div><p></p>
 <p></p></div><p></p>
   </div>
-</footer>
+</section>
 
 				</heading-anchors>
 			</main>
@@ -712,7 +732,7 @@ footer {
 			</p>
 		</footer>
 
-		<!-- This page `/now/` was built on 2026-02-04T01:29:30.120Z -->
-		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+		<!-- This page `/now/` was built on 2026-07-13T17:13:49.392Z -->
+		<script type="module" src="/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>
