@@ -4,14 +4,6 @@
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
-/* Other fonts to play with */
-.dm-serif-text-regular {
-	font-family: "DM Serif Text", serif;
-	font-weight: 400;
-	font-style: normal;
-  }
-  
-
 /* Theme colors */
 :root {
 	--color-gray-20: #e0e0e0;
@@ -94,6 +86,11 @@ body {
 	max-width: 40em;
 	margin: 0 auto;
 	padding: 1em;
+	/* Literata carries the actual reading content (paragraphs, headings,
+	   lists); nav/header/footer chrome outside .wrapper stays system sans.
+	   Code blocks below override back to the monospace stack. */
+	font-family: 'Literata', serif;
+	font-optical-sizing: auto;
 }
 
 blockquote {
@@ -278,9 +275,10 @@ pre code {
 	flex-grow: 0;
 	/* this controls the home link font size */
 	font-size: 1.4em; /* 16px /16 */
-	font-weight: 100;
+	font-weight: 200; /* Literata's minimum weight; the old DM Serif Text ran to 100 */
 	padding-right: .3em;
-	font-family: 'DM Serif Text', serif;
+	font-family: 'Literata', serif;
+	font-optical-sizing: auto;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
