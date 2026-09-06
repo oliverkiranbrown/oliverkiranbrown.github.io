@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-13T02:00:00Z",
+  "title": "Design System: Oliver Kiran Brown — Personal Site",
+  "extensions": {
+    "colorMeta": {
+      "sage-olive": { "role": "primary", "displayName": "Sage Olive", "canonical": "#687a3f", "tonalRamp": ["#1f2513", "#2f381d", "#3f4b27", "#546331", "#687a3f", "#83955c", "#a3b483", "#c9d7b3"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff", "tonalRamp": ["#1a1a1a", "#333333", "#4d4d4d", "#808080", "#b3b3b3", "#d9d9d9", "#f0f0f0", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#333333", "tonalRamp": ["#000000", "#1a1a1a", "#333333", "#4d4d4d", "#666666", "#808080", "#b3b3b3", "#e0e0e0"] },
+      "border-light": { "role": "neutral", "displayName": "Hairline", "canonical": "#e0e0e0", "tonalRamp": ["#8c8c8c", "#a3a3a3", "#bfbfbf", "#d1d1d1", "#e0e0e0", "#ececec", "#f5f5f5", "#fafafa"] },
+      "border-mid": { "role": "neutral", "displayName": "Mid Gray", "canonical": "#c0c0c0", "tonalRamp": ["#5c5c5c", "#757575", "#8f8f8f", "#a8a8a8", "#c0c0c0", "#d1d1d1", "#e0e0e0", "#f0f0f0"] },
+      "link-default": { "role": "secondary", "displayName": "Deep Navy", "canonical": "#082840", "tonalRamp": ["#020a10", "#051424", "#082840", "#0e3d61", "#155582", "#2678ac", "#5aa0cc", "#a3cbe6"] },
+      "link-active": { "role": "secondary", "displayName": "Plum Active", "canonical": "#5f2b48", "tonalRamp": ["#170a12", "#2e1523", "#452035", "#5f2b48", "#7c3a5f", "#9b5279", "#bd7c9c", "#ddb3c4"] },
+      "link-visited": { "role": "secondary", "displayName": "Near-Black Violet", "canonical": "#17050f", "tonalRamp": ["#080206", "#17050f", "#260919", "#3a0e28", "#521440", "#701d59", "#94357a", "#c06fa5"] },
+      "code-bg": { "role": "neutral", "displayName": "Code Surface", "canonical": "#f6f8fa", "tonalRamp": ["#414850", "#5a636d", "#747f8a", "#9aa4ad", "#c3cbd2", "#dde2e6", "#eef1f3", "#f6f8fa"] },
+      "code-ink": { "role": "neutral", "displayName": "Code Ink", "canonical": "#24292e", "tonalRamp": ["#000000", "#111417", "#24292e", "#3d444b", "#565f68", "#767f87", "#9aa1a7", "#c6cace"] },
+      "tag-bg": { "role": "neutral", "displayName": "Tag Chip Gray", "canonical": "#f0f0f0", "tonalRamp": ["#666666", "#808080", "#999999", "#b3b3b3", "#cccccc", "#dddddd", "#eeeeee", "#f0f0f0"] },
+      "tag-bg-hover": { "role": "neutral", "displayName": "Tag Chip Hover Gray", "canonical": "#dddddd", "tonalRamp": ["#595959", "#737373", "#8c8c8c", "#a6a6a6", "#bfbfbf", "#cccccc", "#dddddd", "#eeeeee"] }
+    },
+    "typographyMeta": {
+      "nav": { "displayName": "Nav", "purpose": "Header bar's own font-size context (1.2rem). Nav links and social icons sit at this size; the logo's 1.4em is relative to it." },
+      "logo": { "displayName": "Wordmark", "purpose": "Header home-link only. The single display/serif moment in the system. Literata (variable, weight 200), chosen to replace DM Serif Text since that font is an overused training-data default. Renders at ~1.68rem because 1.4em compounds on the 1.2rem nav context." },
+      "body": { "displayName": "Body", "purpose": "All prose. System sans stack so the writing carries the page, not the font." },
+      "mono": { "displayName": "Mono", "purpose": "Inline and block code." },
+      "label": { "displayName": "Label", "purpose": "Quiet metadata/tag/widget text. Post dates use a tighter 0.8125em variant of this role." }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Header Bar",
+      "kind": "nav",
+      "refersTo": "header-bar",
+      "description": "Full-width Sage Olive bar carrying the wordmark, nav, and social icons.",
+      "html": "<header class=\"ds-header\"><a href=\"#\" class=\"ds-home-link\">Oliver Kiran Brown</a><nav><ul class=\"ds-nav\"><li><a href=\"#\" aria-current=\"page\">About</a></li><li><a href=\"#\">Writing</a></li><li><a href=\"#\">Notes</a></li></ul></nav></header>",
+      "css": ".ds-header { color: #ffffff; display: flex; gap: 1em; flex-wrap: wrap; align-items: center; background-color: #687a3f; font-size: 1.2rem; padding: 1em; width: 100%; } .ds-home-link { font-size: 1.4em; font-weight: 200; font-family: 'Literata', serif; color: #ffffff; } .ds-home-link:hover { text-decoration: underline; } .ds-nav { display: flex; gap: .5em 1em; padding: 0; margin: 0; list-style: none; align-items: center; font-size: 1em; } .ds-nav a { color: #ffffff; text-decoration: none; } .ds-nav a[aria-current=\"page\"] { text-decoration: underline; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "link-default",
+      "description": "Default in-body link styling with hover/active/visited states.",
+      "html": "<p>Read more in <a href=\"#\">this post</a>.</p>",
+      "css": ".ds-link { color: #082840; text-decoration: none; } .ds-link:visited { color: #17050f; } .ds-link:hover, .ds-link:active { color: #5f2b48; text-decoration: underline; }"
+    },
+    {
+      "name": "Blockquote",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Manuscript-style quote: italic + indent, no side-stripe border (the site's absolute ban on colored border-left/right accents).",
+      "html": "<blockquote class=\"ds-blockquote\">A quoted line goes here.</blockquote>",
+      "css": ".ds-blockquote { margin: 1em 0; padding-left: 1.25em; color: #333333; font-style: italic; }"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Flat gray pill used for post tags.",
+      "html": "<a href=\"#\" class=\"ds-tag\">machine-learning</a>",
+      "css": ".ds-tag { display: inline-flex; align-items: center; justify-content: center; text-transform: capitalize; font-style: italic; background: #f0f0f0; padding: 0.2em 0.5em; border-radius: 4px; text-decoration: none; color: #333; } .ds-tag:hover { background: #dddddd; }"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "code-block",
+      "description": "Block code surface with syntax-highlighted tokens.",
+      "html": "<pre class=\"ds-code\"><code>const x = 1;</code></pre>",
+      "css": ".ds-code { background: #f6f8fa; color: #24292e; padding: 1rem; border-radius: 6px; margin: 1em 0; overflow-x: auto; font-family: Consolas, Menlo, Monaco, monospace; font-size: 0.95rem; line-height: 1.5; }"
+    },
+    {
+      "name": "Post List Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "A single entry in a list of posts: number, title, date, tags, no card wrapper.",
+      "html": "<li class=\"ds-postlist-item\"><span class=\"ds-post-number\">3.</span><a href=\"#\" class=\"ds-postlist-link\">Post title goes here</a><span class=\"ds-postlist-date\">July 2026</span></li>",
+      "css": ".ds-postlist-item { display: flex; flex-wrap: wrap; align-items: baseline; margin-bottom: 1em; list-style: none; } .ds-post-number { font-weight: bold; color: #333333; min-width: 2ch; } .ds-postlist-date { font-size: 0.8125em; color: #333333; margin-left: 1.7rem; } .ds-postlist-link { font-size: 1.1875em; font-weight: 700; padding-left: .25em; padding-right: .5em; color: #082840; text-decoration: none; } .ds-postlist-link:hover { color: #5f2b48; text-decoration: underline; }"
+    },
+    {
+      "name": "Reading Progress",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Fixed 3px bar at the top of the viewport tracking scroll depth. Post pages only. Animates via transform: scaleX(), never width.",
+      "html": "<div class=\"ds-reading-progress\" aria-hidden=\"true\"></div>",
+      "css": ".ds-reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background-color: #687a3f; transform: scaleX(0.4); transform-origin: left; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lab Notebook",
+    "overview": "This is a working notebook, not a designed brand page. Every visual decision defers to the writing: one narrow content column, one serif flourish on the wordmark, one accent color, and otherwise plain system-default type on a plain white page. There is no visual performance of authority — no dashboards of stats, no card grids, no gradients — because the site's entire claim is earnestness: this is someone thinking in public, not a polished portfolio funnel. The green top bar and serif logo are the one deliberate flourish; everything below it is quiet by design, in the spirit of references like y1d2.com and neelnanda.io. This system explicitly rejects the generic \"data scientist portfolio\" template: no hero-metric stat blocks, no identical icon-plus-heading card grids, no gradient accents, no glassmorphism. The plainness is the point, not a placeholder for a future redesign.",
+    "keyCharacteristics": [
+      "A single sage-olive accent carries all brand color; nothing else competes with it.",
+      "Flat by default — no shadows, no cards, no layered surfaces.",
+      "One serif accent (the wordmark) against otherwise plain system sans body text.",
+      "Narrow, centered content column (max-width: 40em) so long-form writing stays comfortable to read.",
+      "Header/nav text and icons are always white; hover is signaled by underline or scale, never a dimmer color."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Sage Olive is the only saturated color on the page. It appears on the header bar, one interactive checked-state, and the reading-progress bar; it never appears as decoration, gradient, or a second competing brand hue.", "section": "colors" },
+      { "name": "The White-on-Accent Rule", "body": "Header/nav text and icons are always white, never dimmed on hover/active (any shade darker than pure white drops below the 4.5:1 this background needs) — hover is signaled by underline (links) or a small scale-up (social icons), not a color shift.", "section": "colors" },
+      { "name": "The Invisible Body Rule", "body": "Body text uses the system font stack, not a licensed webfont. The only place a \"chosen\" typeface appears is the wordmark; everywhere else, type should get out of the way of the words.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No box-shadow anywhere in the system. Separation between elements is handled with a 1px dashed hairline (border-top: 1px dashed #e0e0e0) or whitespace, never a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Sage Olive (#687a3f) as the single accent color — header bar, one checked-state, and the reading-progress bar only.",
+      "Do keep body copy in the system sans stack; reserve Literata for the wordmark alone.",
+      "Do use a 1px dashed hairline (#e0e0e0) for section separation instead of shadows or cards.",
+      "Do keep the content column narrow (~40em) so long-form writing stays comfortable to read.",
+      "Do let plainness read as a feature: an earnest, understated, first-draft voice, not a polished personal-brand funnel.",
+      "Do keep header/nav text white; signal hover with underline or scale, never a dimmer color.",
+      "Do animate transform/opacity for scroll- or hover-linked motion, never width/height."
+    ],
+    "donts": [
+      "Don't introduce hero-metric stat blocks, gradient accents, or glassmorphism — explicit anti-references from PRODUCT.md.",
+      "Don't build identical icon-plus-heading card grids for projects, writing, or notes; a plain list row is the established pattern.",
+      "Don't add a second saturated brand color; if a new accent is genuinely needed, it must justify displacing Sage Olive's exclusivity, not sit alongside it.",
+      "Don't add box-shadows, card elevation, or hover-lift effects — the system is flat by rule, not by omission.",
+      "Don't style the wordmark's serif treatment onto body text or headings; Literata is reserved for the logo.",
+      "Don't use a colored border-left/border-right as a side-stripe accent (blockquotes now use italics + indent only, no stripe).",
+      "Don't dim header/nav text on hover; any shade darker than white fails 4.5:1 on Sage Olive."
+    ]
+  }
+}
