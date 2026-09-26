@@ -13,7 +13,7 @@ eleventyNavigation:
 
 There's been alot of talk about existential risks from AI as of late. The AI safety community warns of various threats, ranging from the concrete—misuse by bad actors; cyber-threats—to the calamitous: loss of control and extinction risks. What to make of these claims?
 
-I recently completed this *Stanford Online* course covering Reinforcement Learning (RL). And for the current paradigm of publicly accessible AI, RL is the secret sauce which gives these products their seemingly magical capabilities. So how do these behaviours emerge from the mathematics? Can the current paradigm ever create an AGI powerful enough to turn us all into paperclips? Or is there a broader story the AI Safety community is missing?
+I recently completed this *Stanford Online* course covering [Reinforcement Learning](https://online.stanford.edu/courses/cs234-reinforcement-learning) (RL). And for the current paradigm of publicly accessible AI, RL is the secret sauce which gives these products their seemingly magical capabilities. So how do these behaviours emerge from the mathematics? Can the current paradigm ever create an AGI powerful enough to turn us all into paperclips? Or is there a broader story the AI Safety community is missing?
 
 ### The current wave
 
@@ -21,12 +21,12 @@ Without anyone asking, the world has been flooded with Large Language Models ove
 
 The three phenomena powering these foundation models are (a) the architecture of a transformer (b) Reinforcement Learning and (c) scale. But, as fascinating as the mathematics may be, it misses something. Every equation you write to model the world necessitates a simplification of the rich reality we live in. To squish its unfathomable true complexity into 0s and 1s. What underlying assumptions are made in this quantisation process? To make sense of the media noise, we need to peer under the hood of these tools; de-mist the mystique.
 
-The current hype cycle obsesses over agents. A model wrapped in a harness—Claude Code, Claude Scientist, Claude Design, Copilot, Pi, Goose, OpenClaw, Cline—frameworks which can carefully chain together LLMs with tool calls (e.g. searching the web, executing code) to enable long-horizon, unsupervised action. But the harnesses are built on-top of multitudinous calls to these foundation models.
+The current hype cycle obsesses over agents. A model wrapped in a harness—[Claude Code](https://claude.com/product/claude-code), Claude Scientist, Claude Design, [Copilot](https://github.com/features/copilot), [Pi](https://pi.dev), [Goose](https://goose-docs.ai), [OpenClaw](https://openclaw.ai), [Cline](https://cline.bot)—frameworks which can carefully chain together LLMs with tool calls (e.g. searching the web, executing code) to enable long-horizon, unsupervised action. But the harnesses are built on-top of multitudinous calls to these foundation models.
 
 So, if we're to understand the warnings from the AI safety community, we must understand the power—and limitations—of these LLMs. Can these modern innovations lead us to paperclipdom? What's the tech beneath the hype? And is there a broader story about our current relationship with technology?
 
 >[!note]
->If you wanna skip the maths jargon, you can [[#Human Costs|jump]] to a discussion of the costs associated with training these models. 
+>If you want to skip the maths, [jump](#human-costs) to a discussion about costs associated with training these models.
 
 ### Transformers
 
@@ -121,7 +121,7 @@ To help scale these *useful* reward signals, two core methods have been employed
 	- Take a dataset of harmful queries, and generate a set of harmful responses $\{(x, y_l)_i\}_{i=1}^n$ with the 'unethical' language model.
 	- Use the constitution to make the LLM critique the responses $y_l$, generating a series of iteratively improved, policy-compliant answers.
 	- Take the best, call it $y_w$ and use this *pair* $(y_w,y_l)$ as your ranked preference data. 
-	- Perform reinforcement learning using this generated preference data to shift model weights towards the constitution (RL from AI Feedback).
+	- Perform reinforcement learning using this generated preference data to shift model weights towards the constitution ([RL from AI Feedback](https://arxiv.org/abs/2309.00267)).
 2. **Verifiable rewards**. Code can be run and pass tests, formats can be verified, computations have correct solutions. Instead of learning a reward model from *preference* data, we can use these *explicit* reward signals when post-training LLMs. These verifiable rewards are less prone to reward hacking and have been shown to dramatically improve the reasoning capabilities of these models ([DeepSeek R1](https://arxiv.org/abs/2501.12948)).
 3. Much much more...
 
@@ -153,7 +153,7 @@ In 2024, both Kenya and Venezuela were blocklisted from *Remotasks*, leaving peo
 
 Over time, RLHF requirements moved on, but the same practice of labour exploitation continued. In an effort to deliver on their market valuations, AI companies have plugged their firehose into the ballooning pool of hard-up white collar professionals—coders, doctors, physicists—who can provide the intelligence needed unlock value for enterprise AI. 
 
-Just like in Kenya or Venezuela, contractors face low-pay and insecure conditions. One Portugal-based language annotation worker at Outlier said,
+Just like in Kenya or Venezuela, contractors face low-pay and insecure conditions. One Portugal-based language annotation worker at *Outlier* said,
 
 >“Some people stay up all night to grab tasks as soon as they appear. I sometimes receive an email around 1:00 AM, notifying me that tasks are available, but by the time I wake up, they’re already gone. It often feels like a race to secure tasks and earn money. It feels more like a lottery than a stable workflow.”
 
@@ -178,9 +178,9 @@ LLMs can create biohazards, they can manipulate or persuade—useful tools in a 
 
 The case of China is illustrative. On the spectrum of AI-boom to AI-doom, China accepts cyber risks, but is [less concerned](https://edition.cnn.com/2026/09/17/tech/china-ai-debate-intl-hnk) by these catastrophic scenarios. Why haven't they swallowed the AGI pill?
 
-In the last 30 years, economically, China has made some good bets. They're world leaders in the technologies of the future, having gone all-in on the green transition, effectively producing the planets batteries, solar panels, wind turbines, EVs; all at cut-throat prices, enabled by a socialised banking sector which encourages the productive elements of their economy to actually produce, at scale. So if the promises of AI-boosters don't play out, their economy is insulated, diversified, resilient.
+In the last 30 years, economically, China has made some good bets. They're world leaders in the technologies of the future, having gone all-in on the green transition, [effectively producing the planets batteries, solar panels, wind turbines, EVs](https://www.oxfordenergy.org/wpcms/wp-content/uploads/2024/07/CE14-Clean-energy-innovation-in-China-Final.pdf#:~:text=China%20has%20not,country%20is%20also); all at cut-throat prices, enabled by a [socialised banking sector](https://www.rba.gov.au/publications/bulletin/2012/sep/pdf/bu-0912-7.pdf) which [encourages the productive elements of their economy to actually produce](https://yesmend.com/p/20251022/chinas-state-led-banks-driving-strategic-real-economy-growth/), at scale. So if the promises of AI-boosters don't play out, their economy is insulated, diversified, resilient.
 
-Contrast this with America. In the last 20 years, growth has been almost entirely concentrated around Big Tech. They've grown and grown and grown, successfully. But as we hit the 20s, this growth began to plateau. When everyone's on Facebook, when everyone searches with Google, where's left to go?
+Contrast this with America. In the last 20 years, [growth has been almost entirely concentrated around Big Tech](https://www.rbcwealthmanagement.com/en-us/insights/the-great-narrowing-sp-500-concentration#:~:text=Over%20the%20past,mind%20for%20investors.). They've grown and grown and grown, successfully. But as we hit the 20s, this growth began to plateau. When everyone's on Facebook, when everyone searches with Google, where's left to go?
 
 Below, we'll trace an argument made by Cory Doctorow in *The Reverse Centaur*—that structurally, these Big Tech companies *need* a transformative growth story. And—whether it's heartfelt, or they're huffing up hallucinogenics—the catastrophe-fetishisation of the AI-safety community helps lubricate the hype valves of the industry, forming a vital, pliable rhetorical device which can be bent in support of their will.
 
@@ -188,9 +188,9 @@ Below, we'll trace an argument made by Cory Doctorow in *The Reverse Centaur*—
 
 In financial markets, one can either invest in 'growth stocks' or 'mature stocks'. Mature stocks are old reliable. Supermarkets selling food, banks lending mortgages. Each year, they'll grow reasonably and payout consistent dividends. A low risk, secure investment. No fun. Contrastingly, growth stocks are meant to bring the party. 
 
-Take Uber. Instead of being a plain, reliable (and delightfully boring) taxi company, their stated mission was to *replace all taxi-drivers*. The total addressable market is...all moving vehicles? Investors snap at this opportunity to invest in the glitzy future, with it's tantalising potential payouts. As a growth stock, instead of needing to collect credit from a bank, Uber could simply gnaw off a little corner of it's very own golden throne—it's stock—to do as it pleases: advertise, hire talent, acquire rivals. It's a party.
+Take Uber. Instead of being a plain, reliable (and delightfully boring) taxi company, their [stated mission](https://www.failory.com/pitch-deck/uber) was to [replace all drivers](https://www.sec.gov/Archives/edgar/data/1543151/000095012319002651/filename1.htm). The total addressable market? "[All passanger vehicle and public transport trips](https://www.sec.gov/Archives/edgar/data/1543151/000095012319002651/filename1.htm)", valued at $5.7 trillion. Investors snap at this opportunity to invest in the glitzy future, with it's tantalising potential payouts. As a growth stock, instead of needing to collect credit from a bank, Uber could simply gnaw off a little corner of it's very own golden throne—it's stock—to do as it pleases: advertise, hire talent, acquire rivals. It's a party.
 
-A party that has to keep going. If the sun comes up, and bleary-eyed investors realise their hypnotics supply has run dry, then valuations can suddenly shift. Take Meta. By 2021, they'd reached ad market dominance, but had been dogged by a series of reputation damaging scandals (Russian election interference, the Cambridge Analytica privacy debacle and the gagging of whistleblower Frances Haugen). They needed a new growth story to keep investors hooked. Enter the Metaverse.
+A party that has to keep going. If the sun comes up, and bleary-eyed investors realise their hypnotics supply has run dry, then valuations can suddenly shift. Take Meta. By 2021, they'd reached ad market dominance, but had been dogged by a series of reputation damaging scandals ([Russian election interference](https://www.justice.gov/archives/sco/file/1373816/dl?lctg=6796bccb7b375dec1909a709), the [Cambridge Analytica privacy debacle](https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal) and the [leaks from whistleblower Frances Haugen](https://www.theguardian.com/technology/2021/oct/25/facebook-revelations-from-misinformation-to-mental-health#:~:text=Frances%20Haugen%20left,the%20impact%20its)). They needed a new growth story to keep investors hooked. Enter the Metaverse.
 
 Zuck defined his companies new "north star". "From now on, we're going to be metaverse first, not Facebook first," [he declared](https://www.npr.org/2021/10/28/1049813246/facebook-new-name-meta-mark-zuckerberg) in late '21. But unsurprisingly, most people aren't exactly clamouring to spend their days with a VR-brick glued to their eyeballs as they interact with each other as "[legless, sexless, low-polygon cartoon characters](https://pluralistic.net/2022/12/18/metaverse-means-pivot-to-video/)", in a literal sci-fi dystopia. The idea flopped, and along with it, Meta's stock valuation, plummeting [24% to the lowest price since 2016](https://www.cnbc.com/2022/10/27/meta-stock-falls-23percent-on-earnings-miss-analyst-downgrades.html).
 
@@ -257,6 +257,8 @@ There *is* utility, in LLMs, in recommendation systems. But next time you prompt
 
 - Bai, Y. et al. (2022) *Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback*. Available at: https://arxiv.org/abs/2204.05862
 - Doctorow, C. (2026) *The Reverse Centaur's Guide to Life After AI: How to Think About Artificial Intelligence — Before It's Too Late*. London: Verso.
+- Gauthier, G. et al. (2025) *I've Seen Enough: Measuring the Toll of
+Content Moderation on Mental Health*. Avalible at: https://arxiv.org/pdf/2511.09813
 - Hao, K. (2025) *Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI*. New York: Penguin Press.
 - Li, L., Chu, W., Langford, J. and Schapire, R. E. (2010) *A Contextual-Bandit Approach to Personalized News Article Recommendation*. Available at: https://arxiv.org/abs/1003.0146
 - Newport, C. (2019) *Digital Minimalism: Choosing a Focused Life in a Noisy World*. New York: Portfolio/Penguin.

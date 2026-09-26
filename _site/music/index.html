@@ -549,7 +549,65 @@ mjx-container[display] {
 	border: solid white;
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
-  }</style>
+  }
+
+  /* GitHub/Obsidian-style alert blocks (markdown-it-github-alerts) */
+.markdown-alert {
+	margin: 1em 0;
+	padding: 0.75em 1em;
+	border-left: 3px solid var(--markdown-alert-color, #8ba254);
+	border-radius: 6px;
+	background: var(--markdown-alert-bg, #f6f8fa);
+	color: var(--text-color);
+}
+
+.markdown-alert-title {
+	display: flex;
+	align-items: center;
+	gap: 0.4em;
+	font-weight: 700;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	margin: 0 0 0.4em 0;
+	color: var(--markdown-alert-color, #8ba254);
+}
+
+.markdown-alert-title svg {
+	fill: var(--markdown-alert-color, #8ba254);
+	width: 1em;
+	height: 1em;
+}
+
+.markdown-alert > :last-child {
+	margin-bottom: 0;
+}
+
+/* Per-type accent colors */
+.markdown-alert-note {
+	--markdown-alert-color: #0969da;
+	--markdown-alert-bg: #f1f8ff;
+}
+
+.markdown-alert-tip {
+	--markdown-alert-color: #8ba254; /* matches your site green */
+	--markdown-alert-bg: #f4f8ee;
+}
+
+.markdown-alert-important {
+	--markdown-alert-color: #8250df;
+	--markdown-alert-bg: #f8f3ff;
+}
+
+.markdown-alert-warning {
+	--markdown-alert-color: #9a6700;
+	--markdown-alert-bg: #fff8e6;
+}
+
+.markdown-alert-caution {
+	--markdown-alert-color: #cf222e;
+	--markdown-alert-bg: #fff1f0;
+}</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -629,21 +687,21 @@ mjx-container[display] {
 <p>My partner in crime <a href="https://linktr.ee/Dom.howard_">Dom Howard</a> went on to study jazz at RCM after we finished in 2021 and he's utterly brilliant, go <a href="https://domhoward.bandcamp.com/album/all-the-paths-join-up-here">check him out</a>.</p>
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=avif&via=transform 2400w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=webp&via=transform 2400w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=jpeg&via=transform" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Finflux_photo.jpg&width=2400&format=jpeg&via=transform" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
   </div>
 </div>
 <h3 id="the-karma-violets">The Karma Violets</h3>
 <p>The Karma Violets came together thanks to complete chance! I met the lovely <a href="https://www.instagram.com/wesley_ayres_music/">Wes Ayres</a> whilst working as a waiter at Peterhouse College, Cambridge, we got chatting music and decided to form a band. With the addition of the crazy mutual connection Ambrose de Soissons-Page (Wes' family friend who also happened to played the same <a href="https://www.lovemusichateracism.com/home/">LMHR</a> / <a href="https://www.repeatfanzine.co.uk/homepage.htm">REPEAT</a> gigs as me back in the day!), we completed this indie-rock trio. Lockdown couldn't stop us pumping out two EPs - have a listen <a href="https://karmaviolets.bandcamp.com/">here</a>.</p>
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=avif&via=transform 4898w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=webp&via=transform 4898w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=jpeg&via=transform" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2Fkv_photo.jpg&width=4898&format=jpeg&via=transform" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
   </div>
 </div>
 <h3 id="feed-the-mammoth">Feed the Mammoth</h3>
 <p>I headed off to University in 2021 and threw myself straight into the smorgasbord of musical madness that is <a href="https://www.instagram.com/warwickbandsoc/">Warwick BandSoc</a>. I played in a wacky variety of bands - shoutout to the angry garage punk of <a href="https://youtu.be/Jl_S9tzjVro?si=uPLFTgpQNBGDDSsO&amp;t=270">Domestic Love</a> and my good friends in <a href="https://www.instagram.com/sunnysidedownband/">Sunny Side Down</a>! Eventually, I decided to settle down and focus on Feed the Mammoth. We wrote some tunes I'm genuinely proud of and had a banging time doing it. If you want a flavour of what we got up to, check out our <a href="https://www.youtube.com/channel/UCl9l2k9-kfGDI2H8EHLcG9Q">YouTube</a>.</p>
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=avif&via=transform 4318w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=webp&via=transform 4318w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=jpeg&via=transform" alt="FTM Band Photo" width="4318" height="3455"></picture>
+    <picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fmusic%2FCR1_photo.jpg&width=4318&format=jpeg&via=transform" alt="FTM Band Photo" width="4318" height="3455"></picture>
   </div>
 </div>
 <h2 id="community-building">Community Building</h2>
@@ -675,7 +733,7 @@ mjx-container[display] {
 			</p>
 		</footer>
 
-		<!-- This page `/music/` was built on 2026-09-25T00:01:21.089Z -->
+		<!-- This page `/music/` was built on 2026-09-26T22:39:45.488Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

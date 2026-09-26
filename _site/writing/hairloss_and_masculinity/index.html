@@ -550,6 +550,64 @@ mjx-container[display] {
 	border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
   }
+
+  /* GitHub/Obsidian-style alert blocks (markdown-it-github-alerts) */
+.markdown-alert {
+	margin: 1em 0;
+	padding: 0.75em 1em;
+	border-left: 3px solid var(--markdown-alert-color, #8ba254);
+	border-radius: 6px;
+	background: var(--markdown-alert-bg, #f6f8fa);
+	color: var(--text-color);
+}
+
+.markdown-alert-title {
+	display: flex;
+	align-items: center;
+	gap: 0.4em;
+	font-weight: 700;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	margin: 0 0 0.4em 0;
+	color: var(--markdown-alert-color, #8ba254);
+}
+
+.markdown-alert-title svg {
+	fill: var(--markdown-alert-color, #8ba254);
+	width: 1em;
+	height: 1em;
+}
+
+.markdown-alert > :last-child {
+	margin-bottom: 0;
+}
+
+/* Per-type accent colors */
+.markdown-alert-note {
+	--markdown-alert-color: #0969da;
+	--markdown-alert-bg: #f1f8ff;
+}
+
+.markdown-alert-tip {
+	--markdown-alert-color: #8ba254; /* matches your site green */
+	--markdown-alert-bg: #f4f8ee;
+}
+
+.markdown-alert-important {
+	--markdown-alert-color: #8250df;
+	--markdown-alert-bg: #f8f3ff;
+}
+
+.markdown-alert-warning {
+	--markdown-alert-color: #9a6700;
+	--markdown-alert-bg: #fff8e6;
+}
+
+.markdown-alert-caution {
+	--markdown-alert-color: #cf222e;
+	--markdown-alert-bg: #fff1f0;
+}
 /*
  * New diff- syntax
  */
@@ -657,7 +715,7 @@ pre[class*="language-diff-"] {
 </blockquote>
 <p>So I refreshed and condensed that longer piece, made a submission, and it's now live! Go check it out here: <a href="https://www.ithoughtaboutthatalot.com/2025/hair-loss-and-masculinity"><em>In 2025, I thought a lot about hairloss and masculinity</em></a>.</p>
 <p>Here's to owning it in 2026, and spending alot less on shampoo than these fellas!!!</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=avif&via=transform 4680w"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=webp&via=transform 4680w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=jpeg&via=transform" alt="Bald me!" width="4680" height="3744"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Fhairloss_and_masculinity%2Fthunderbolt_balloon_tomb.jpg&width=4680&format=jpeg&via=transform" alt="Bald me!" width="4680" height="3744"></picture></p>
 <p>📷 <a href="https://www.instagram.com/itsmaks_ko/">@itsmaks_ko</a></p>
 
 
@@ -678,7 +736,7 @@ pre[class*="language-diff-"] {
 			</p>
 		</footer>
 
-		<!-- This page `/writing/hairloss_and_masculinity/` was built on 2026-09-25T00:01:21.089Z -->
+		<!-- This page `/writing/hairloss_and_masculinity/` was built on 2026-09-26T22:39:45.488Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
