@@ -46,5 +46,6 @@ jobs:
           clean: true
           # Fixes for YOUR case:
           enable_jekyll: false
-          cname: ''  # Not needed for user sites, but prevents weird rewrites
+          cname: oliverkiranbrown.com
+          # cname: ''  # Not needed for user sites, but prevents weird rewrites
           force_orphan: true  # clean branch deploy

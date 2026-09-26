@@ -224,7 +224,7 @@ Stepping back to this lens, we can view the growth of big tech and the AI-craze 
 
 As Zubov outlines in *The Age of Surveillance Capitalism*, in the 1970s a [clique of behaviourists formed around the famed psychologist B.F. Skinner](https://www.nybooks.com/articles/2020/04/09/bigger-brother-surveillance-capitalism/#:~:text=In%20the%201970s%2C,fact%20that%20he). His pioneering experiments with mice showed how you could shape the conditions of the world and then predict behaviour as a result. This understanding, that conditions—pushes, nudges, bells—shape behaviour[ directly influenced RL](https://medium.com/@CalebMBowyer/a-crude-history-of-reinforcement-learning-rl-1abaae72550e), and hence, [the design of modern social media](https://www.pbslearningmedia.org/resource/psychology-behaviorism-skinner-social-media-video/retro-report/).
 
-As you scroll through content on a platform, every minute detail is measured. Likes. Comments. Repeats. How long your eyes linger on a reel. All this information—captured in carefully constructed lab conditions: the four corners of the mobile app—identical everywhere. You? A single data point in a rich ocean of information.
+As you scroll through content on a platform, every minute detail is measured. Likes. Comments. Repeats. How long your eyes linger on a reel. All this information, captured in carefully constructed lab conditions—the four corners of the mobile app—identical everywhere. You? A single data point in a rich ocean of information.
 
 While individually, you're blindsided (or perhaps bemused) by brainrot, aggravated by attention-sapping slop, think from the perspective of a data scientist who can wade through this treasure-trove of quantified behaviour.
 
