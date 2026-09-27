@@ -19,6 +19,7 @@
 
 	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
 	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
+	--font-family-title: "Ganymedian", var(--font-family);
 }
 
 @font-face {
@@ -37,6 +38,13 @@
 	font-display: swap;
 }
 
+/* Title */
+@font-face {
+	font-family: "Ganymedian";
+	src: url("/fonts/GanymedianRegular.ttf");
+	font-weight: 400;
+}
+
 * { box-sizing: border-box; }
 @view-transition { navigation: auto; }
 
@@ -44,7 +52,7 @@ html, body {
 	margin: 0 auto;
 	padding: 0;
 	font-family: var(--font-family-monospace);
-	font-size: 1.0625rem;
+	font-size: 1rem;
 	line-height: 1.6;
 	color: var(--text-color);
 	background-color: var(--background-color);
@@ -89,7 +97,7 @@ blockquote {
 
 a[href] { color: var(--text-color-link); }
 a[href]:visited { color: var(--text-color-link-visited); }
-a[href]:hover, a[href]:active { color: var(--red); }
+a[href]:hover, a[href]:active { color: var(--gray4); }
 
 /* header, kept plain, no bg color trick needed since it's already white-on-white-ish */
 .top-bar {
@@ -105,20 +113,31 @@ a[href]:hover, a[href]:active { color: var(--red); }
 	width: 100%;
 }
 .home-link {
-	font-family: var(--font-family);
-	font-weight: 900;
+	/* font-family: var(--font-family); */
+	font-family: var(--font-family-title);
+	font-weight: 400;
 	font-style: italic;
-	font-size: 3rem;
+	font-size: 4rem;
 	line-height: 1.1;
 	margin-right: 0.3em;
 	text-shadow: 0.03em 0.03em 0 var(--red);
 }
-.home-link:link:not(:hover) { text-decoration: none; color: var(--gray7); }
+.home-link:link:not(:hover) { text-decoration: none; color: var(--red); }
+
 .top-bar a { color: var(--gray7); }
 .top-bar a:visited { color: var(--gray7); }
 .top-bar a:hover, .top-bar a:active { color: var(--red); }
+/* Home link — leave color untouched on hover, just add a red underline */
+.top-bar .home-link:hover,
+.top-bar .home-link:active {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--red);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
 
-.nav { display: flex; gap: .5em 1em; padding: 0; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav { display: flex; gap: .5em 1em; padding: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
 .nav-item { display: inline-block; }
 .nav-item a[href]:not(:hover) { text-decoration: none; }
 .nav a[href][aria-current="page"] { text-decoration: underline; }
