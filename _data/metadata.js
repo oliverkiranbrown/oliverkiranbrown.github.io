@@ -1,5 +1,5 @@
 export default {
-	title: "kinobi",
+	title: "KINOBI",
 	url: "https://oliverkiranbrown.com/",
 	language: "en",
 	description: "Oli's personal site",

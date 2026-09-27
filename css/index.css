@@ -11,7 +11,10 @@
 	/* Hightlight! */
 	--red: #ff0000;
 
-	--background-color: var(--gray1);
+	/* Parchment Background */
+	--background-color: #fdf6e3;
+
+	/* --background-color: var(--gray1); */
 	--text-color: var(--gray6);
 	--text-color-link: var(--gray7);
 	--text-color-link-active: var(--gray4);
@@ -41,7 +44,7 @@
 /* Title */
 @font-face {
 	font-family: "Ganymedian";
-	src: url("/fonts/GanymedianRegular.ttf");
+	src: url("/fonts/ChunkoBoldDemo.ttf");
 	font-weight: 400;
 }
 
@@ -115,7 +118,7 @@ a[href]:hover, a[href]:active { color: var(--gray4); }
 .home-link {
 	/* font-family: var(--font-family); */
 	font-family: var(--font-family-title);
-	font-weight: 400;
+	font-weight:100;
 	font-style: italic;
 	font-size: 4rem;
 	line-height: 1.1;

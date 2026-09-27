@@ -29,7 +29,7 @@ Here, our goal is to make a machine learn from labelled categorical data. More p
 
 A small note that our actual data $(X,Y)$ are modelled as random variables, sampled from some probability distribution $\mathcal{X}\times\mathcal{Y}$ with joint measure $P_0$. In the real world, we don't know the statistical distribution of the english language or images of boats. The idea in this formalism of ML is to *learn* this underlying and unknown distribution $P_0$ from data we can collect from the world.
 # The Very Basics
-SLT is all about understanding how well our function $h$ is performing. Are we modelling the underlying data accurately? In order to do this, we have build up some key tools. Please do skip to the interesting stuff if you know this already! `LINK TO LATER ON`
+SLT is all about understanding how well our function $h$ is performing. Are we modelling the underlying data accurately? In order to do this, we have build up some key tools. Please do [skip](#excess-risk) to the interesting stuff if you know this already!
 ## The Hypothesis Class
 Firstly, what is this function $h$? It's the 'model' that everyone talks about. But what does it look like? What shape does it take? We need to draw it from somewhere, to set the guardrails on how the function can look so that the parameters *inside* the function can then be learnt. We call this space of possible functions the hypothesis class, $\mathcal{H}$. 
 
@@ -47,9 +47,9 @@ $$
 $$
 In the real world, $\mathcal{H}$ obviously gets a lot more exciting. For example, the hypothesis class for an LLM would be the architecture of a transformer and $\mathcal{Y}$ would be a probability distribution of tokens, permitting sampling to predict the next word. After defining this model class, you can then do your learning on the parameters *inside* this model class. 
 ## Loss
-We now need some way to quantify how well our chosen function $h\in\mathcal{H}$ is performing. This is how we can understand how to improve our model. `LINK TO INTERESTNG NOTE ON LOSS FUNCTIONS`
+We now need some way to quantify how well our chosen function $h\in\mathcal{H}$ is performing. This is how we can understand how to improve our model.
 
-If $h$ *is* performing well using its current parameters, then it has learnt the phenomena is it modelling. If $h$ is *not* performing well given its current parameters, then we can use that information to point the parameters of $h$ in a better direction.  If we keep doing this (using iterative stochastic gradient descent and backpropogation) `LINK TO DEEP LEARNING SECTION`, the model will keep tweaking its parameters, getting better and better...eventually leading to some pretty stellar ML models. 
+If $h$ *is* performing well using its current parameters, then it has learnt the phenomena is it modelling. If $h$ is *not* performing well given its current parameters, then we can use that information to point the parameters of $h$ in a better direction.  If we keep doing this (using iterative [stochastic gradient descent and backpropogation](#deep-learning)), the model will keep tweaking its parameters, getting better and better...eventually leading to some pretty stellar ML models. 
 
 To assess performance, we need a *loss function*. This compares the model's predicted label to the real data. If we're correct (or close to correct), then the error (or loss) is low. If our model predicted a label that was *far* from the original value, then our loss in high. 
 
@@ -118,7 +118,7 @@ It turns out this problem has a neat closed form solution! If we package up our 
 $$
 (\hat{w},\hat{b})=(X^TX)^{-1}X^TY
 $$
-See the annex for the details `LINK TO ANNEX` - the point is to illustrate how the empirical risk minimiser framework can fit into the framework of classical statistics: finding optimal model parameters based on data. E.g. for $p=2$
+See the [annex](#annex) for the details - the point is to illustrate how the empirical risk minimiser framework can fit into the framework of classical statistics: finding optimal model parameters based on data. E.g. for $p=2$
 ![Example of regression in dimension two](./SLT_p=2_regression.png)
 ### K-Nearest Neighbours
 If we return to binary classification, another classic example to demonstrate the practicality of the ERM framework would be k-NN. Here, we have $Y\in\{-1,1\}$ and given some new point in our space, we'll look at the $K$ nearest points to it and assign our new data point the most common label. The $K$ nearest neighbours simply vote on the class the new point.  
@@ -189,7 +189,7 @@ Mapping this onto the [classic bias vs variance trade-off graph](https://en.wiki
 
 ![Updated Bias vs Variance Graph](./SLT_updated_bias_vs_variance.png)
 
-*Finally, finding an explanation for this seems to still be an active area of research. Interestingly, in 2022, [Sébastien Bubeck](https://dblp.uni-trier.de/search/author?author=S%C3%A9bastien%20Bubeck "DBLP author search") and [Mark Sellke](https://dblp.uni-trier.de/search/author?author=Mark%20Sellke "DBLP author search") published a [paper](https://arxiv.org/abs/2105.12806) which made some theoretical in-roads using some of the tools and techniques that I'll introduce later in this post. `LINK TO LATER TOOLS` Neat!*
+*Finally, finding an explanation for this seems to still be an active area of research. Interestingly, in 2022, [Sébastien Bubeck](https://dblp.uni-trier.de/search/author?author=S%C3%A9bastien%20Bubeck "DBLP author search") and [Mark Sellke](https://dblp.uni-trier.de/search/author?author=Mark%20Sellke "DBLP author search") published a [paper](https://arxiv.org/abs/2105.12806) which made some theoretical in-roads using some of the tools and techniques that I'll introduce [later](#connecting-rademacher-complexity-to-the-hypothesis-class) in this post. Neat!*
 # Controlling the Excess Risk
 We've seen that the excess risk is the sum of the *estimation error* (how well is our model performing inside the hypothesis class?) and the *approximation error* (how well is our model class performing against all possible model classes?). To make sensible choices about $\mathcal{H}$, it'd be good to understand exactly how the excess risk is effected by
 
@@ -426,7 +426,7 @@ Taking copies of random variables and bounding carefully yields the following re
 $$
 \mathbb{E}\left(\sup_{f\in\mathcal{F}}\frac{1}{n}\sum_{i=1}^{n}\mathbb{E}[f(Z_i)]-f(Z_i)\right)\leq2\mathfrak{R}_n(\mathcal{F})
 $$
-where $\mathcal{F}:=\{(x,y)\mapsto l(h(x),y)\text{ ; }h\in\mathcal{H}\}$. See the neat trick in the annex. `INSERT LINK TO ANNEX HERE`
+where $\mathcal{F}:=\{(x,y)\mapsto l(h(x),y)\text{ ; }h\in\mathcal{H}\}$. See the neat trick in the [annex](#symmetrisation-argument).
 
 **Connection to Estimation Error**
 So overall, we can put these bounds together to see that the estimation error is controlled by the Rademacher complexity:
@@ -446,11 +446,11 @@ $$
 \mathbb{P}(|X|\geq t)\leq2\exp(-t^2/C^2)
 $$
 Think 'strong tail decays' and see the annex for details. Using some key facts about these objects, we can argue as follows:
-1. The Rademacher random variables, $\varepsilon_i$ are sub-gaussian. `LINK TO ANNEX`
+1. The Rademacher random variables, $\varepsilon_i$ [are sub-gaussian](#maximum-of-mean-zero-sub-gaussians).
 2. Sums of sub-gaussians are sub-gaussian (proof is definition pushing)
 3. Therefore, we have an expectation of a supremum over a finite set. If we pull out a [probability textbook](https://eclass.uoa.gr/modules/document/file.php/MATH506/04.%20%CE%92%CE%BF%CE%B7%CE%B8%CE%AE%CE%BC%CE%B1%CF%84%CE%B1/HDP-book.pdf), there's a known result we can apply.
 
-**Fact**: (proof in annex `LINK TO ANNEX` ) If $W_1,...,W_d$ are mean zero sub-gaussian with parameter $\sigma$, then 
+**Fact**: ([proof](#maximum-of-mean-zero-sub-gaussians) in annex) If $W_1,...,W_d$ are mean zero sub-gaussian with parameter $\sigma$, then 
 
 $$\mathbb{E}[\max_{1\leq j\leq d}W_j]\leq \sigma \sqrt{2\log{d}}$$
 
@@ -599,7 +599,7 @@ $$
 &\leq de^{\lambda^2\sigma^2}
 \end{align}
 $$
-Taking logs and optimising over $\lambda\geq 0$ yields the result `LINK TO RESULT IN TEXT`.
+Taking logs and optimising over $\lambda\geq 0$ yields the result.
 # References
 ## General
 - Sharan, V. (n.d.). _Rademacher calculation_ [PDF]. Available [here](https://vatsalsharan.github.io/lecture_notes/lec4_final.pdf). [Accessed 23 June 2025].
