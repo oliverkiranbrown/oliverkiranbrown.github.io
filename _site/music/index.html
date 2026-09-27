@@ -37,7 +37,7 @@
 
 	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
 	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
-	--font-family-title: "Ganymedian", var(--font-family);
+	--font-family-title: "BionixFat", var(--font-family);
 }
 
 @font-face {
@@ -60,6 +60,12 @@
 @font-face {
 	font-family: "Ganymedian";
 	src: url("/fonts/ChunkoBoldDemo.ttf");
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "BionixFat";
+	src: url("/fonts/BionixFat-vnmEM.otf") format("opentype");
 	font-weight: 400;
 }
 
@@ -131,9 +137,8 @@ a[href]:hover, a[href]:active { color: var(--gray4); }
 	width: 100%;
 }
 .home-link {
-	/* font-family: var(--font-family); */
 	font-family: var(--font-family-title);
-	font-weight:100;
+	font-weight: 100;
 	font-style: italic;
 	font-size: 4rem;
 	line-height: 1.1;
@@ -155,7 +160,7 @@ a[href]:hover, a[href]:active { color: var(--gray4); }
 	text-underline-offset: 4px;
 }
 
-.nav { display: flex; gap: .5em 1em; padding: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav { display: flex; gap: 1em 1em; padding-left: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
 .nav-item { display: inline-block; }
 .nav-item a[href]:not(:hover) { text-decoration: none; }
 .nav a[href][aria-current="page"] { text-decoration: underline; }
@@ -406,7 +411,7 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 			</p>
 		</footer>
 
-		<!-- This page `/music/` was built on 2026-09-27T09:55:57.400Z -->
+		<!-- This page `/music/` was built on 2026-09-27T10:10:48.568Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
