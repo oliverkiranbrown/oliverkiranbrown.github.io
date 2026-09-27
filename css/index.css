@@ -12,7 +12,8 @@
 	--red: #ff0000;
 
 	/* Parchment Background */
-	--background-color: #fdf6e3;
+	/* --background-color: #fdf6e3; */
+	--background-color: --gray1;
 
 	/* --background-color: var(--gray1); */
 	--text-color: var(--gray6);
