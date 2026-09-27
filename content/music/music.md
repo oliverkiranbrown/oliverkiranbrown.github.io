@@ -51,7 +51,7 @@ In my 3rd year at Warwick, I had the privilege of serving as president of BandSo
 
 ### Balloon Tomb
 
-Current party punk outfit based in Bristol. Lots of silliness and chaos—so good to play in an outfit without all that seriousness (and many goblins). Made our website [myself](../writing/deploying_nextjs_site_to_vps/) too; check it out here: [balloontomb.band](https://balloontomb.band)!
+Current party-punk outfit based in Bristol. Lots of silliness and chaos—so good to play in a band without all that seriousness (and many goblins). Made our website [myself](../writing/deploying_nextjs_site_to_vps/) too; check it out here: [balloontomb.band](https://balloontomb.band)!
 
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>

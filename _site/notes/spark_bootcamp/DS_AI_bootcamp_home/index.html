@@ -14,8 +14,27 @@
 		<style>/* This is an arbitrary CSS string added to the bundle */
 /* Defaults */
 :root {
-	--font-family: -apple-system, system-ui, sans-serif;
+	/*--font-family: -apple-system, system-ui, sans-serif;
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+	*/
+	--font-family: "Areal", -apple-system, system-ui, sans-serif;
+	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco
+}
+
+@font-face {
+	font-family: "Areal";
+	src: url("/fonts/ABCArealSuperfamilyVariable.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Areal Mono";
+	src: url("/fonts/ABCArealMonoVariable.woff2") format("woff2")
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 /* Other fonts to play with */
@@ -71,6 +90,7 @@ html,
 body {
 	padding: 0;
 	margin: 0 auto;
+	/* Text styling choice */
 	font-family: var(--font-family);
 	color: var(--text-color);
 	background-color: var(--background-color);
@@ -679,7 +699,7 @@ mjx-container[display] {
 			</p>
 		</footer>
 
-		<!-- This page `/notes/spark_bootcamp/DS_AI_bootcamp_home/` was built on 2026-09-26T23:42:17.956Z -->
+		<!-- This page `/notes/spark_bootcamp/DS_AI_bootcamp_home/` was built on 2026-09-27T00:21:47.397Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
