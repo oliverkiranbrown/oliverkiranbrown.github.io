@@ -22,11 +22,6 @@
 	</url>
 	
 	<url>
-		<loc>https://oliverkiranbrown.com/</loc>
-		<lastmod>2025-11-23</lastmod>
-	</url>
-	
-	<url>
 		<loc>https://oliverkiranbrown.com/music/</loc>
 		<lastmod>2025-11-23</lastmod>
 	</url>
@@ -94,5 +89,10 @@
 	<url>
 		<loc>https://oliverkiranbrown.com/writing/rl-in-the-wild/</loc>
 		<lastmod>2026-09-25</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://oliverkiranbrown.com/</loc>
+		<lastmod>2026-09-27</lastmod>
 	</url>
 </urlset>

@@ -7,7 +7,7 @@ permalink: /
 ---
 
 <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
-  <div>
+  <div class="photo-frame">
     <img src="hands.jpg" alt="Headshot">
   </div>
 </div>
