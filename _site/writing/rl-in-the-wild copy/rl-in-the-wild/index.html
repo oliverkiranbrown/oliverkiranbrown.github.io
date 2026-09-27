@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Reinforcement Learning in the Wild</title>
+		<title>Reinforcement Learning in the Wild Copy</title>
 		<meta name="description" content="Collating some thoughts on RL and its applications in the world">
 		<link rel="icon" href="/img/favicon.png">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="KINOBI">
@@ -26,8 +26,7 @@
 	--red: #ff0000;
 
 	/* Parchment Background */
-	/* --background-color: #fdf6e3; */
-	--background-color: --gray1;
+	--background-color: #fdf6e3;
 
 	/* --background-color: var(--gray1); */
 	--text-color: var(--gray6);
@@ -37,7 +36,7 @@
 
 	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
 	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
-	--font-family-title: "BionixFat", var(--font-family);
+	--font-family-title: "Ganymedian", var(--font-family);
 }
 
 @font-face {
@@ -58,8 +57,8 @@
 
 /* Title */
 @font-face {
-	font-family: "BionixFat";
-	src: url("/fonts/BionixFat-vnmEM.otf") format("opentype");
+	font-family: "Ganymedian";
+	src: url("/fonts/ChunkoBoldDemo.ttf");
 	font-weight: 400;
 }
 
@@ -131,8 +130,9 @@ a[href]:hover, a[href]:active { color: var(--gray4); }
 	width: 100%;
 }
 .home-link {
+	/* font-family: var(--font-family); */
 	font-family: var(--font-family-title);
-	font-weight: 100;
+	font-weight:100;
 	font-style: italic;
 	font-size: 4rem;
 	line-height: 1.1;
@@ -154,7 +154,7 @@ a[href]:hover, a[href]:active { color: var(--gray4); }
 	text-underline-offset: 4px;
 }
 
-.nav { display: flex; gap: 1em 1em; padding-left: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav { display: flex; gap: .5em 1em; padding: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
 .nav-item { display: inline-block; }
 .nav-item a[href]:not(:hover) { text-decoration: none; }
 .nav a[href][aria-current="page"] { text-decoration: underline; }
@@ -375,7 +375,7 @@ pre[class*="language-diff-"] {
 					
 
 
-<h1 id="reinforcement-learning-in-the-wild">Reinforcement Learning in the Wild</h1>
+<h1 id="reinforcement-learning-in-the-wild-copy">Reinforcement Learning in the Wild Copy</h1>
 
 <ul class="post-metadata">
 	<li><time datetime="2026-09-25">25 September 2026</time></li>
@@ -408,7 +408,7 @@ pre[class*="language-diff-"] {
 <ol start="3">
 <li>These numbers can be passed through a long process of transformations which learn to unpick different aspects of human language. Crucially, you just setup the <em>shape</em> of these functions: &quot;I want to multiply by <em>some</em> number here&quot; — you don't know the exact values yet.</li>
 </ol>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Ftransformer.png&width=874&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Ftransformer.png&width=874&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Ftransformer.png&width=874&format=png&via=transform" alt="Transformer Architecutre" width="874" height="1246"></picture><br>
+<p><img src="content/writing/rl-in-the-wild copy/transformer.png" alt="Transformer Architecutre"><br>
 <a href="https://arxiv.org/abs/1706.03762">Source</a></p>
 <ol start="4">
 <li>Finally, you build a function which can convert the output of these transformations into a probability distribution over the original token-list. Famously, you can then sample from that distribution, typically taking the most likely next token.</li>
@@ -416,12 +416,12 @@ pre[class*="language-diff-"] {
 <p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1400%2F1*PseObt571pU9in_EjASsJw.png&width=1400&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1400%2F1*PseObt571pU9in_EjASsJw.png&width=1400&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1400%2F1*PseObt571pU9in_EjASsJw.png&width=1400&format=png&via=transform" alt="" width="1400" height="532"></picture></p>
 <p><a href="https://medium.com/@adimodi96/from-logits-to-tokens-9a36feab9cab">Source</a></p>
 <p>With this architecture set-up, you can then pass through terabytes of text, and through stochastic gradient descent, slowly learn the actual <em>parameters</em> of the functions which correctly predict the next word. It's a beautiful process—travelling through this huge parameter space—iteratively improving your guesses.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fsgd.png&width=692&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fsgd.png&width=692&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fsgd.png&width=692&format=png&via=transform" alt="Stochastic Gradient Descent" width="692" height="387"></picture></p>
+<p><img src="content/writing/rl-in-the-wild copy/sgd.png" alt="Stochastic Gradient Descent"></p>
 <p>From <em>some</em> number to &quot;let's try <mjx-container class="MathJax" jax="SVG" style="direction: ltr; position: relative;"><svg style="overflow: visible; min-height: 1px; min-width: 1px; vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="8.082ex" height="1.557ex" role="img" focusable="false" viewBox="0 -666 3572.4 688" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" style="stroke-width: 3;"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(500,0)" style="stroke-width: 3;"></path><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z" transform="translate(778,0)" style="stroke-width: 3;"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(1278,0)" style="stroke-width: 3;"></path></g><g data-mml-node="mo" transform="translate(2000.2,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z" style="stroke-width: 3;"></path></g><g data-mml-node="mi" transform="translate(3000.4,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z" style="stroke-width: 3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top: 0px; left: 0px; clip: rect(1px, 1px, 1px, 1px); -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: absolute; padding: 1px 0px 0px 0px; border: 0px; display: block; width: auto; overflow: hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0.52</mn><mo>×</mo><mi>x</mi></math></mjx-assistive-mml></mjx-container> here&quot;, and then &quot;ah, <mjx-container class="MathJax" jax="SVG" style="direction: ltr; position: relative;"><svg style="overflow: visible; min-height: 1px; min-width: 1px; vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="4.023ex" height="1.581ex" role="img" focusable="false" viewBox="0 -677 1778 699" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" style="stroke-width: 3;"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(500,0)" style="stroke-width: 3;"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(778,0)" style="stroke-width: 3;"></path><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z" transform="translate(1278,0)" style="stroke-width: 3;"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline" style="top: 0px; left: 0px; clip: rect(1px, 1px, 1px, 1px); -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; position: absolute; padding: 1px 0px 0px 0px; border: 0px; display: block; width: auto; overflow: hidden;"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0.49</mn></math></mjx-assistive-mml></mjx-container> scores better&quot;, on and on. Eventually, this gives you a model which can somewhat plausibly string words together in a row.</p>
 <p>But what if some vile hate-speech crept into the training data? The model has no morally—it's been rewarded by reproducing it's training data—so, unconstrained, it'll happily barf out whatever disgraceful drivel you desire. How can we align the choices these models make to our own moral codes?</p>
 <h3 id="reinforcement-learning-from-human-feedback">Reinforcement Learning from Human Feedback</h3>
 <p>The second great innovation. Armed with this pre-trained model with a basic grasp of semantic meaning, you can further train these systems to match our human desires.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Frlhf.png&width=1212&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Frlhf.png&width=1212&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Frlhf.png&width=1212&format=png&via=transform" alt="RLHF Diagram" width="1212" height="546"></picture></p>
+<p><img src="content/writing/rl-in-the-wild copy/rlhf.png" alt="RLHF Diagram"></p>
 <p><a href="https://arxiv.org/abs/2203.02155">Source</a></p>
 <p>The core idea? Put the models to work, performing various tasks, and then score the result. Reward the behaviour you like; punish the misadventures and bit-by-bit, you can shift the model weights in a 'better' direction.</p>
 <p>It's worth spelling out the assumptions made here when producing these kinds of reward models. To illustrate, consider the case of a human, ranking model responses in preference order.</p>
@@ -442,7 +442,7 @@ pre[class*="language-diff-"] {
 <p>Techniques have <a href="https://openai.com/index/sycophancy-in-gpt-4o/">greatly improved</a> since the release of GTP-4o to help combat these challenges.</p>
 <h3 id="improvements">Improvements</h3>
 <p>First—still using human feedback—you can create multiple preference datasets ranking responses for their <a href="https://arxiv.org/abs/2204.05862">helpfulness and harmlessness</a>. These signals can then be fed into very large reward models, helping the model to learn nuance, rather than eagerly shutting down potentially harmful responses.</p>
-<p><picture><source type="image/avif" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fimproved-rlhf.png&width=2406&format=avif&via=transform"><source type="image/webp" srcset="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fimproved-rlhf.png&width=2406&format=webp&via=transform"><img loading="lazy" decoding="async" src="/.11ty/image/?src=content%2Fwriting%2Frl-in-the-wild%2Fimproved-rlhf.png&width=2406&format=png&via=transform" alt="Improved RLHF" width="2406" height="1120"></picture></p>
+<p><img src="content/writing/rl-in-the-wild copy/improved-rlhf.png" alt="Improved RLHF"></p>
 <p>But to train these growing reward models, AI engineers need access to ever larger pools of human-preference data. This can get expensive: a useful reward signal requires human feedback that can diligently distinguish between responses.</p>
 <p>Consider querying an esoteric region of the data distribution. A <em>non-expert</em> human-labeller could easily prefer a verbose response with a subtle, hard-to-verify inaccuracy over something curt but correct. These inaccuracies dirty the training data, damaging model utility.</p>
 <p>To help scale these <em>useful</em> reward signals, two core methods have been employed.</p>
@@ -565,7 +565,7 @@ Content Moderation on Mental Health</em>. Avalible at: <a href="https://arxiv.or
 			</p>
 		</footer>
 
-		<!-- This page `/writing/rl-in-the-wild/` was built on 2026-09-27T10:19:01.266Z -->
+		<!-- This page `/writing/rl-in-the-wild copy/rl-in-the-wild/` was built on 2026-09-27T09:52:19.704Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>

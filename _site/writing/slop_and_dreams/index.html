@@ -6,7 +6,7 @@
 		<title>Slop and Dreams</title>
 		<meta name="description" content="GenAI, the hype-train and a alternative path.">
 		<link rel="icon" href="/img/favicon.png">
-		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="kinobi">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="KINOBI">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
 		
 		
@@ -25,7 +25,11 @@
 	/* Hightlight! */
 	--red: #ff0000;
 
-	--background-color: var(--gray1);
+	/* Parchment Background */
+	/* --background-color: #fdf6e3; */
+	--background-color: --gray1;
+
+	/* --background-color: var(--gray1); */
 	--text-color: var(--gray6);
 	--text-color-link: var(--gray7);
 	--text-color-link-active: var(--gray4);
@@ -33,6 +37,7 @@
 
 	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
 	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
+	--font-family-title: "BionixFat", var(--font-family);
 }
 
 @font-face {
@@ -51,6 +56,13 @@
 	font-display: swap;
 }
 
+/* Title */
+@font-face {
+	font-family: "BionixFat";
+	src: url("/fonts/BionixFat-vnmEM.otf") format("opentype");
+	font-weight: 400;
+}
+
 * { box-sizing: border-box; }
 @view-transition { navigation: auto; }
 
@@ -58,7 +70,7 @@ html, body {
 	margin: 0 auto;
 	padding: 0;
 	font-family: var(--font-family-monospace);
-	font-size: 1.0625rem;
+	font-size: 1rem;
 	line-height: 1.6;
 	color: var(--text-color);
 	background-color: var(--background-color);
@@ -103,7 +115,7 @@ blockquote {
 
 a[href] { color: var(--text-color-link); }
 a[href]:visited { color: var(--text-color-link-visited); }
-a[href]:hover, a[href]:active { color: var(--red); }
+a[href]:hover, a[href]:active { color: var(--gray4); }
 
 /* header, kept plain, no bg color trick needed since it's already white-on-white-ish */
 .top-bar {
@@ -119,20 +131,30 @@ a[href]:hover, a[href]:active { color: var(--red); }
 	width: 100%;
 }
 .home-link {
-	font-family: var(--font-family);
-	font-weight: 900;
+	font-family: var(--font-family-title);
+	font-weight: 100;
 	font-style: italic;
-	font-size: 3rem;
+	font-size: 4rem;
 	line-height: 1.1;
 	margin-right: 0.3em;
 	text-shadow: 0.03em 0.03em 0 var(--red);
 }
-.home-link:link:not(:hover) { text-decoration: none; color: var(--gray7); }
+.home-link:link:not(:hover) { text-decoration: none; color: var(--red); }
+
 .top-bar a { color: var(--gray7); }
 .top-bar a:visited { color: var(--gray7); }
 .top-bar a:hover, .top-bar a:active { color: var(--red); }
+/* Home link — leave color untouched on hover, just add a red underline */
+.top-bar .home-link:hover,
+.top-bar .home-link:active {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--red);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
 
-.nav { display: flex; gap: .5em 1em; padding: 0; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav { display: flex; gap: 1em 1em; padding-left: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
 .nav-item { display: inline-block; }
 .nav-item a[href]:not(:hover) { text-decoration: none; }
 .nav a[href][aria-current="page"] { text-decoration: underline; }
@@ -260,7 +282,7 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 	inset: 0;
 	background: var(--red);
 	mix-blend-mode: multiply;
-	opacity: 0.2;
+	opacity: 0.17;
 }
 /*
  * New diff- syntax
@@ -316,7 +338,7 @@ pre[class*="language-diff-"] {
 	</head>
 	<body>
 		<header class="top-bar">
-			<a href="/" class="home-link">kinobi</a>
+			<a href="/" class="home-link">KINOBI</a>
 			<nav>
 				<ul class="nav">
 					<li class="nav-item"><a href="/">About</a></li>
@@ -385,7 +407,7 @@ pre[class*="language-diff-"] {
 				<a href="/">About</a>
 				<a href="https://oliverkiranbrown.com/drum_sequencer/">Groove!</a>
 				<a href="/notes/">Notes</a>
-				<a href="/now/">Now</a>
+				
 				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
 			</div>
 			<p style="margin-top: 0.5em; font-size: 0.8em;">
@@ -393,7 +415,7 @@ pre[class*="language-diff-"] {
 			</p>
 		</footer>
 
-		<!-- This page `/writing/slop_and_dreams/` was built on 2026-09-27T02:23:07.102Z -->
+		<!-- This page `/writing/slop_and_dreams/` was built on 2026-09-27T10:19:01.266Z -->
 		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
 	</body>
 </html>
