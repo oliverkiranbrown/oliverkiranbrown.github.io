@@ -268,5 +268,5 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 	inset: 0;
 	background: var(--red);
 	mix-blend-mode: multiply;
-	opacity: 0.2;
+	opacity: 0.17;
 }
