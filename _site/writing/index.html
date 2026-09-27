@@ -3,44 +3,38 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Oliver Kiran Brown</title>
+		<title>kinobi</title>
 		<meta name="description" content="Oli&#39;s personal site">
 		<link rel="icon" href="/img/favicon.png">
-		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="kinobi">
 		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
 		
 		
 		
 		<style>/* This is an arbitrary CSS string added to the bundle */
-/* ============================================
-   PALETTE — change these 8 values, done.
-   Darkest → lightest.
-   ============================================ */
+/* colors — just a grayscale, tweak these */
 :root {
-	--c-950: #0a0a0a; /* page background */
-	--c-900: #121212; /* header/nav background */
-	--c-800: #1c1c1c; /* raised surfaces: code, table stripes */
-	--c-700: #2e2e2e; /* borders, dividers */
-	--c-500: #707070; /* muted text: comments, dates, meta */
-	--c-300: #a3a3a3; /* secondary text: visited links */
-	--c-100: #d8d8d8; /* body text */
-	--c-50:  #f4f4f4; /* headings, links, emphasis */
+	--gray1: #fff;
+	--gray2: #eee;
+	--gray3: #ddd;
+	--gray4: #999;
+	--gray5: #555;
+	--gray6: #222;
+	--gray7: #000;
 
-	--background-color: var(--c-950);
-	--text-color: var(--c-100);
-	--text-color-link: var(--c-50);
-	--text-color-link-active: var(--c-300);
-	--text-color-link-visited: var(--c-500);
+	--background-color: var(--gray1);
+	--text-color: var(--gray6);
+	--text-color-link: var(--gray7);
+	--text-color-link-active: var(--gray4);
+	--text-color-link-visited: var(--gray5);
 
-	--font-family: "Areal", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	--font-family-monospace: "Areal Mono", ui-monospace, "SF Mono", Consolas, Menlo, monospace;
-	--font-size-base: 1.1rem;
-	--syntax-tab-size: 2;
+	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
+	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
 }
 
 @font-face {
 	font-family: "Areal";
-	src: url("/fonts/ABCArealVariable.woff2") format("woff2");
+	src: url("/fonts/ABCArealSuperfamilyVariable.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
@@ -54,17 +48,14 @@
 	font-display: swap;
 }
 
-/* ============================================
-   BASE
-   ============================================ */
 * { box-sizing: border-box; }
 @view-transition { navigation: auto; }
 
 html, body {
 	margin: 0 auto;
 	padding: 0;
-	font-family: var(--font-family);
-	font-size: var(--font-size-base);
+	font-family: var(--font-family-monospace);
+	font-size: 1.1rem;
 	color: var(--text-color);
 	background-color: var(--background-color);
 }
@@ -73,7 +64,7 @@ html { overflow-y: scroll; }
 .wrapper { max-width: 40em; margin: 0 auto; padding: 1em; }
 .visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 
-p { line-height: 1.6; text-align: justify; }
+p { line-height: 1.5; text-align: justify; }
 p:last-child { margin-bottom: 0; }
 h2, h3, h4, li { text-align: left; line-height: 1.5; }
 main :first-child { margin-top: 0; }
@@ -86,48 +77,40 @@ video, iframe { width: 100%; height: auto; }
 iframe { aspect-ratio: 16/9; }
 
 blockquote {
-	border-left: 3px solid var(--c-500);
+	border-left: 3px solid var(--gray4);
 	margin: 1em 0;
 	padding-left: 1em;
-	color: var(--text-color);
 	background: transparent;
 }
 
-/* ============================================
-   LINKS
-   ============================================ */
 a[href] { color: var(--text-color-link); }
 a[href]:visited { color: var(--text-color-link-visited); }
-a[href]:hover, a[href]:active {
-	color: var(--text-color-link-active);
-	text-decoration: underline;
-}
+a[href]:hover, a[href]:active { color: var(--text-color-link-active); }
 
-/* ============================================
-   HEADER / NAV
-   ============================================ */
+/* header, kept plain, no bg color trick needed since it's already white-on-white-ish */
 .top-bar {
-	color: var(--c-50) !important;
-	background-color: var(--c-900);
-	border-bottom: 1px solid var(--c-700);
+	color: var(--gray7) !important;
+	border-bottom: 2px solid var(--gray6);
 	display: flex;
 	gap: 1em;
 	flex-wrap: wrap;
 	align-items: center;
 	font-size: 1.2rem;
-	padding: 1em;
+	padding: 1.25em;
 	width: 100%;
 }
 .home-link {
-	font-size: 1.4em;
-	font-weight: 100;
-	padding-right: .3em;
-	flex-grow: 0;
+	font-family: var(--font-family);
+	font-weight: 900;
+	font-style: italic;
+	font-size: 3rem;
+	line-height: 1.1;
+	margin-right: 0.3em;
 }
 .home-link:link:not(:hover) { text-decoration: none; }
-.top-bar a { color: var(--c-50); }
-.top-bar a:visited { color: var(--c-50); }
-.top-bar a:hover, .top-bar a:active { color: var(--c-300); }
+.top-bar a { color: var(--gray7); }
+.top-bar a:visited { color: var(--gray7); }
+.top-bar a:hover, .top-bar a:active { color: var(--gray4); }
 
 .nav { display: flex; gap: .5em 1em; padding: 0; margin: 0; list-style: none; font-weight: 250; align-items: center; }
 .nav-item { display: inline-block; }
@@ -135,21 +118,18 @@ a[href]:hover, a[href]:active {
 .nav a[href][aria-current="page"] { text-decoration: underline; }
 
 .social-icons { display: flex; gap: 0.75em; margin-left: auto; align-items: center; }
-.social-icons svg { width: 19px; height: 19px; fill: var(--c-50); transition: fill 0.3s ease; }
-.social-icons a:hover svg { fill: var(--c-300); }
+.social-icons svg { width: 19px; height: 19px; fill: var(--gray7); }
+.social-icons a:hover svg { fill: var(--gray4); }
 
 .links-nextprev {
 	display: flex; justify-content: space-between; gap: .5em 1em;
-	list-style: ""; border-top: 1px dashed var(--c-700); padding: 1em 0;
+	list-style: ""; border-top: 1px dashed var(--gray3); padding: 1em 0;
 }
 .links-nextprev-next { text-align: right; }
 
-/* ============================================
-   POST LIST / TAGS
-   ============================================ */
 .postlist { list-style: none; padding: 0 0 0 1.5rem; }
 .postlist-item { display: flex; flex-wrap: wrap; align-items: baseline; margin-bottom: 1em; }
-.postlist-date, .postlist-item:before { font-size: 0.8125em; color: var(--c-500); }
+.postlist-date, .postlist-item:before { font-size: 0.8125em; color: var(--gray5); }
 .postlist-date { word-spacing: -0.5px; margin-left: 1.7rem; }
 .postlist-link {
 	font-size: 1.1875em; font-weight: 700;
@@ -157,113 +137,99 @@ a[href]:hover, a[href]:active {
 	padding: 0 .5em 0 .25em;
 	text-align: left;
 }
-.postlist-item-active .postlist-link { font-weight: bold; color: var(--c-50); }
-.post-number { font-weight: bold; color: var(--c-500); min-width: 2ch; }
+.postlist-item-active .postlist-link { font-weight: bold; }
+.post-number { font-weight: bold; color: var(--gray4); min-width: 2ch; }
 
 .post-tag {
 	display: inline-flex; align-items: center; justify-content: center;
 	text-transform: capitalize; font-style: italic;
-	background: var(--c-800); color: var(--c-100);
+	background: var(--gray2); color: var(--gray6);
 	padding: 0.2em 0.5em; border-radius: 4px; text-decoration: none;
 }
-.post-tag:hover { background: var(--c-700); }
+.post-tag:hover { background: var(--gray3); }
 
 .post-metadata, .post-tags { list-style: none; padding: 0; margin: 0 0 0.5em; display: flex; gap: 0.5em; flex-wrap: wrap; }
 .post-metadata time { margin-right: 1em; }
 
 .tag-filter-label { font-weight: bold; margin-right: 0.5em; }
-.tag-filter-dropdown {
-	margin-bottom: 1em; padding: 0.4em; font-size: 1rem;
-	background: var(--c-800); color: var(--text-color); border: 1px solid var(--c-700);
-}
+.tag-filter-dropdown { margin-bottom: 1em; padding: 0.4em; font-size: 1rem; }
 #tag-filter-container { margin-bottom: 1em; display: flex; flex-wrap: wrap; gap: 0.75em; }
 .tag-checkbox { display: flex; align-items: center; font-size: 0.95rem; cursor: pointer; position: relative; }
 .tag-checkbox input[type="checkbox"] { display: none; }
 .custom-checkmark {
 	width: 1em; height: 1em; margin-right: 0.5em; border-radius: 4px;
-	border: 2px solid var(--c-500); background-color: var(--c-800);
-	transition: background-color 0.2s, border-color 0.2s;
+	border: 2px solid var(--gray4); background-color: var(--gray1);
 }
 .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
-	background-color: var(--c-50); border-color: var(--c-50);
+	background-color: var(--gray6); border-color: var(--gray6);
 }
 .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
 	content: ""; position: absolute; top: 50%; left: 50%;
 	width: 3px; height: 7px;
-	border: solid var(--c-950); border-width: 0 2px 2px 0;
+	border: solid var(--gray1); border-width: 0 2px 2px 0;
 	transform: translate(-50%, -50%) rotate(45deg);
 }
 
-/* ============================================
-   TABLE
-   ============================================ */
 table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
-th, td { padding: 0.75em 1em; border-bottom: 1px solid var(--c-700); text-align: left; }
-thead { background-color: var(--c-800); font-weight: bold; }
-tr:hover { background-color: var(--c-800); }
+th, td { padding: 0.75em 1em; border-bottom: 1px solid var(--gray3); text-align: left; }
+thead { background-color: var(--gray2); font-weight: bold; }
+tr:hover { background-color: var(--gray2); }
 
-/* ============================================
-   CODE — highlighting kept via brightness/weight, not hue
-   ============================================ */
 pre, code { font-family: var(--font-family-monospace); font-size: 0.9em; line-height: 1.5; }
 pre {
-	background: var(--c-800);
-	color: var(--c-100);
+	background: var(--gray2);
+	color: var(--gray6);
 	padding: 1rem;
 	border-radius: 6px;
 	margin: 1em 0;
 	overflow-x: auto;
 	text-align: left;
+	border: 1px solid var(--gray3); /* a bit of a crutch but it looks better than a floating gray box */
 }
 :not(pre) > code {
-	background: var(--c-800);
-	color: var(--c-50);
+	background: var(--gray2);
+	color: var(--gray7);
 	padding: 0.2em 0.4em;
 	border-radius: 6px;
 	font-size: 0.85em;
 	word-break: break-word;
 }
-pre code { background: none; padding: 0; color: inherit; }
+pre code { background: none; padding: 0; border: none; color: inherit; }
 
-.token.comment       { color: var(--c-500); font-style: italic; }
-.token.keyword        { color: var(--c-50); font-weight: 700; }
-.token.string         { color: var(--c-300); }
-.token.function       { color: var(--c-50); font-weight: 600; }
-.token.number         { color: var(--c-300); }
+/* token colors — no hue, just contrast + weight/italic doing the work */
+.token.comment    { color: var(--gray4); font-style: italic; }
+.token.keyword    { color: var(--gray7); font-weight: 700; }
+.token.string     { color: var(--gray5); }
+.token.function   { color: var(--gray7); font-weight: 600; }
+.token.number     { color: var(--gray5); }
 .token.operator,
-.token.punctuation    { color: var(--c-100); }
-.token.variable       { color: var(--c-100); font-style: italic; }
-.token.class-name     { color: var(--c-50); font-weight: 600; }
-.token.imports        { color: var(--c-300); font-style: italic; }
+.token.punctuation { color: var(--gray6); }
+.token.variable   { color: var(--gray6); font-style: italic; }
+.token.class-name { color: var(--gray7); font-weight: 600; }
+.token.imports    { color: var(--gray5); font-style: italic; }
 
-/* ============================================
-   MATH
-   ============================================ */
 mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
 
-/* ============================================
-   ALERT BLOCKS — differentiated by border-style, not color
-   ============================================ */
 .markdown-alert {
 	margin: 1em 0; padding: 0.75em 1em;
-	border-left: 3px solid var(--c-500);
+	border-left: 3px solid var(--gray4);
 	border-radius: 6px;
-	background: var(--c-800);
-	color: var(--text-color);
+	background: var(--gray2);
 }
 .markdown-alert-title {
 	display: flex; align-items: center; gap: 0.4em;
 	font-weight: 700; font-size: 0.9em;
 	text-transform: uppercase; letter-spacing: 0.02em;
-	margin: 0 0 0.4em; color: var(--c-50);
+	margin: 0 0 0.4em; color: var(--gray6);
 }
-.markdown-alert-title svg { fill: var(--c-50); width: 1em; height: 1em; }
+.markdown-alert-title svg { fill: var(--gray6); width: 1em; height: 1em; }
 .markdown-alert > :last-child { margin-bottom: 0; }
 
-.markdown-alert-tip       { border-left-color: var(--c-300); }
+/* only real distinguishing feature left between alert types is border style, keeping it simple */
+.markdown-alert-tip       { border-left-color: var(--gray5); }
 .markdown-alert-important { border-left-style: double; border-left-width: 5px; }
 .markdown-alert-warning   { border-left-style: dashed; }
-.markdown-alert-caution   { border-left-width: 5px; border-left-color: var(--c-50); }</style>
+.markdown-alert-caution   { border-left-width: 5px; border-left-color: var(--gray7); }</style>
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -273,7 +239,7 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 	</head>
 	<body>
 		<header class="top-bar">
-			<a href="/" class="home-link">Oliver Kiran Brown</a>
+			<a href="/" class="home-link">kinobi</a>
 			<nav>
 				<ul class="nav">
 					<li class="nav-item"><a href="/">About</a></li>
@@ -425,7 +391,7 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
 			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
 				<a href="/">About</a>
-				<a href="https://oliverkiranbrown.github.io/drum_sequencer/">Groove!</a>
+				<a href="https://oliverkiranbrown.com/drum_sequencer/">Groove!</a>
 				<a href="/notes/">Notes</a>
 				<a href="/now/">Now</a>
 				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
@@ -435,7 +401,7 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 			</p>
 		</footer>
 
-		<!-- This page `/writing/` was built on 2026-09-27T01:00:40.229Z -->
+		<!-- This page `/writing/` was built on 2026-09-27T01:32:15.652Z -->
 		<script type="module" src="/dist/9Or_lbGDQQ.js"></script>
 	</body>
 </html>

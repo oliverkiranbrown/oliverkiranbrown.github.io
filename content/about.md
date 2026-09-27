@@ -6,11 +6,11 @@ eleventyNavigation:
 permalink: /
 ---
 
-<!-- <div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
   <div>
-    <img src="hands.png" alt="Headshot">
+    <img src="hands.jpg" alt="Headshot">
   </div>
-</div> -->
+</div>
 
 ## About Me  
 Hey! I'm Oli, a current Data Science and Analytics graduate at  [Lloyds Banking Group](https://www.lloydsbankinggroup.com/), currently based in Bristol. Over the coming years, I'm hoping to learn as much as I can about the modern data ecosytem in industry, laying the foundations for an exciting career in this space. On this site, I'm planning to chart my thoughts along this journey, with the aim of slowly building up a body of writing that I can be proud of.
