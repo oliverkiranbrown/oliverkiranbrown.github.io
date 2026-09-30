@@ -60,7 +60,7 @@ With this architecture set-up, you can then pass through terabytes of text, and 
 
 From *some* number to "let's try $0.52 \times x$ here", and then "ah, $0.49$ scores better", on and on. Eventually, this gives you a model which can somewhat plausibly string words together in a row.
 
-But what if some vile hate-speech crept into the training data? The model has no morally—it's been rewarded by reproducing it's training data—so, unconstrained, it'll happily barf out whatever disgraceful drivel you desire. How can we align the choices these models make to our own moral codes?
+But what if some vile hate-speech crept into the training data? The model has no morality—it's been rewarded by reproducing it's training data—so, unconstrained, it'll happily barf out whatever disgraceful drivel you desire. How can we align the choices these models make to our own moral codes?
 
 ### Reinforcement Learning from Human Feedback
 
