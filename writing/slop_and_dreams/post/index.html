@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Slop and Dreams</title>
+		<meta name="description" content="GenAI, the hype-train and a alternative path.">
+		<link rel="icon" href="/img/favicon.png">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Oliver Kiran Brown">
+		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Other fonts to play with */
+.dm-serif-text-regular {
+	font-family: "DM Serif Text", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+/*
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		/*
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+*/
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+.wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+blockquote {
+	border-left: 3px solid #8ba254; /* thin green line on LHS */
+	margin: 1em 0;                  /* vertical spacing */
+	padding-left: 1em;              /* space between line and text */
+	color: var(--text-color);       /* inherit normal text color */
+	background: transparent;        /* keep background clean */
+  }
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+	text-align: justify;
+}
+
+h2 {
+	text-align: left;
+}
+
+h3 {
+	text-align: left;
+}
+
+h4 {
+	text-align: left;
+}
+
+li {
+	line-height: 1.5;
+	text-align: left;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer p {
+	padding: 1rem;
+	text-align: center;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	/*
+	border-bottom: 1px dashed var(--color-gray-20);
+	*/
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 0;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 1rem;
+  }
+  
+  th, td {
+	padding: 0.75em 1em;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+  }
+  
+  thead {
+	background-color: #f9f9f9;
+	font-weight: bold;
+  }
+  
+  tr:hover {
+	background-color: #f5f5f5;
+  }
+
+
+
+/* Base code font setup */
+/* ===== Modern light code theme ===== */
+
+pre, code {
+  font-family: var(--font-family-monospace);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Block code */
+pre {
+  background: #f6f8fa;
+  color: #24292e;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1em 0;
+  overflow-x: auto;
+  text-align: left;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: rgba(228, 210, 210, 0.05);
+  color: #24292e;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  word-break: break-word;
+}
+
+/* Prevent double styling */
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Prism light tokens */
+.token.comment       { color: #6a737d; font-style: italic; }
+.token.keyword       { color: #d73a49; }
+.token.string        { color: #032f62; }
+.token.function      { color: #6f42c1; }
+.token.number        { color: #005cc5; }
+.token.operator      { color: #24292e; }
+.token.punctuation   { color: #24292e; }
+.token.variable      { color: #e36209; }
+.token.class-name    { color: #22863a; }
+.token.imports       { color: #b31d28; }
+
+/* Header */
+.top-bar {
+	color: white !important;
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	font-size: 1.2rem;
+	background-color: #8ba254;  
+	align-items: center;
+	/*
+	--auto-generated colour palette
+	--sorrell-brown: #d3b89c;
+	--green-waterloo: #1c1d07;
+	--dallas: #785c26;
+	--bronze-olive: #4d410d;
+	--chelsea-cucumber: #8ba254;
+	--saratoga: #526a17;
+	--clover: #38480f;
+	--medium-carmine: #a54630;
+	--oslo-gray: #82888a;
+	--fuscous-gray: #514f49;
+
+	--favourites
+	--sorrell-brown: #d3b89c;
+	--chelsea-cucumber: #8ba254;
+	--oslo-gray: #82888a;
+
+	--final
+	--chelsea-cucumber: #8ba254;
+	*/
+	padding: 1em;
+	width: 100%;
+}
+.home-link {
+	flex-grow: 0;
+	/* this controls the home link font size */
+	font-size: 1.4em; /* 16px /16 */
+	font-weight: 100;
+	padding-right: .3em;
+	font-family: 'DM Serif Text', serif;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+.top-bar a {
+	color: white;
+  }
+  
+  .top-bar a:visited {
+	color: white;
+  }
+  
+  .top-bar a:hover,
+  .top-bar a:active {
+	color: #f0f0f0; /* or any lighter shade for hover effect */
+  }
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-weight: 250;
+	align-items: center;
+	/* this controls the nav bar font size */
+	font-size: 1em;
+
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* styling for the social icons on RHS of header */
+.social-icons {
+	display: flex;
+	gap: 0.75em;
+	margin-left: auto; /* Pushes to far right in the flex row */
+	align-items: center;
+  }
+  
+  .social-icons svg {
+	width: 19px;
+	height: 19px;
+	fill: white; /* Match your header color */
+	transition: fill 0.3s ease;
+  }
+  
+  .social-icons a:hover svg {
+	fill: #f0f0f0; /* Lighter on hover */
+  }
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin-bottom: 1em;
+  }
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 1.7rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+	text-align: left;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+.post-number {
+	font-weight: bold;
+	color: #888;
+	min-width: 2ch;
+  }
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+.tag-filter-label {
+	font-weight: bold;
+	margin-right: 0.5em;
+  }
+  
+  .tag-filter-dropdown {
+	margin-bottom: 1em;
+	padding: 0.4em;
+	font-size: 1rem;
+  }
+  
+  .postlist-item {
+	margin-bottom: 0.8em;
+  }
+
+  #tag-filter-container {
+	margin-bottom: 1em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em;
+  }
+  
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+  }
+  
+  .tag-checkbox input {
+	margin-right: 0.4em;
+	margin-top: 0.4em;
+  }
+
+  .post-metadata,
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-tags {
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  background: #f0f0f0;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.post-tag:hover {
+  background: #ddd;
+}
+
+/* control over maths */
+mjx-container[display] {
+	display: inline-flex;
+	overflow-x: auto;
+	overflow-y: hidden;
+	max-width: 100%;
+  }
+
+/* custom checkbox */
+/* Hide the native checkbox */
+.tag-checkbox input[type="checkbox"] {
+	display: none;
+  }
+  
+  /* Style the label to align nicely */
+  .tag-checkbox {
+	display: flex;
+	align-items: center;
+	font-size: 0.95rem;
+	cursor: pointer;
+	position: relative;
+  }
+  
+  /* Style the custom checkbox square */
+  .custom-checkmark {
+	width: 1em;
+	height: 1em;
+	border: 2px solid #ccc;
+	background-color: #fff;
+	margin-right: 0.5em;
+	border-radius: 4px;
+	position: relative;
+	transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* When checked, change the background color */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: #8ba254; /* your custom green */
+	border-color: #8ba254;
+  }
+  
+  /* Optional: add a checkmark icon */
+  .tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 7px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		
+		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
+	</head>
+	<body>
+		<header class="top-bar">
+			<a href="/" class="home-link">Oliver Kiran Brown</a>
+			<nav>
+				<ul class="nav">
+					<li class="nav-item"><a href="/">About</a></li>
+					<li class="nav-item"><a href="/writing/">Writing</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
+				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+			</nav>
+
+			<div class="social-icons">
+				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
+					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
+					</svg>
+				</a>
+				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+					</svg>
+				</a>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+
+
+<h1 id="slop-and-dreams">Slop and Dreams</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-10-15">15 October 2025</time></li>
+</ul>
+<ul class="post-tags">
+		<li><a href="/tags/writing/" class="post-tag">Writing</a></li>
+		<li><a href="/tags/ml/" class="post-tag">ML</a></li>
+</ul>
+
+<p>I'm scared of living in a world of slop. Of a world without thought. I can already feel this slop sloshing against the walls of my increasingly barren brain. Nuanced concepts, summarised. <a href="https://www.media.mit.edu/projects/your-brain-on-chatgpt/overview/">Critical thinking, going</a>. Fresh ideas, generated. And now? Your thumbs can drift over to reels and without blinking, you're consuming these 10-second-long, data-centre melting, child's brain mushing, regression to the mean inducing slop videos generated by OpenAI's latest contribution to human flourishing—Sora 2.</p>
+<p>Don't get me wrong, as a tech nerd, the underlying maths is fascinating. It must be unbelievably gratifying to sit in your <a href="https://nypost.com/2023/05/20/inside-silicon-valleys-free-wheeling-sex-parties/">silicon valley polycule</a>, dreaming in tensor calculus, coding in PyTorch on £500k/year, with access to unlimited resources and just push the boundaries of what's possible with ML.</p>
+<p>But at what cost? What's the business model here? Where's the value add? And who does it effect?</p>
+<p>These generative tools can be fantastic personal assistants. Their excellent coding tools. LLM-based agents are automating away dull admin. There are productivity gains, efficiency improvements and value add, in <em>some</em> use-cases. And, hey maybe I'm a skeptic. Who knows, maybe in 10 years, we'll live in a world without apps, where every smartphone interaction is interfaced by LLM agents. But these models are fundamentally probabilistic, next-token guessing, hallucination guaranteed word vomiters. Can monetisation match the hype? Really? And further, ever since OAI shed it's benevolent credentials and went private, they've followed the classic VC-backed formulae: start cheap to lure people in and dominate market share, but then what?</p>
+<p>We've been here before.</p>
+<p>In what's been affectionately deemed &quot;<a href="https://www.washingtonindependentreviewofbooks.com/bookreview/enshittification-why-everything-suddenly-got-worse-and-what-to-do-about-it">the Enshittification of the Internet</a>&quot;, when central bank interest rates jumped back up from zero and the glory days of free debt ended, 'institutional investors' started clamouring for a return, pushing FAANG to drive their services into the ground in the pursuit of profit. Do you remember when Amazon was actually cheap? Now, Bezos' captive market charges the same as the high street. <em>So screw big tech, I'll just shop local!</em> Oh wait, <a href="https://www.parliament.uk/business/lords/media-centre/house-of-lords-media-notices/2024/november-2024/look-beyond-retail-to-reverse-high-street-decline-says-new-lords-report/">it doesn't exist</a>.... Triple 30 second unskippable ads on YouTube. AI-generated music on Spotify, clawing away from smaller artists already pitiful streaming income. Ads on Netflix (even though you pay!!!). Uber gutting local taxi companies with VC-cheap rides. Scrolling past pages of sponsorship on Google before you get the result you wanted. X descending into right-wing armageddon. The internet is not what it used to be.</p>
+<p>If OAI is forced to similarly return the value promised to VC, I do worry what this means. Via your prompting, these valley-tech nerds have access to your wildest hopes and dreams, you at your darkest moments, you at your most creative or mundane. Copilot are <a href="https://adzooma.com/blog/ai-to-roi-why-ads-in-copilot-are-the-next-big-breakthrough-for-ppc/">already floating</a> the idea of serving you ads via their chatbot based on your context. What does this mean for trust and transparency, if the first place you look for information—your default AI summary—is subtly stuffed full of ads?</p>
+<p>In these lonely and divided times, <a href="https://www.bbc.co.uk/news/articles/cpd2qv58yl5o">even love</a> can't escape the chopping block of corporate capture. An LLM can make a <a href="https://www.reddit.com/r/MyBoyfriendIsAI/">perfect partner</a> — you can whisper your deepest darkest secrets to them in the depths of the night without a mess of dirty plates and stinky socks. And why stop at chat? For the low price of <a href="https://www.youtube.com/watch?v=jjkaYyysYhA">sucking all of the groundwater</a> out of local ecosystems and <a href="https://www.theguardian.com/technology/2024/sep/15/data-center-gas-emissions-tech">belching CO2 into the atmosphere</a> in an urgent period of climate breakdown, you can fry some GPUs and generate your perfect <a href="https://www.iwf.org.uk/about-us/why-we-exist/our-research/how-ai-is-being-abused-to-create-child-sexual-abuse-imagery/">disturbed sexual fantasy</a>. The erotica industry is worth <a href="https://www.researchandmarkets.com/reports/6005580/adult-entertainment-market-report?srsltid=AfmBOoqsPJMtJ0_HiGGBJHyaLfLdu6Vy7RFrI0ceXrq6zo9gCY-KwKHR">billions a year</a>—what a depressing interpretation of AI-value add.</p>
+<p>Sora and this scary world we're moving into feels like the logical endpoint of extreme individualism. It's the apex of this contradictory phenomenon: our online world has connected the world like we could never have imagined—instantaneous video calls across the world, practicing languages live on Omegle from your bedroom, <a href="https://www.youtube.com/watch?v=6WlI24rv__g">clips of Mongolian throat-singers</a> on YouTube—we're never been so technologically advanced, so tightly networked, yet simultaneously, <a href="https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf">so atomised and lonely</a>.</p>
+<p>And as a chief enabler of this online world, it's only right that Amazon personifies this individualisation <a href="https://webassets.oxfamamerica.org/media/documents/At_Work_and_Under_Watch.pdf">in their working practice</a>. Bezos makes his workers wear little trackers, to spot which colleagues are off on break together, possibly discussing their precarious working conditions. Once potential friendship is detected, their shifts are automatically desynchronised. This algorithmically removes the <em>preconditions</em> for workers recognising their collective bargaining power. <a href="https://journals.sagepub.com/doi/10.1177/23780231251318389">These systems</a> <em>enforce</em> atomisation. We really have moved a long way from the techno-optimism of the early 2000s. These technologies promised connection, but their implementation divides.</p>
+<p>Sure, it's scary. But fundamentally, technology <em>itself</em> is a neutral force. It's who controls the technology that matters. And it doesn't <em>have</em> to be this way. Social media, LLMs... these are transformative technologies that—taking a long-term view—are just getting out of the womb. And as our benevolent tech overlords have built their oligopoly, they've bestowed humanity with these wonderful gifts. Github, Flutter, HuggingFace — there's this wonderful open-source treasure trove of possibility. The foundations for a different future are here. We don't have to accept our overlord's value-less, attention-enveloping, eyeball-mining platforms. We can build back <a href="https://melvillehouse.s3.amazonaws.com/documents/AGAINST-PLATFORMS_Teaching-Guide.pdf">institutions</a> that genuinely <em>care</em> — creating with the public, for the public, now. There's a world to win.</p>
+
+
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/">About</a>
+				<a href="https://oliverkiranbrown.github.io/drum_sequencer/">Groove!</a>
+				<a href="/notes/">Notes</a>
+				<a href="/now/">Now</a>
+				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
+			</div>
+			<p style="margin-top: 0.5em; font-size: 0.8em;">
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/writing/slop_and_dreams/post/` was built on 2026-02-04T01:28:16.511Z -->
+		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+	</body>
+</html>

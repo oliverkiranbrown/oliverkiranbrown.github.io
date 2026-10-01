@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Taking the Plunge</title>
+		<meta name="description" content="A story about hairloss.">
+		<link rel="icon" href="/img/favicon.png">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="KINOBI">
+		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* colors — just a grayscale, tweak these */
+:root {
+	--gray1: #fff;
+	--gray2: #eee;
+	--gray3: #ddd;
+	--gray4: #999;
+	--gray5: #555;
+	--gray6: #222;
+	--gray7: #000;
+
+	/* Hightlight! */
+	--red: #ff0000;
+
+	/* Parchment Background */
+	/* --background-color: #fdf6e3; */
+	--background-color: --gray1;
+
+	/* --background-color: var(--gray1); */
+	--text-color: var(--gray6);
+	--text-color-link: var(--gray7);
+	--text-color-link-active: var(--gray4);
+	--text-color-link-visited: var(--gray5);
+
+	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
+	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
+	--font-family-title: "BionixFat", var(--font-family);
+}
+
+@font-face {
+	font-family: "Areal";
+	src: url("/fonts/ABCArealSuperfamilyVariable.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Areal Mono";
+	src: url("/fonts/ABCArealMonoVariable.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Title */
+@font-face {
+	font-family: "BionixFat";
+	src: url("/fonts/BionixFat-vnmEM.otf") format("opentype");
+	font-weight: 400;
+}
+
+* { box-sizing: border-box; }
+@view-transition { navigation: auto; }
+
+html, body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: var(--font-family-monospace);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html { overflow-y: scroll; }
+
+.wrapper { max-width: 40em; margin: 0 auto; padding: 1em; }
+.visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+
+p { line-height: 1.5; text-align: justify; }
+p:last-child { margin-bottom: 0; }
+h2, h3, h4, li { text-align: left; line-height: 1.5; }
+main :first-child { margin-top: 0; }
+main, footer p { padding: 1rem; text-align: center; }
+
+/* Red hover */
+h2 a[href^="#"], h3 a[href^="#"] {
+	color: var(--gray3);
+	text-decoration: none;
+}
+h2 a[href^="#"]:hover, h3 a[href^="#"]:hover {
+	color: var(--red);
+}
+
+::selection {
+	background: var(--red);
+	color: var(--gray1);
+}
+
+img { max-width: 100%; }
+img[width][height] { height: auto; }
+img[src$=".svg"] { width: 100%; height: auto; max-width: none; }
+video, iframe { width: 100%; height: auto; }
+iframe { aspect-ratio: 16/9; }
+
+blockquote {
+	border-left: 3px solid var(--red);
+	margin: 1em 0;
+	padding-left: 1em;
+	background: transparent;
+}
+
+a[href] { color: var(--text-color-link); }
+a[href]:visited { color: var(--text-color-link-visited); }
+a[href]:hover, a[href]:active { color: var(--gray4); }
+
+/* header, kept plain, no bg color trick needed since it's already white-on-white-ish */
+.top-bar {
+	color: var(--gray7) !important;
+	border-bottom: 2px solid var(--gray6);
+	box-shadow: 0 1px 0 var(--red);
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 1.2rem;
+	padding: 1.25em;
+	width: 100%;
+}
+.home-link {
+	font-family: var(--font-family-title);
+	font-weight: 100;
+	font-style: italic;
+	font-size: 4rem;
+	line-height: 1.1;
+	margin-right: 0.3em;
+	text-shadow: 0.03em 0.03em 0 var(--red);
+}
+.home-link:link:not(:hover) { text-decoration: none; color: var(--gray7); }
+
+.top-bar a { color: var(--gray7); }
+.top-bar a:visited { color: var(--gray7); }
+.top-bar a:hover, .top-bar a:active { color: var(--red); }
+/* Home link — leave color untouched on hover, just add a red underline */
+.top-bar .home-link:hover,
+.top-bar .home-link:active {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--red);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
+
+.nav { display: flex; gap: 1em 1em; padding-left: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav-item { display: inline-block; }
+.nav-item a[href]:not(:hover) { text-decoration: none; }
+.nav a[href][aria-current="page"] { text-decoration: underline; }
+
+.social-icons { display: flex; gap: 0.75em; margin-left: auto; align-items: center; }
+.social-icons svg { width: 19px; height: 19px; fill: var(--gray7); }
+.social-icons a:hover svg { fill: var(--gray4); }
+
+.links-nextprev {
+	display: flex; justify-content: space-between; gap: .5em 1em;
+	list-style: ""; border-top: 1px dashed var(--gray3); padding: 1em 0;
+}
+.links-nextprev-next { text-align: right; }
+
+.postlist { list-style: none; padding: 0 0 0 1.5rem; }
+.postlist-item { display: flex; flex-wrap: wrap; align-items: baseline; margin-bottom: 1em; }
+.postlist-date, .postlist-item:before { font-size: 0.8125em; color: var(--gray5); }
+.postlist-date { word-spacing: -0.5px; margin-left: 1.7rem; }
+.postlist-link {
+	font-size: 1.1875em; font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding: 0 .5em 0 .25em;
+	text-align: left;
+}
+.postlist-item-active .postlist-link { font-weight: bold; }
+.post-number { font-weight: bold; color: var(--gray4); min-width: 2ch; }
+
+.post-tag {
+	display: inline-flex; align-items: center; justify-content: center;
+	text-transform: capitalize; font-style: italic;
+	background: var(--gray2); color: var(--gray6);
+	padding: 0.2em 0.5em; border-radius: 4px; text-decoration: none;
+}
+.post-tag:hover { background: var(--gray3); }
+
+.post-metadata, .post-tags { list-style: none; padding: 0; margin: 0 0 0.5em; display: flex; gap: 0.5em; flex-wrap: wrap; }
+.post-metadata time { margin-right: 1em; }
+
+.tag-filter-label { font-weight: bold; margin-right: 0.5em; }
+.tag-filter-dropdown { margin-bottom: 1em; padding: 0.4em; font-size: 1rem; }
+#tag-filter-container { margin-bottom: 1em; display: flex; flex-wrap: wrap; gap: 0.75em; }
+.tag-checkbox { display: flex; align-items: center; font-size: 0.95rem; cursor: pointer; position: relative; }
+.tag-checkbox input[type="checkbox"] { display: none; }
+.custom-checkmark {
+	width: 1em; height: 1em; margin-right: 0.5em; border-radius: 4px;
+	border: 2px solid var(--gray4); background-color: var(--gray1);
+}
+.tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: var(--gray6); border-color: var(--gray6);
+}
+.tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: ""; position: absolute; top: 50%; left: 50%;
+	width: 3px; height: 7px;
+	border: solid var(--gray1); border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+th, td { padding: 0.75em 1em; border-bottom: 1px solid var(--gray3); text-align: left; }
+thead { background-color: var(--gray2); font-weight: bold; }
+tr:hover { background-color: var(--gray2); }
+
+pre, code { font-family: var(--font-family-monospace); font-size: 0.9em; line-height: 1.5; }
+pre {
+	background: var(--gray2);
+	color: var(--gray6);
+	padding: 1rem;
+	border-radius: 6px;
+	margin: 1em 0;
+	overflow-x: auto;
+	text-align: left;
+	border: 1px solid var(--gray3); /* a bit of a crutch but it looks better than a floating gray box */
+}
+:not(pre) > code {
+	background: var(--gray2);
+	color: var(--gray7);
+	padding: 0.2em 0.4em;
+	border-radius: 6px;
+	font-size: 0.85em;
+	word-break: break-word;
+}
+pre code { background: none; padding: 0; border: none; color: inherit; }
+
+/* token colors — no hue, just contrast + weight/italic doing the work */
+.token.comment    { color: #6a737d; font-style: italic; }
+.token.keyword    { color: #d73a49; }
+.token.string     { color: #032f62; }
+.token.function   { color: #6f42c1; }
+.token.number     { color: #005cc5; }
+.token.operator,
+.token.punctuation { color: var(--gray6); }
+.token.variable   { color: #e36209; }
+.token.class-name { color: #22863a; }
+.token.imports    { color: #b31d28; }
+
+mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+.markdown-alert {
+	margin: 1em 0; padding: 0.75em 1em;
+	border-left: 3px solid var(--red);
+	border-radius: 6px;
+	background: var(--gray2);
+}
+.markdown-alert-title {
+	display: flex; align-items: center; gap: 0.4em;
+	font-weight: 700; font-size: 0.9em;
+	text-transform: uppercase; letter-spacing: 0.02em;
+	margin: 0 0 0.4em; color: var(--gray6);
+}
+.markdown-alert-title svg { fill: var(--gray6); width: 1em; height: 1em; }
+.markdown-alert > :last-child { margin-bottom: 0; }
+
+/* only real distinguishing feature left between alert types is border style, keeping it simple */
+.markdown-alert-tip       { border-left-color: var(--gray5); }
+.markdown-alert-important { border-left-style: double; border-left-width: 5px; }
+.markdown-alert-warning   { border-left-style: dashed; }
+.markdown-alert-caution   { border-left-width: 5px; border-left-color: var(--gray7); }
+
+/* Home Image */
+.photo-frame { position: relative; display: inline-block; }
+.photo-frame img { display: block; filter: grayscale(1) contrast(1.1); }
+.photo-frame::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--red);
+	mix-blend-mode: multiply;
+	opacity: 0.17;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		
+		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
+	</head>
+	<body>
+		<header class="top-bar">
+			<a href="/" class="home-link">KINOBI</a>
+			<nav>
+				<ul class="nav">
+					<li class="nav-item"><a href="/">About</a></li>
+					<li class="nav-item"><a href="/writing/">Writing</a></li>
+					<li class="nav-item"><a href="/music/">Music</a></li>
+				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+			</nav>
+
+			<div class="social-icons">
+				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
+					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
+					</svg>
+				</a>
+				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+					</svg>
+				</a>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+
+
+<h1 id="taking-the-plunge">Taking the Plunge</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-08-27">27 August 2025</time></li>
+</ul>
+<ul class="post-tags">
+		<li><a href="/tags/personal/" class="post-tag">Personal</a></li>
+		<li><a href="/tags/experimental/" class="post-tag">Experimental</a></li>
+		<li><a href="/tags/writing/" class="post-tag">Writing</a></li>
+</ul>
+
+<p><em>I've gone bald. At the ripe old age of twenty-two. My George Daniel, Dwyane the Rock Johnson, Yanis Varoufakis amalgamation begins! The long road to my new shiny scalp had its twists and turns. To quote <a href="https://www.theguardian.com/society/2024/apr/16/losing-my-hair-made-me-miserable-now-im-as-bald-as-an-egg-i-couldnt-be-happier">Stewart Heritage</a>,</em></p>
+<blockquote>
+<p>So baldness is not great. But, hey, we’re men, right? It’s too trivial a subject to get worked up about, even though it makes us paranoid and anxious and has obliterated our sense of self-esteem. Even though we’re suffering through the grief of losing something we’re powerless to keep, we’ve all decided that it’s better just to suffer in silence.</p>
+</blockquote>
+<p><em>So, as I finally come to terms with my Androgenetic Alopecia, I thought I'd throw my hat in the elocutionary ring and toast this 'new me' by recording some of these moments on my journey to baldness. A tribute, of sorts, to these pesky follicles which have caused such ridiculous grief!</em></p>
+<p>From 19 to 21, I collected enough snapshots to know I was on the long road to a Norwood Five. The penny dropped at the Edinburgh Fringe Festival, aged 20. After dancing all night long to the sweet funk of High Fade in Whistle Binkies, some friends from my troupe and I hiked up Arthur's Seat to see sunrise in. The long trek, the sun creeping over the horizon, basking us in this glorious orange. It was stunning. A real highlight of the Festival for me.</p>
+<p>But when some (hilarious!) videos were shared of our somewhat-sobering descent off the hilltop, a camera caught a top-view of my scalp. I was shocked. You couldn't argue with the morning rays. My hair was thinning. Alot.</p>
+<p>And so began this depressing obsession. This endless flood of mini heart-sink moments. Frantic panicked googling, a 20-page research document on the efficacy of minoxidil, finesteride and demastamps. Avoidance to evade acceptance. Photo from gigs, something not quite right. Handing over my ID at a pub in Cumbria, 'Christ mate, you're looking old!'. Coming back sweaty from a run, a sun-kissed face and exposed forehead. Begrudgingly trying treatments to stem the tide. Occasional jokes, laughed off.</p>
+<p>I became terrified of haircuts, growing it out long as if to boost my defensive armoury which the wind could cut through in a second. When knocking at a friend's door, a pathetic fret over the flow of my thinning locks before they answered. Occasional adjustments from my girlfriend. A joke hairline competition at a party, landing second-worst. Wearing a hat whilst drumming. I became reluctant to shower. Each time, I could see little tuffs tumble to the bathroom floor. I didn't enjoy the reminder.</p>
+<p>Searching for answers, I realised genes and idiocy had created a perfect triple threat. On my Dad's side, all the men rock a strong M-shaped hairline. On my Mum's side, very thin, fine hair with grandpa Syed sporting the monk look. Me? In Lockdown, aged seventeen, I tore at the front of my scalp after a terrible breakup. The perfect cosmic karma after being such an unbelievable arsehole. Lesson learnt.</p>
+<p>As this slow shedding marched forward, unrelenting, I tried to understand, why do I care? Why am I so obsessed and upset? <em>It's just some hair mate, calm down!</em></p>
+<p>Hiking in Chiavenna, Italy, with a close friend, I read <a href="https://www.penguin.co.uk/books/288084/the-descent-of-man-by-perry-grayson/9780141981741"><em>The Descent of Man</em></a> by the inimitable Grayson Perry. It's an attempt to peer into the messy cloud that is modern masculinity. Grayson says we're these status-driven brutes, trained for the savanna, but now placed in a coffee shop. So while we can't compete physically, we find a myriad of proxies to continue the battle. It's not hunting, it's the specificity of your metrosexual coffee addiction, it's your niche music taste, how much you can bench, how many women you've slept with, how fit your girlfriend is, how many drugs you've done, how quickly you can answer a question, your test scores, your job, your hairline.</p>
+<p>We're not all <em>Wolf of Wall Street</em> type traders, we're not all coffee snobs, literary critics, jacked Adonises or mathematical wizards. You don't need to top the list in every category. Hell, some advanced Judith Butler reading saint might be able to rise above this puny boneheaded brawl entirely, but for me, I need a few good cards in my hand. And to watch yourself slipping, bit by bit, from 'decent hair' to 'oh christ, you look 30 years old at 22', hurts <em>one</em> of these base senses of masculine status. It pulls down one of the pillars you rest your identity upon.</p>
+<p>So when I got off the plane from Chiavenna, having made this realisation, verging on self-acceptance, just out of a difficult breakup with three days to spare before I started a new job in a new town without any friends around; I went a little crazy. Running to Argos on a Sunday for clippers, weeping around London listening to <em>Open My Door</em> seventeen times, weeping over <em>Baldcafe</em> videos, weeping to Mum on the phone. A long charge time was the only barrier between me and a total shave before the first day of the new job.</p>
+<p>Over the next year, it worsened and worsened. Anticipating the end of my year long contract at DESNZ, I began a brutal job hunt in the evenings. As that swallowed my time, I struggled to see and make friends from my middle-of-nowhere town. Just obsessing over my next steps (masters, PhDs, grad schemes, other job applications...) brought careful haircare routines crumbling. I'd be scared to swim, emerging from the water and rushing for my towel. Caught in some Bristol rain without a hood or umbrella, my careful arrangement destroyed. Avoiding the camera in practice room recordings. The bright office lights exposing the scalp beneath my thinning curls. Nervous admissions, self-depreciating humour and over-sharing to pre-diffuse my internal mental paranoia. Endless photos documenting the decline.</p>
+<p>It all came to a head whilst travelling South-East Asia. The humid sweat-inducing climate worked ruin on my hair. Up a mountain, dancing in a club, meeting so many new people - with this visible deterioration.</p>
+<p>The cap offered protection. <em>I promise I'm as young as you!</em> But I was hiding. Still confident but compromised. A Berliner was joking around in Koh Pha Ngan and - to my horror - lifted my cap. At the Full Moon Party, looking at this sea of people: one of the few guys with a hat after sundown. So many beautiful 20-something guys and 20-something girls, luscious locks abound, mingling with abandon whilst I'm held back in restraint. <em>I look too old, I don't belong</em>. For such a firm believer in honesty, in openness and in telling the truth, I was hiding a secret beneath my armour.</p>
+<p>So when I found myself kicking the sand of Sairee Beach, Koh Tao, crying to the same songs, about the same fears as I had in my shit town months ago, I couldn't stand it. <em>I'm done! I've moved on! I want to be free!</em> I'm about to begin a new chapter: landing in a new town, with this new job, with so many loving and supportive friends around me. I'm ambitious. I have goals I want to achieve. <em>This hair is irrelevant fluff that I can't carry into this new life.</em> I want to build things, to work bloody hard and I can't afford to continue suffering this distraction. I needed to rip out this crumbling pillar that had morphed from holding up my sense of identity to poisoning it.</p>
+<p>Thankfully, I have other pillars to hold me up. I've got a decent job, I've been playing drums for years, I'm a moderate maths nerd, an impending coffee snob, bookish, talkative...and beautifully, losing one of these pillars pushes you to build others. For me? It's callisthenics. Jacked bald is better than skinny bald - just look at The Rock! With some new muscle, the edifice of my fraught masculinity can rest easy at night.</p>
+<p>So when I made the trip to this Thai barber, got a 3mm buzz all over and finally exposed my insecurity to the world, I knew exactly where to go: the beach. I threw on my goggles, leaped into the tropical waters and immersed my head under the waves. Swimming through the coral, free. I emerged from the water, ran my head over my scalp and felt this reluctant joy. <em>There's no need to worry, I've not nothing to hide</em>. A bittersweet smile spread across my face. I met a German friend, Flo, 'you look so much better (but lose the glasses!)'. We climbed this rock to watch the sun go down. Exhausted, with happy tears in my eyes, I raised my hands in triumph. <em>I've done it. I'm free.</em></p>
+<p>The 3mm still exposed too much. The next day, I went straight to another barber in Phuket. Two-hundred Bhat, a zero guard and some joyful tears later; it's all off. Gone. Yes, I look like an egg. But it's an egg with a pretty big bloody grin. I read <a href="https://archive.org/details/collectedpoems190000walc">Walcott</a> with satisfaction, clear in mind, body and spirit and ready for my next exciting chapter in life.</p>
+<blockquote>
+<p>Love After Love - Derrick Walcott</p>
+<p>The time will come<br>
+when, with elation<br>
+you will greet yourself arriving<br>
+at your own door, in your own mirror<br>
+and each will smile at the other's welcome,</p>
+<p>and say, sit here. Eat.<br>
+You will love again the stranger who was your self.<br>
+Give wine. Give bread. Give back your heart<br>
+to itself, to the stranger who has loved you</p>
+<p>all your life, whom you ignored<br>
+for another, who knows you by heart.<br>
+Take down the love letters from the bookshelf,</p>
+<p>the photographs, the desperate notes,<br>
+peel your own image from the mirror.<br>
+Sit. Feast on your life.</p>
+</blockquote>
+<p><picture><source type="image/avif" srcset="/writing/taking_the_plunge/ycI-PAWHTX-1184.avif"><source type="image/webp" srcset="/writing/taking_the_plunge/ycI-PAWHTX-1184.webp"><img loading="lazy" decoding="async" src="/writing/taking_the_plunge/ycI-PAWHTX-1184.jpeg" alt="The Beach of Koh Tao" width="1184" height="1776"></picture></p>
+
+
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/">About</a>
+				<a href="https://oliverkiranbrown.com/drum_sequencer/">Groove!</a>
+				<a href="/notes/">Notes</a>
+				
+				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
+			</div>
+			<p style="margin-top: 0.5em; font-size: 0.8em;">
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/writing/taking_the_plunge/` was built on 2026-10-01T08:21:31.851Z -->
+		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+	</body>
+</html>

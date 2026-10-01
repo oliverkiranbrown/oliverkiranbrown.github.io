@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>KINOBI</title>
+		<meta name="description" content="Oli&#39;s personal site">
+		<link rel="icon" href="/img/favicon.png">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="KINOBI">
+		<script src="node_modules/MathJax/es5/tex-chtml.js" id="MathJax-script" async=""></script>
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* colors — just a grayscale, tweak these */
+:root {
+	--gray1: #fff;
+	--gray2: #eee;
+	--gray3: #ddd;
+	--gray4: #999;
+	--gray5: #555;
+	--gray6: #222;
+	--gray7: #000;
+
+	/* Hightlight! */
+	--red: #ff0000;
+
+	/* Parchment Background */
+	/* --background-color: #fdf6e3; */
+	--background-color: --gray1;
+
+	/* --background-color: var(--gray1); */
+	--text-color: var(--gray6);
+	--text-color-link: var(--gray7);
+	--text-color-link-active: var(--gray4);
+	--text-color-link-visited: var(--gray5);
+
+	--font-family-monospace: "Areal Mono", Consolas, Menlo, Monaco, monospace;
+	--font-family: "Areal", apple-system, "Helvetica Neue", Arial, sans-serif;
+	--font-family-title: "BionixFat", var(--font-family);
+}
+
+@font-face {
+	font-family: "Areal";
+	src: url("/fonts/ABCArealSuperfamilyVariable.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Areal Mono";
+	src: url("/fonts/ABCArealMonoVariable.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Title */
+@font-face {
+	font-family: "BionixFat";
+	src: url("/fonts/BionixFat-vnmEM.otf") format("opentype");
+	font-weight: 400;
+}
+
+* { box-sizing: border-box; }
+@view-transition { navigation: auto; }
+
+html, body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: var(--font-family-monospace);
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html { overflow-y: scroll; }
+
+.wrapper { max-width: 40em; margin: 0 auto; padding: 1em; }
+.visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+
+p { line-height: 1.5; text-align: justify; }
+p:last-child { margin-bottom: 0; }
+h2, h3, h4, li { text-align: left; line-height: 1.5; }
+main :first-child { margin-top: 0; }
+main, footer p { padding: 1rem; text-align: center; }
+
+/* Red hover */
+h2 a[href^="#"], h3 a[href^="#"] {
+	color: var(--gray3);
+	text-decoration: none;
+}
+h2 a[href^="#"]:hover, h3 a[href^="#"]:hover {
+	color: var(--red);
+}
+
+::selection {
+	background: var(--red);
+	color: var(--gray1);
+}
+
+img { max-width: 100%; }
+img[width][height] { height: auto; }
+img[src$=".svg"] { width: 100%; height: auto; max-width: none; }
+video, iframe { width: 100%; height: auto; }
+iframe { aspect-ratio: 16/9; }
+
+blockquote {
+	border-left: 3px solid var(--red);
+	margin: 1em 0;
+	padding-left: 1em;
+	background: transparent;
+}
+
+a[href] { color: var(--text-color-link); }
+a[href]:visited { color: var(--text-color-link-visited); }
+a[href]:hover, a[href]:active { color: var(--gray4); }
+
+/* header, kept plain, no bg color trick needed since it's already white-on-white-ish */
+.top-bar {
+	color: var(--gray7) !important;
+	border-bottom: 2px solid var(--gray6);
+	box-shadow: 0 1px 0 var(--red);
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 1.2rem;
+	padding: 1.25em;
+	width: 100%;
+}
+.home-link {
+	font-family: var(--font-family-title);
+	font-weight: 100;
+	font-style: italic;
+	font-size: 4rem;
+	line-height: 1.1;
+	margin-right: 0.3em;
+	text-shadow: 0.03em 0.03em 0 var(--red);
+}
+.home-link:link:not(:hover) { text-decoration: none; color: var(--gray7); }
+
+.top-bar a { color: var(--gray7); }
+.top-bar a:visited { color: var(--gray7); }
+.top-bar a:hover, .top-bar a:active { color: var(--red); }
+/* Home link — leave color untouched on hover, just add a red underline */
+.top-bar .home-link:hover,
+.top-bar .home-link:active {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--red);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
+
+.nav { display: flex; gap: 1em 1em; padding-left: 1em; margin: 0; list-style: none; font-weight: 250; align-items: center; }
+.nav-item { display: inline-block; }
+.nav-item a[href]:not(:hover) { text-decoration: none; }
+.nav a[href][aria-current="page"] { text-decoration: underline; }
+
+.social-icons { display: flex; gap: 0.75em; margin-left: auto; align-items: center; }
+.social-icons svg { width: 19px; height: 19px; fill: var(--gray7); }
+.social-icons a:hover svg { fill: var(--gray4); }
+
+.links-nextprev {
+	display: flex; justify-content: space-between; gap: .5em 1em;
+	list-style: ""; border-top: 1px dashed var(--gray3); padding: 1em 0;
+}
+.links-nextprev-next { text-align: right; }
+
+.postlist { list-style: none; padding: 0 0 0 1.5rem; }
+.postlist-item { display: flex; flex-wrap: wrap; align-items: baseline; margin-bottom: 1em; }
+.postlist-date, .postlist-item:before { font-size: 0.8125em; color: var(--gray5); }
+.postlist-date { word-spacing: -0.5px; margin-left: 1.7rem; }
+.postlist-link {
+	font-size: 1.1875em; font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding: 0 .5em 0 .25em;
+	text-align: left;
+}
+.postlist-item-active .postlist-link { font-weight: bold; }
+.post-number { font-weight: bold; color: var(--gray4); min-width: 2ch; }
+
+.post-tag {
+	display: inline-flex; align-items: center; justify-content: center;
+	text-transform: capitalize; font-style: italic;
+	background: var(--gray2); color: var(--gray6);
+	padding: 0.2em 0.5em; border-radius: 4px; text-decoration: none;
+}
+.post-tag:hover { background: var(--gray3); }
+
+.post-metadata, .post-tags { list-style: none; padding: 0; margin: 0 0 0.5em; display: flex; gap: 0.5em; flex-wrap: wrap; }
+.post-metadata time { margin-right: 1em; }
+
+.tag-filter-label { font-weight: bold; margin-right: 0.5em; }
+.tag-filter-dropdown { margin-bottom: 1em; padding: 0.4em; font-size: 1rem; }
+#tag-filter-container { margin-bottom: 1em; display: flex; flex-wrap: wrap; gap: 0.75em; }
+.tag-checkbox { display: flex; align-items: center; font-size: 0.95rem; cursor: pointer; position: relative; }
+.tag-checkbox input[type="checkbox"] { display: none; }
+.custom-checkmark {
+	width: 1em; height: 1em; margin-right: 0.5em; border-radius: 4px;
+	border: 2px solid var(--gray4); background-color: var(--gray1);
+}
+.tag-checkbox input[type="checkbox"]:checked + .custom-checkmark {
+	background-color: var(--gray6); border-color: var(--gray6);
+}
+.tag-checkbox input[type="checkbox"]:checked + .custom-checkmark::after {
+	content: ""; position: absolute; top: 50%; left: 50%;
+	width: 3px; height: 7px;
+	border: solid var(--gray1); border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+table { width: 100%; border-collapse: collapse; margin: 1.5em 0; }
+th, td { padding: 0.75em 1em; border-bottom: 1px solid var(--gray3); text-align: left; }
+thead { background-color: var(--gray2); font-weight: bold; }
+tr:hover { background-color: var(--gray2); }
+
+pre, code { font-family: var(--font-family-monospace); font-size: 0.9em; line-height: 1.5; }
+pre {
+	background: var(--gray2);
+	color: var(--gray6);
+	padding: 1rem;
+	border-radius: 6px;
+	margin: 1em 0;
+	overflow-x: auto;
+	text-align: left;
+	border: 1px solid var(--gray3); /* a bit of a crutch but it looks better than a floating gray box */
+}
+:not(pre) > code {
+	background: var(--gray2);
+	color: var(--gray7);
+	padding: 0.2em 0.4em;
+	border-radius: 6px;
+	font-size: 0.85em;
+	word-break: break-word;
+}
+pre code { background: none; padding: 0; border: none; color: inherit; }
+
+/* token colors — no hue, just contrast + weight/italic doing the work */
+.token.comment    { color: #6a737d; font-style: italic; }
+.token.keyword    { color: #d73a49; }
+.token.string     { color: #032f62; }
+.token.function   { color: #6f42c1; }
+.token.number     { color: #005cc5; }
+.token.operator,
+.token.punctuation { color: var(--gray6); }
+.token.variable   { color: #e36209; }
+.token.class-name { color: #22863a; }
+.token.imports    { color: #b31d28; }
+
+mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+.markdown-alert {
+	margin: 1em 0; padding: 0.75em 1em;
+	border-left: 3px solid var(--red);
+	border-radius: 6px;
+	background: var(--gray2);
+}
+.markdown-alert-title {
+	display: flex; align-items: center; gap: 0.4em;
+	font-weight: 700; font-size: 0.9em;
+	text-transform: uppercase; letter-spacing: 0.02em;
+	margin: 0 0 0.4em; color: var(--gray6);
+}
+.markdown-alert-title svg { fill: var(--gray6); width: 1em; height: 1em; }
+.markdown-alert > :last-child { margin-bottom: 0; }
+
+/* only real distinguishing feature left between alert types is border style, keeping it simple */
+.markdown-alert-tip       { border-left-color: var(--gray5); }
+.markdown-alert-important { border-left-style: double; border-left-width: 5px; }
+.markdown-alert-warning   { border-left-style: dashed; }
+.markdown-alert-caution   { border-left-width: 5px; border-left-color: var(--gray7); }
+
+/* Home Image */
+.photo-frame { position: relative; display: inline-block; }
+.photo-frame img { display: block; filter: grayscale(1) contrast(1.1); }
+.photo-frame::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--red);
+	mix-blend-mode: multiply;
+	opacity: 0.17;
+}</style>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Serif+Text&display=swap" rel="stylesheet">
+		
+		<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async=""></script>
+	</head>
+	<body>
+		<header class="top-bar">
+			<a href="/" class="home-link">KINOBI</a>
+			<nav>
+				<ul class="nav">
+					<li class="nav-item"><a href="/">About</a></li>
+					<li class="nav-item"><a href="/writing/">Writing</a></li>
+					<li class="nav-item"><a href="/music/" aria-current="page">Music</a></li>
+				</ul>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+			</nav>
+
+			<div class="social-icons">
+				<a href="mailto:oliverkiranbrown@gmail.com" aria-label="Email" style="margin: 0 0.25em;">
+					<svg fill="#000000" width="24" height="24" version="1.1" id="XMLID_243_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier"> <g id="mail"> <g> <path d="M24,21H0V3h24V21z M2,19h20V8.1l-10,8.2L2,8.1V19z M2,5.5l10,8.2l10-8.2V5H2V5.5z"></path> </g> </g> </g>
+					</svg>
+				</a>
+				<a href="https://github.com/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.8-1.4-3.8-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 3 1.3 3.7.9.1-.8.4-1.3.7-1.6-2.5-.3-5.1-1.2-5.1-5.3 0-1.2.4-2.2 1.1-2.9-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-.1 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.9 0 4.1-2.6 5-5.1 5.3.4.3.7.9.7 1.8v2.7c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.65 18.35.5 12 .5z"></path>
+					</svg>
+				</a>
+				<a href="https://linkedin.com/in/oliverkiranbrown" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="margin: 0 0.25em;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+						<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+					</svg>
+				</a>
+			</div>
+			
+		</header>
+		<div class="wrapper">
+			<main id="skip">
+				<heading-anchors>
+					
+<h1 id="music">Music</h1>
+<p>I'm a big music fan. And after playing drums in bands for years, it's come to form an important part of my identity. So, in a vain attempt to beat any nerd allegations (double meaning intentional!), here are some links to showcase what I'm getting up to outside of work 😜</p>
+<h2 id="projects">Projects</h2>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Years Active</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://influxofinsanity.bandcamp.com/album/influx-the-collection">Influx of Insanity</a></td>
+<td>2016 - 2021</td>
+</tr>
+<tr>
+<td><a href="https://karmaviolets.bandcamp.com/music">The Karma Violets</a></td>
+<td>2019 - 2021</td>
+</tr>
+<tr>
+<td><a href="https://feedthemammoth.bandcamp.com/">Feed the Mammoth</a></td>
+<td>2021 - 2025</td>
+</tr>
+<tr>
+<td><a href="https://www.balloontomb.band">Balloon Tomb</a></td>
+<td>2024 - 2026</td>
+</tr>
+</tbody>
+</table>
+<h2 id="some-background-if-you-care">Some Background (if you care!)</h2>
+<h3 id="influx-of-insanity">Influx of Insanity</h3>
+<p>It all started aged 14 with a noisy prog metal double-act called <a href="https://www.instagram.com/influxofinsanity/">Influx of Insanity</a>. We played a <em>lot</em> of gigs, wrote some hilarious, teenage angst-ridden lyrics and released some self-produced music out into the world. It was great fun! This <a href="https://www.youtube.com/watch?v=Ot16iTOSIvc">video</a> gives you a good idea of what we were all about...</p>
+<p>My partner in crime <a href="https://linktr.ee/Dom.howard_">Dom Howard</a> went on to study jazz at RCM after we finished in 2021 and he's utterly brilliant, go <a href="https://domhoward.bandcamp.com/album/all-the-paths-join-up-here">check him out</a>.</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/music/UT5g9yPTUv-2400.avif"><source type="image/webp" srcset="/music/UT5g9yPTUv-2400.webp"><img loading="lazy" decoding="async" src="/music/UT5g9yPTUv-2400.jpeg" alt="Influx at the Junction 2021" width="2400" height="1597"></picture>
+  </div>
+</div>
+<h3 id="the-karma-violets">The Karma Violets</h3>
+<p>The Karma Violets came together thanks to complete chance! I met the lovely <a href="https://www.instagram.com/wesley_ayres_music/">Wes Ayres</a> whilst working as a waiter at Peterhouse College, Cambridge, we got chatting music and decided to form a band. With the addition of the crazy mutual connection Ambrose de Soissons-Page (Wes' family friend who also happened to played the same <a href="https://www.lovemusichateracism.com/home/">LMHR</a> / <a href="https://www.repeatfanzine.co.uk/homepage.htm">REPEAT</a> gigs as me back in the day!), we completed this indie-rock trio. Lockdown couldn't stop us pumping out two EPs—have a listen <a href="https://karmaviolets.bandcamp.com/">here</a>.</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/music/uw3_Q1P4qQ-4898.avif"><source type="image/webp" srcset="/music/uw3_Q1P4qQ-4898.webp"><img loading="lazy" decoding="async" src="/music/uw3_Q1P4qQ-4898.jpeg" alt="The Karma Violets 2019" width="4898" height="3265"></picture>
+  </div>
+</div>
+<h3 id="feed-the-mammoth">Feed the Mammoth</h3>
+<p>I headed off to University in 2021 and threw myself straight into the smorgasbord of musical madness that is <a href="https://www.instagram.com/warwickbandsoc/">Warwick BandSoc</a>. I played in a wacky variety of bands - shoutout to the angry garage punk of <a href="https://youtu.be/Jl_S9tzjVro?si=uPLFTgpQNBGDDSsO&amp;t=270">Domestic Love</a> and my good friends in <a href="https://www.instagram.com/sunnysidedownband/">Sunny Side Down</a>! Eventually, I decided to settle down and focus on Feed the Mammoth. We wrote <a href="https://www.youtube.com/channel/UCl9l2k9-kfGDI2H8EHLcG9Q">some tunes</a> I'm genuinely proud of and had a blast doing it!</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/music/BesRvC3NXw-4318.avif"><source type="image/webp" srcset="/music/BesRvC3NXw-4318.webp"><img loading="lazy" decoding="async" src="/music/BesRvC3NXw-4318.jpeg" alt="FTM Band Photo" width="4318" height="3455"></picture>
+  </div>
+</div>
+<p>In my 3rd year at Warwick, I had the privilege of serving as president of BandSoc. University can be a lonely place, and in our world that so heavily incentivises the <em>individual</em> ('sort <em>yourself</em> out, increase <em>your own</em> following'), it was beautiful to help build a social structure which ties people together, forcing you to put your faith in others–in something bigger than yourself. I'll keep chasing that everywhere I go. Thanks BandSoc ❤️</p>
+<h3 id="balloon-tomb">Balloon Tomb</h3>
+<p>Current party-punk outfit based in Bristol. Lots of silliness and chaos—so good to play in a band without all that seriousness (and many goblins). Made our website <a href="../writing/deploying_nextjs_site_to_vps/">myself</a> too; check it out here: <a href="https://balloontomb.band">balloontomb.band</a>!</p>
+<div style="display: flex; align-items: top; gap: 2rem; max-width: 800px; margin: 2rem auto;">
+  <div>
+    <picture><source type="image/avif" srcset="/music/_vnaM5AwlC-2738.avif"><source type="image/webp" srcset="/music/_vnaM5AwlC-2738.webp"><img loading="lazy" decoding="async" src="/music/_vnaM5AwlC-2738.jpeg" alt="FTM Band Photo" width="2738" height="1825"></picture>
+  </div>
+</div>
+				</heading-anchors>
+			</main>
+		</div>
+		<footer style="text-align: center; padding: 2em 0; font-size: 0.9rem;">
+			<p style="margin: 0; font-weight: bold; padding-bottom: .5em;">Oliver Kiran Brown</p>
+			<div style="margin-top: 0.5em; gap: 1em; display:flex; justify-content: center; margin: 0 auto;" class="nav-item">
+				<a href="/">About</a>
+				<a href="https://oliverkiranbrown.com/drum_sequencer/">Groove!</a>
+				<a href="/notes/">Notes</a>
+				
+				<a href="https://cal.com/oliver-brown-krqmtl?redirect=true">Meet</a>
+			</div>
+			<p style="margin-top: 0.5em; font-size: 0.8em;">
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/music/` was built on 2026-10-01T08:21:31.852Z -->
+		<script type="module" src="/dist/adnw7mXoOQ.js"></script>
+	</body>
+</html>
