@@ -218,7 +218,7 @@ Take OpenAI. [An IPO in 2026 was likely](https://www.theguardian.com/technology/
 
 And Big Tech has massively expanded over the last 20 years. Frankly, they've successfully excavated our public square, replacing it with something much darker, tuned to their profit. It's been a momentus societal transformation. And in-fact, much of that real ad market growth was enabled by the same mathematical framework which powers the AI boom: Reinforcement Learning. 
 
-Stepping back to this lens, we can view the growth of big tech and the AI-craze as part of a broader story—the collapsing of the rich complexity of our world into numbers which can be optimised for to serve whoever controls the data—the quantification of everything. It's a broader story of asymmetry, a *genuine* loss of control which effects us all. And by connecting the tools and techniques utilised by Big Tech in their initial growth phase to the tools powering the current AI (ka)boom, we can understand it's logic, and how to step back and think of alternative futures.
+Stepping back to this lens, we can view the growth of big tech and the AI-craze as part of a broader story—the collapsing of the rich complexity of our world into numbers which can be optimised for, to serve whoever controls the data—the quantification of everything. It's a broader story of asymmetry, a *genuine* loss of control which effects us all. And by connecting the tools and techniques utilised by Big Tech in their initial growth phase to the tools powering the current AI (ka)boom, we can understand it's logic, and how to step back and think of alternative futures.
 
 ### Rendering behaviour
 
@@ -234,7 +234,7 @@ Sitting in a central office, with [this birds eye view](https://www.bbc.co.uk/ip
 
 Take [LinUCB for the multi-armed bandit problem](https://arxiv.org/pdf/1003.0146). The goal: what content to recommend to a new user based on the information we know about them. LinUCB gives us precise confidence bounds about which new piece of content to serve to a user, and hence, an exact strategy to keep the user tied to the platform, constantly engaged, balancing exploitation of what we know about that user with exploration of the vast space of content available on the platform, guaranteeing they stay hooked to the dopamine slot-machine.
 
-It's dark genius. Collapsing the rich complexity of human behaviour into these numbers which can be optimised for to capture attention and render it into profit.
+It's dark genius. Collapsing the rich complexity of human behaviour into these numbers which can be optimised to capture attention and render it into profit.
 
 ### Corrupted Utility
 
@@ -250,7 +250,7 @@ Zubov points to the work of Hannah Arendt, writing in 1958 in her book *The Huma
 
 How close are we to her vision of this potential future? 
 
-When the screens that surround us leaves a zombie-like, unthinking, with drool dribbling down our chin, it's time to slow down. To [reconsider our relationship with these technologies](https://calnewport.com/on-digital-minimalism/). What would it look like to have more control about what you see online? [Algorithmic pluralism](https://counterhate.com/blog/what-is-algorithmic-pluralism-and-how-can-it-give-control-social-media-feeds/), [choice](https://rebeltechalliance.org/stopusingbigtech.html), control. To prompt an LLM when it serves you, rather than from a hype-machine fuelled [fear of falling behind into a permanent underclass](https://www.theguardian.com/business/2026/jun/02/will-the-ai-economy-create-a-permanent-underclass).
+When the screens that surround us leaves us zombie-like, unthinking, with drool dribbling down our chin, it's time to slow down. To [reconsider our relationship with these technologies](https://calnewport.com/on-digital-minimalism/). What would it look like to have more control about what you see online? [Algorithmic pluralism](https://counterhate.com/blog/what-is-algorithmic-pluralism-and-how-can-it-give-control-social-media-feeds/), [choice](https://rebeltechalliance.org/stopusingbigtech.html), control. To prompt an LLM when it serves you, rather than from a hype-machine fuelled [fear of falling behind into a permanent underclass](https://www.theguardian.com/business/2026/jun/02/will-the-ai-economy-create-a-permanent-underclass).
 
 There *is* utility, in LLMs, in recommendation systems. But next time you prompt, or scroll, stop yourself. Ask, 'who is this serving?'. If the answer is not a decisive *me*, then reconsider your relationship with that tool. Understand what they can and *cannot* do; assert your fundamental right to self-determination. To ensure that technology serve you, rather than the whims of techno-barons.
 ### References
