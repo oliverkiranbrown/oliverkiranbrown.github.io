@@ -259,6 +259,85 @@ mjx-container[display] { display: inline-flex; overflow-x: auto; overflow-y: hid
 .markdown-alert-warning   { border-left-style: dashed; }
 .markdown-alert-caution   { border-left-width: 5px; border-left-color: var(--gray7); }
 
+/* ---------------------------------------------------------------
+   Footnotes (Obsidian `[^1]` syntax)
+   Adapted from hermit-tech.com: superscript references, a
+   hanging-indent list, and notes that expand inline when tapped.
+   --------------------------------------------------------------- */
+
+.footnote-ref { text-decoration: none; }
+.footnote-ref sup {
+	font-size: 0.75em;
+	line-height: 0;
+	position: relative;
+	top: -0.5em;
+	vertical-align: initial;
+}
+.footnote-ref:hover sup { color: var(--red); }
+
+.footnotes {
+	counter-reset: footnote;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	margin-top: 3rem;
+	text-align: left;
+}
+.footnotes::before {
+	border-top: 1px solid var(--gray6);
+	content: "";
+	display: block;
+	margin-bottom: 1.5rem;
+	width: 200px;
+}
+.footnotes-list { list-style: none; margin: 0; padding: 0; }
+.footnote-item {
+	counter-increment: footnote;
+	margin-bottom: 0.75rem;
+	padding-left: 1.75rem;
+	text-indent: -1.75rem;
+}
+.footnote-item::before {
+	content: counter(footnote) ".";
+	display: inline-block;
+	margin-right: 0.4rem;
+	text-align: right;
+	text-indent: 0;
+	width: 1.35rem;
+}
+/* markdown-it wraps each note in a <p>; keep it on the same line as the number */
+.footnote-item > p { display: inline; margin: 0; text-align: left; }
+.footnote-item > p + p { display: block; margin-top: 0.5rem; text-indent: 0; }
+
+.footnotes a[href^="#fnref"] { margin-left: 0.35rem; text-decoration: none; }
+
+/* Inline notes ---------------------------------------------------- */
+.sidenote {
+	display: none;
+	font-size: 0.875rem;
+	font-style: italic;
+	line-height: 1.5;
+	margin: 0.25rem 0 0.5rem 1.25rem;
+	text-align: left;
+}
+.sidenote.open { display: block; }
+.sidenote p { margin: 0; text-align: left; }
+.sidenote a[href^="#fnref"] { text-decoration: none; }
+.sidenote a[href^="#fnref"]:hover { color: var(--red); }
+
+/* JavaScript takes over the bottom list once the notes live inline */
+.js-footnotes .footnotes { display: none; }
+
+/* On a wide screen, show the notes in the margin like the reference site */
+@media (min-width: 1440px) {
+	.sidenote {
+		clear: right;
+		display: block;
+		float: right;
+		margin: 0 calc(-300px - 2.5rem) 0.5rem 0;
+		width: 300px;
+	}
+}
+
 /* Home Image */
 .photo-frame { position: relative; display: inline-block; }
 .photo-frame img { display: block; filter: grayscale(1) contrast(1.1); }

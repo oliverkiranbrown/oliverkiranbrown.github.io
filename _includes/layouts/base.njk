@@ -42,6 +42,9 @@
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
 
+		{#- Inline footnotes: tap a reference to expand the note next to it #}
+		<script>{% include "js/footnotes.js" %}</script>
+
 		{#- Add an extra font for the home link#}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

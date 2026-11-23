@@ -9,6 +9,7 @@ import markdownItGithubAlerts from "markdown-it-github-alerts";
 //import pluginJupyter from "eleventy-plugin-jupyter-nb-extract/.eleventy.js";
 
 import pluginFilters from "./_config/filters.js";
+import { footnotes, stripObsidianFootnotesHeading } from "./_config/footnotes.js";
 
 // to specify image file paths manually with a shortcode
 import Image from "@11ty/eleventy-img";
@@ -21,6 +22,13 @@ export default async function(eleventyConfig) {
 		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
 			return false;
 		}
+	});
+
+	// Obsidian writes its footnote definitions under a trailing `# Footnotes`
+	// heading. The footnote plugin moves those definitions to the end of the
+	// document, so the heading is removed to stop it being left stranded.
+	eleventyConfig.addPreprocessor("obsidian-footnotes", ["md"], (data, content) => {
+		return stripObsidianFootnotesHeading(content);
 	});
 
 	// Copy the contents of the `public` folder to the output folder
@@ -59,7 +67,7 @@ export default async function(eleventyConfig) {
 			inlineMath: [['$', '$']],
 			displayMath: [['$$', '$$']]
 		}
-	}).use(markdownItGithubAlerts);
+	}).use(footnotes).use(markdownItGithubAlerts);
 	
 	eleventyConfig.setLibrary("md", md);
 
