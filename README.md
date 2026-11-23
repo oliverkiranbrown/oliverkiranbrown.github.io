@@ -109,6 +109,27 @@ Deploy this Eleventy site in just a few clicks on these services:
 	- `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
 - `_includes/postslist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `content/index.njk` has an example of how to use it.
 
+### Footnotes
+
+Footnotes use the standard Obsidian/Pandoc syntax — write `[^1]` where you want the reference, and put the definitions at the bottom of the file under a `# Footnotes` heading:
+
+```md
+Here is a claim that needs a source.[^1]
+
+## Footnotes
+
+[^1]: The note itself, which can contain *markdown*, [links](https://www.11ty.dev/) and
+    further paragraphs if you indent them.
+```
+
+Parsing is handled by [`markdown-it-footnote`](https://github.com/markdown-it/markdown-it-footnote) and configured in `_config/footnotes.js`:
+
+- The `# Footnotes` heading is optional — it is stripped automatically, because the definitions are moved to the end of the rendered post. A document that merely mentions "footnotes" without containing any `[^x]:` definitions is left alone.
+- Numbering follows the order the references appear in the text, so a note referenced more than once keeps a single number while each reference gets its own back-link.
+- Write each note on a single line. The site sets `breaks: true`, so a source line that wraps becomes a hard line break in the output; a blank line followed by a four-space indent is what creates a second paragraph inside a note.
+- Tapping a reference expands the note inline, right where you are reading; on wide screens the notes sit in the margin. Without JavaScript you get a styled numbered list at the end of the post instead — the enhancement lives in `js/footnotes.js` and the styles in `css/index.css`.
+- Inline notes also work: `^[a note written directly in the text]`.
+
 #### Content Security Policy
 
 If your site enforces a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (as public-facing sites should), you have a few choices (pick one):
